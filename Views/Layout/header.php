@@ -5,6 +5,11 @@
     <meta name="page_type" content="">
     <meta name="generator" content="">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="Assets/Img/favi/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Assets/Img/favi/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Assets/Img/favi/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <title><?php echo ucfirst(trim($title)); ?> | GamePlayParty</title>
 
     <link rel="stylesheet" href="Assets/Css/footer.css">
