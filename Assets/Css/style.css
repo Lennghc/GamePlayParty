@@ -4,7 +4,12 @@
 
 h1 {
     color: var(--text-color-text);
+    font: bold 3em/5em 'Open Sans';
 
+}
+
+p {
+    color:var(--text-color-text)
 }
 
 body.dark {
@@ -19,9 +24,19 @@ body.dark {
     z-index: 100;
 }
 
+.title-under-logo {
+    padding-top: 5em;
+}
+
+
+
 @media (max-width: 790px) {
     #logo_image {
         width: 80%;
+    }
+
+    .title-under-logo{
+        padding-top: 3.5em;
     }
 
 }

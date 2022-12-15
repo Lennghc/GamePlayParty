@@ -1,16 +1,5 @@
         <nav>
             <div class="nav-bar">
-                <i class="bx bx-menu sidebarOpen"></i>
-                <div class="menu">
-                    <div class="logo-toggle">
-                        <span class="logo"><a href="#">Logo</a></span>
-                        <i class="bx bx-menu sidebarClose"></i>
-                    </div>
-                <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Info</a></li>
-                </ul>
-                </div>
                 <div class="darkLight-searchBox">
                     <div class="dark-light">
                         <i class="bx bx-moon moon"></i>
@@ -29,6 +18,28 @@
                 </div>
             </div>
         </nav>
+
+
+        <div id='social-sidebar'>
+            <ul>
+                <li>
+                    <a class='entypo-twitter' href="#"><i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a class='entypo-gplus' href='#' ><i class="fa fa-solid fa-film"></i>
+                        <span>Bioscopen</span>
+                    </a>
+                </li>
+                <li>
+                    <a class='entypo-tumblr' href='#'><i class="fa fa-phone-volume"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <script src="Assets/Js/navbar.js"></script>
-    </body>
-</html>
+        </body>
+
+        </html>

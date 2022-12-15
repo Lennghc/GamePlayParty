@@ -43,11 +43,8 @@
             <span class="copyright">© 2022 Webworld. Alle rechten voorbehouden</span>
             <ul class="footer-list">
                 <li class="footer_list-item">
-                    <a href="#" class="footer_list-link">
-                        <li class="ri-facebook-circle-line"></li>
-                    </a>
                     <a href="https://www.facebook.com/Kinepolis.Nederland" class="footer_list-link">
-                        <li class="fa-brands fa-facebook"></li>
+                        <li class="fa-brands fa-twitter"></li>
                     </a>
                     <a href="https://twitter.com/kinepolis_nl" class="footer_list-link">
                         <li class="fa-brands fa-twitter"></li>

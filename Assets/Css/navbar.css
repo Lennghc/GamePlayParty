@@ -1,31 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     transition: all 0.4s ease;
 }
-:root{
+
+:root {
     --body-color: #E4E9F7;
-    --nav-color: #05c943;
+    --nav-color: #08c447;
     --side-nav: #010718;
     --text-color: #FFF;
     --search-bar: #F2F2F2;
     --search-text: #010718;
 }
+
 body {
     height: 100vh;
-    background-color: var(--body-color)!important;
+    background-color: var(--body-color) !important;
 }
-body.dark{
+
+body.dark {
     --body-color: #18191A;
     --nav-color: #009432;
     --side-nav: #242526;
     --text-color: #CCC;
     --search-bar: #242526;
 }
-nav{
+
+nav {
     position: fixed;
     top: 0;
     left: 0;
@@ -34,10 +39,12 @@ nav{
     background-color: var(--nav-color);
     z-index: 10;
 }
-body.dark nav{
+
+body.dark nav {
     border: 1px solid #393838;
 }
-nav .nav-bar{
+
+nav .nav-bar {
     position: relative;
     height: 100%;
     max-width: 100%;
@@ -49,31 +56,37 @@ nav .nav-bar{
     align-items: center;
     justify-content: flex-end;
 }
-nav .nav-bar .sidebarOpen{
+
+nav .nav-bar .sidebarOpen {
     color: var(--text-color);
     font-size: 25px;
     padding: 5px;
     cursor: pointer;
     display: none;
 }
-nav .nav-bar .logo a{
+
+nav .nav-bar .logo a {
     font-size: 25px;
     font-weight: 500;
     color: var(--text-color);
     text-decoration: none;
 }
-.menu .logo-toggle{
+
+.menu .logo-toggle {
     display: none;
 }
-.nav-bar .nav-links{
+
+.nav-bar .nav-links {
     display: flex;
     align-items: center;
 }
-.nav-bar .nav-links li{
+
+.nav-bar .nav-links li {
     margin: 0 5px;
     list-style: none;
 }
-.nav-links li a{
+
+.nav-links li a {
     position: relative;
     font-size: 17px;
     font-weight: 400;
@@ -81,7 +94,8 @@ nav .nav-bar .logo a{
     text-decoration: none;
     padding: 10px;
 }
-.nav-links li a::before{
+
+.nav-links li a::before {
     content: '';
     position: absolute;
     left: 50%;
@@ -94,15 +108,18 @@ nav .nav-bar .logo a{
     opacity: 0;
     transition: all 0.3s ease;
 }
-.nav-links li:hover a::before{
+
+.nav-links li:hover a::before {
     opacity: 1;
 }
-.nav-bar .darkLight-searchBox{
+
+.nav-bar .darkLight-searchBox {
     display: flex;
     align-items: center;
 }
+
 .darkLight-searchBox .dark-light,
-.darkLight-searchBox .searchToggle{
+.darkLight-searchBox .searchToggle {
     height: 40px;
     width: 40px;
     display: flex;
@@ -110,42 +127,51 @@ nav .nav-bar .logo a{
     justify-content: center;
     margin: 0 5px;
 }
+
 .dark-light i,
-.searchToggle i{
+.searchToggle i {
     position: absolute;
     color: var(--text-color);
     font-size: 22px;
     cursor: pointer;
     transition: all 0.3 ease;
 }
-.dark-light i.sun{
+
+.dark-light i.sun {
     opacity: 0;
     pointer-events: none;
 }
-.dark-light.active i.sun{
+
+.dark-light.active i.sun {
     opacity: 1;
     pointer-events: auto;
 }
-.dark-light.active i.moon{
+
+.dark-light.active i.moon {
     opacity: 0;
     pointer-events: none;
 }
-.searchToggle i.cancel{
+
+.searchToggle i.cancel {
     opacity: 0;
     pointer-events: none;
 }
-.searchToggle.active i.cancel{
+
+.searchToggle.active i.cancel {
     opacity: 1;
     pointer-events: auto;
 }
-.searchToggle.active i.search{
+
+.searchToggle.active i.search {
     opacity: 0;
     pointer-events: none;
 }
+
 .searchBox {
     position: relative;
 }
-.searchBox .search-field{
+
+.searchBox .search-field {
     position: absolute;
     bottom: -85px;
     right: 5px;
@@ -161,12 +187,14 @@ nav .nav-bar .logo a{
     pointer-events: none;
     transition: all 0.3s ease;
 }
-.searchToggle.active ~ .search-field{
-    bottom: -74px;
+
+.searchToggle.active~.search-field {
+    bottom: -42px;
     opacity: 1;
     pointer-events: auto;
 }
-.search-field::before{
+
+.search-field::before {
     content: '';
     position: absolute;
     right: 14px;
@@ -177,7 +205,8 @@ nav .nav-bar .logo a{
     transform: rotate(-45deg);
     z-index: -1;
 }
-.search-field input{
+
+.search-field input {
     height: 100%;
     width: 100%;
     padding: 0 45px 0 15px;
@@ -189,26 +218,33 @@ nav .nav-bar .logo a{
     color: var(--search-text);
     background-color: var(--search-bar);
 }
-body.dark .search-field input{
+
+body.dark .search-field input {
     color: var(--text-color);
 }
-.search-field i{
+
+.search-field i {
     position: absolute;
     color: var(--nav-color);
     right: 15px;
     font-size: 22px;
     cursor: pointer;
 }
-body.dark .search-field i{
+
+body.dark .search-field i {
     color: var(--text-color);
 }
+
 @media (max-width: 790px) {
+
     /* nav .nav-bar .sidebarOpen{
         display: block;
     } */
-    nav, .nav-bar {
+    nav,
+    .nav-bar {
         display: none;
     }
+
     .menu {
         position: fixed;
         height: 100%;
@@ -220,31 +256,166 @@ body.dark .search-field i{
         z-index: 100;
         transition: all 0.4 ease;
     }
-    nav.active .menu{
+
+    nav.active .menu {
         left: -0%;
     }
-    nav.active .nav-bar .navlogo a{
+
+    nav.active .nav-bar .navlogo a {
         opacity: 0;
         transition: all 0.3 ease;
     }
-    .menu .logo-toggle{
+
+    .menu .logo-toggle {
         display: block;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    .logo-toggle .sidebarClose{
+
+    .logo-toggle .sidebarClose {
         color: var(--text-color);
         font-size: 24px;
         cursor: pointer;
     }
-    .nav-bar .nav-links{
+
+    .nav-bar .nav-links {
         flex-direction: column;
         padding-top: 30px;
     }
-    .nav-links li a{
+
+    .nav-links li a {
         display: block;
         margin-top: 20px;
     }
+}
+
+
+
+i.fa {
+    color: gray;
+    font-size: 24px;
+}
+
+i.fa:hover {
+    color: white;
+}
+
+[class*="entypo-"]:before {
+    font-family: 'entypo', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+#social-sidebar a {
+    text-decoration: none;
+}
+
+#social-sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- Social Sidebar ---------- */
+#social-sidebar {
+    position: fixed;
+    right: 0;
+    bottom: 26rem;
+    z-index: 9997;
+    transition: all 0.5s;
+    padding: 15px;
+    /* overflow-y: auto; */
+    justify-content: flex-start !important;
+
+}
+
+@media (max-width: 790px) {
+#social-sidebar{
+    bottom: 0;
+    top:0;
+}
+}
+
+
+#social-sidebar ul li a {
+    border-radius: 0 10px 10px 0;
+    border: 2px solid rgba(0, 0, 0, 0.07)
+}
+
+#social-sidebar ul li a {
+    background: #fff;
+    color: #fff;
+    display: block;
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px;
+    position: relative;
+    text-align: center;
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+#social-sidebar ul li a:hover span {
+    right: 150%;
+    opacity: 1;
+    white-space: nowrap;
+    transition: 0.5s;
+    width: 120px;
+    color: white;
+}
+
+#social-sidebar ul li a span {
+    border-radius: 3px;
+    line-height: 24px;
+    /* left: -100%; */
+    margin-top: -16px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    padding: 4px 8px;
+    position: absolute;
+    /* -webkit-transition: opacity .3s, left .4s;
+-moz-transition: opacity .3s, left .4s;
+-ms-transition: opacity .3s, left .4s;
+-o-transition: opacity .3s, left .4s;
+transition: opacity .3s, left .4s; */
+    top: 50%;
+    z-index: -1;
+    width: 80px;
+}
+
+#social-sidebar ul li a span:before {
+    content: "";
+    display: block;
+    height: 8px;
+    right: -4px;
+    margin-top: -4px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 8px;
+    z-index: -2;
+}
+
+#social-sidebar ul li a[class*="twitter"]:hover,
+#social-sidebar ul li a[class*="twitter"] span,
+#social-sidebar ul li a[class*="twitter"] span:before {
+    background: var(--nav-color);
+}
+
+#social-sidebar ul li a[class*="gplus"]:hover,
+#social-sidebar ul li a[class*="gplus"] span,
+#social-sidebar ul li a[class*="gplus"] span:before {
+    background: var(--nav-color);
+}
+
+#social-sidebar ul li a[class*="tumblr"]:hover,
+#social-sidebar ul li a[class*="tumblr"] span,
+#social-sidebar ul li a[class*="tumblr"] span:before {
+    background: var(--nav-color);
 }

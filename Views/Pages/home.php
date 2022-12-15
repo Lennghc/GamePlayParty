@@ -14,30 +14,33 @@
         <?php include 'Views/Layout/navbar.php'; ?>
 
         <div class="container">
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
-            <h1>h1asdjsahjf</h1>
+            <h1 class="title-under-logo">h1asdjsahjf</h1>
+
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+            <p>sadbahgdj</p>
+
         </div>
 
 
