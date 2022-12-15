@@ -10,7 +10,7 @@ if (!SHOW_ERRORS) {
         $error = error_get_last();
         if ($error && $error['type'] == E_ERROR) {
             http_response_code(500);
-            include('views/errors/500.php');
+            include('Views/Errors/500.php');
         }
     });
 }
