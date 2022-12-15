@@ -203,8 +203,11 @@ body.dark .search-field i{
     color: var(--text-color);
 }
 @media (max-width: 790px) {
-    nav .nav-bar .sidebarOpen{
+    /* nav .nav-bar .sidebarOpen{
         display: block;
+    } */
+    nav, .nav-bar {
+        display: none;
     }
     .menu {
         position: fixed;
