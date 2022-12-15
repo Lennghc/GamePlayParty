@@ -13,7 +13,7 @@ class MainController {
 
             switch ($controller) {
                 default:
-                
+                    include('Views/Pages/home.php');
                 break;
             }
 
