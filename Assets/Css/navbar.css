@@ -402,20 +402,8 @@ transition: opacity .3s, left .4s; */
     z-index: -2;
 }
 
-#social-sidebar ul li a[class*="twitter"]:hover,
-#social-sidebar ul li a[class*="twitter"] span,
-#social-sidebar ul li a[class*="twitter"] span:before {
-    background: var(--nav-color);
-}
-
-#social-sidebar ul li a[class*="gplus"]:hover,
-#social-sidebar ul li a[class*="gplus"] span,
-#social-sidebar ul li a[class*="gplus"] span:before {
-    background: var(--nav-color);
-}
-
-#social-sidebar ul li a[class*="tumblr"]:hover,
-#social-sidebar ul li a[class*="tumblr"] span,
-#social-sidebar ul li a[class*="tumblr"] span:before {
+#social-sidebar ul li a[class*="icon"]:hover,
+#social-sidebar ul li a[class*="icon"] span,
+#social-sidebar ul li a[class*="icon"] span:before {
     background: var(--nav-color);
 }

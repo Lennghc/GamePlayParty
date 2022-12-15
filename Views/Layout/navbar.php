@@ -23,17 +23,17 @@
         <div id='social-sidebar'>
             <ul>
                 <li>
-                    <a class='entypo-twitter' href="#"><i class="fa fa-home"></i>
+                    <a class='icon' href="#"><i class="fa fa-home"></i>
                         <span>Home</span>
                     </a>
                 </li>
                 <li>
-                    <a class='entypo-gplus' href='#' ><i class="fa fa-solid fa-film"></i>
+                    <a class='icon' href='#'><i class="fa fa-solid fa-film"></i>
                         <span>Bioscopen</span>
                     </a>
                 </li>
                 <li>
-                    <a class='entypo-tumblr' href='#'><i class="fa fa-phone-volume"></i>
+                    <a class='icon' href='#'><i class="fa fa-phone-volume"></i>
                         <span>Contact</span>
                     </a>
                 </li>
