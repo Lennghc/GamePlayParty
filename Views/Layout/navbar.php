@@ -11,8 +11,8 @@
     <body>
         <nav>
             <div class="nav-bar">
-                <i class="bx bx-menu sidebarOpen"></i>
-                <span class="logo navLogo"><a href="#">Logo</a></span>
+                <i class="bx bx-menu sidebarOpen"><img src="Assets/Img/logo.png"></i>
+                <span class="logo navLogo"><a href="#">LOGO</a></span>
 
                 <div class="menu">
                     <div class="logo-toggle">
