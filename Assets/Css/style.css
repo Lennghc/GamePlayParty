@@ -1,0 +1,27 @@
+:root {
+    --text-color-text: #000000;
+}
+
+h1 {
+    color: var(--text-color-text);
+
+}
+
+body.dark {
+    --text-color-text: #FFFFFF;
+}
+
+
+#logo_image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+@media (min-width: 790px) {
+    #logo_image {
+        width: -webkit-fill-available;
+    }
+
+}

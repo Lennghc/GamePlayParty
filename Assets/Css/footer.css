@@ -1,7 +1,6 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+footer{
+    bottom: 0;
+    width: 100%;
 }
 
 i {
@@ -68,4 +67,11 @@ i {
 
 .footer_bottom .footer_list {
     flex-direction: row;
+}
+
+
+@media (max-width: 790px) {
+    footer{
+        position: unset;
+    }
 }
