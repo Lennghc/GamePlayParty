@@ -19,9 +19,9 @@ body.dark {
     z-index: 100;
 }
 
-@media (min-width: 790px) {
+@media (max-width: 790px) {
     #logo_image {
-        width: -webkit-fill-available;
+        width: 80%;
     }
 
 }
