@@ -1,5 +1,4 @@
 <?php
-require_once 'DataHandler.php';
 
 class Main extends DataHandler
 {
@@ -10,10 +9,4 @@ class Main extends DataHandler
     public function __destruct() {
         parent::__destruct($dbh = null);
     }
-
-    public function testFunction()
-    {
-
-    }
-
 }

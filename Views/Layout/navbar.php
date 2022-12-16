@@ -2,17 +2,18 @@
             <div class="nav-bar">
                 <div class="darkLight-searchBox">
                     <div class="dark-light">
-                        <i class="bx bx-moon moon"></i>
-                        <i class="bx bx-sun sun"></i>
+                        <i class="fas fa-cloud-moon moon"></i>
+                        <i class="fas fa-cloud-sun sun"></i>
+                        
                     </div>
                     <div class="searchBox">
                         <div class="searchToggle">
-                            <i class="bx bx-x cancel"></i>
-                            <i class="bx bx-search search"></i>
+                            <i class="fa fa-times cancel"></i>
+                            <i class="fa fa-search search"></i>
                         </div>
                         <div class="search-field">
                             <input type="text" placeholder="Search...">
-                            <i class="bx bx-search"></i>
+                            <i class="fa fa-search"></i>
                         </div>
                     </div>
                 </div>

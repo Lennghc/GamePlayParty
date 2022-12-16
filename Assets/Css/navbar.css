@@ -9,12 +9,11 @@
 }
 
 :root {
-    --body-color: #E4E9F7;
+    --body-color: #F5F5F5;
     --nav-color: #08c447;
-    --side-nav: #010718;
     --text-color: #FFF;
     --search-bar: #F2F2F2;
-    --search-text: #010718;
+    --search-text: #2c3e50;
 }
 
 body {
@@ -25,9 +24,9 @@ body {
 body.dark {
     --body-color: #18191A;
     --nav-color: #009432;
-    --side-nav: #242526;
     --text-color: #CCC;
     --search-bar: #242526;
+    --search-text: #F5F5F5;
 }
 
 nav {
@@ -225,7 +224,7 @@ body.dark .search-field input {
 
 .search-field i {
     position: absolute;
-    color: var(--nav-color);
+    color: var(--nav-color)!important;
     right: 15px;
     font-size: 22px;
     cursor: pointer;
