@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 * {
     margin: 0;
@@ -294,7 +294,7 @@ body.dark .search-field i {
 
 
 i.fa {
-    color: gray;
+    color: #fff;
     font-size: 24px;
 }
 
@@ -335,6 +335,11 @@ i.fa:hover {
     bottom: 0;
     top:0;
 }
+
+#social-sidebar ul li a{
+    background: var(--nav-color);
+}
+
 }
 
 
@@ -344,7 +349,7 @@ i.fa:hover {
 }
 
 #social-sidebar ul li a {
-    background: #fff;
+    background: var(--nav-color);
     color: #fff;
     display: block;
     height: 50px;

@@ -4,7 +4,7 @@
 
 h1 {
     color: var(--text-color-text);
-    font: bold 3em/5em 'Open Sans';
+    font: bold 3em/1em 'Open Sans' !important;
 
 }
 
@@ -28,6 +28,11 @@ body.dark {
     padding-top: 5em;
 }
 
+.home-image{
+    float: right;
+    margin: 20px;
+}
+
 
 
 @media (max-width: 790px) {
@@ -37,6 +42,10 @@ body.dark {
 
     .title-under-logo{
         padding-top: 3.5em;
+    }
+
+    .home-image{
+        margin: 0;
     }
 
 }
