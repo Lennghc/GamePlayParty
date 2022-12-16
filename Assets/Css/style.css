@@ -9,7 +9,7 @@ h1 {
 }
 
 p {
-    color:var(--text-color-text)
+    color: var(--text-color-text)
 }
 
 body.dark {
@@ -26,9 +26,15 @@ body.dark {
 
 .title-under-logo {
     padding-top: 5em;
+    float: left;
+    padding: 1em;
+    text-align: left;
+    transform: rotate(-15deg);
+    font: bold 3em/5em 'Open Sans';
+    color: var(--text-color-text)
 }
 
-.home-image{
+.home-image {
     float: right;
     margin: 40px;
 }
@@ -40,11 +46,19 @@ body.dark {
         width: 80%;
     }
 
-    .title-under-logo{
+    .title-under-logo {
         padding-top: 3.5em;
+        padding-top: 5em;
+        float: none;
+        padding: 0;
+        text-align: left;
+        transform: rotate(-15deg);
+        font: bold 2em/4.5em 'Open Sans' !important;
+        margin-bottom: 0.5em;
+
     }
 
-    .home-image{
+    .home-image {
         margin: 0;
     }
 

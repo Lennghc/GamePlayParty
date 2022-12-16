@@ -10,21 +10,23 @@
 
 <body>
     <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
+    <div class="container row">
+        <div class="col-md-7 title-under-logo" >Power to the players</div>
+    </div>
 
     <?php include 'Views/Layout/navbar.php'; ?>
 
     <div class="container">
-        <h1 class="title-under-logo">Power to the players</h1>
 
         <div class="row">
-                <p> Breng jouw spel naar het volgende niveau op het grote scherm! Met een privé-theater dat speciaal voor jou en je crew is gereserveerd, heb je nog nooit eerder zo gespeeld. Maak er een toernooi van! </p>
-                <p> Neem je eigen favoriete Xbox One-spellen mee of kies uit het aanbod van je theater. </p>
-                <p>Dingen die je moet weten</p>
+            <p> Breng jouw spel naar het volgende niveau op het grote scherm! Met een privé-theater dat speciaal voor jou en je crew is gereserveerd, heb je nog nooit eerder zo gespeeld. Maak er een toernooi van! </p>
+            <p> Neem je eigen favoriete Xbox One-spellen mee of kies uit het aanbod van je theater. </p>
+            <p>Dingen die je moet weten</p>
 
 
             <div class="col-md-12">
-            <img src="Assets/Img/001.jpg" alt="" class="img-fluid home-image"></img>
-                    <p class="text-start fw-normal"> Er is geen minimum voor groepen, maar het wordt aanbevolen dat de groepsgrootte tussen de 8 en 12 personen is. Dit zal de speeltijd voor elke speler maximaliseren.
+                <img src="Assets/Img/001.jpg" alt="" class="img-fluid home-image"></img>
+                <p class="text-start fw-normal"> Er is geen minimum voor groepen, maar het wordt aanbevolen dat de groepsgrootte tussen de 8 en 12 personen is. Dit zal de speeltijd voor elke speler maximaliseren.
                     Voel je vrij om je eigen Xbox-spel mee te nemen om te spelen (persoonlijke spelconsoles of spellen voor andere spelconsoles zijn niet toegestaan).
                     Er is geen leeftijdsgrens voor videospelletjes op Xbox, maar de ouders moeten wel zelf kunnen beslissen over de spelbeoordeling van oudere gamers (d.w.z., titels met een 'M'-rating).
                     Feesten kunnen maximaal 6 weken voor de datum van uw voorkeur worden aangevraagd en zijn niet gegarandeerd tot de datum is bevestigd en geboekt door het theater.
@@ -36,16 +38,16 @@
                     Het is mogelijk dat er op sommige locaties doordeweeks geen partyboekingen beschikbaar zijn.</p>
 
             </div>
- 
-            </div>
 
-
-            <div class="col-md-10">
-
-
-
-            </div>
         </div>
+
+
+        <div class="col-md-10">
+
+
+
+        </div>
+    </div>
 
     </div>
 
