@@ -1,11 +1,13 @@
 <?php
 require_once 'Models/Auth.php';
+require_once './Classes/Functions.php';
 
 class HomeController
 {
     public function __construct()
     {
         $this->Auth = new Auth();
+        $this->Functions = new Functions();
     }
     public function __destruct()
     {
@@ -26,6 +28,7 @@ class HomeController
                     break;
                 case 'login':
                     $this->login();
+                    break;
                 case 'cinemaDetails':
                     $this->cinemaDetails();
                     break;
@@ -50,11 +53,8 @@ class HomeController
 
     public function login()
     {
-        if($_REQUEST['submit']) {
-            include '../Models/Auth.php';
-        } else {
             include 'Views/Pages/login.php';
-        }
+            $this->Functions->toast('test');
     }
 
     public function cinemaDetails()
