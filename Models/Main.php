@@ -1,5 +1,6 @@
 <?php
 require_once 'DataHandler.php';
+require_once 'Classes/Functions.php';
 
 class Main extends DataHandler
 {

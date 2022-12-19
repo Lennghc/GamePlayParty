@@ -32,10 +32,15 @@ body {
 }
 
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  border-radius: 0;
 }
+
+.form-signin input[type="text"] {
+  border-radius: 0;
+}
+
 
 .bd-placeholder-img {
   font-size: 1.125rem;
