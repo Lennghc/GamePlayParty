@@ -103,3 +103,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.button {
+  margin-top: 2%;
+}
