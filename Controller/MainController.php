@@ -12,8 +12,10 @@ class MainController {
             $controller = isset($_GET['con']) ? $_GET['con'] : '';
 
             switch ($controller) {
+
                 default:
-                include("Views/Pages/home.php");
+                // include("Views/Pages/home.php");
+                include("Views/Pages/cinemaDetails.php");
                 break;
             }
 

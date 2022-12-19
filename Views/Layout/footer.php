@@ -44,7 +44,7 @@
             <ul class="footer-list">
                 <li class="footer_list-item">
                     <a href="https://www.facebook.com/Kinepolis.Nederland" class="footer_list-link">
-                        <li class="fa-brands fa-twitter"></li>
+                        <li class="fa-brands fa-facebook"></li>
                     </a>
                     <a href="https://twitter.com/kinepolis_nl" class="footer_list-link">
                         <li class="fa-brands fa-twitter"></li>
