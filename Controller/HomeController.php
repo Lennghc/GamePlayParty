@@ -38,9 +38,6 @@ class HomeController
                 case 'logout':
                     $this->logout();
                     break;
-                case 'cinemaDetails':
-                    $this->cinemaDetails();
-                    break;
                 case 'searchCinemas':
                     $this->searchCinemas();
                     break;
@@ -134,10 +131,6 @@ class HomeController
         header('location: ' . PATH_URL);
     }
 
-    public function cinemaDetails()
-    {
-        include('Views/Pages/cinemaDetails.php');
-    }
     public function searchCinemas()
     {
         include('Views/Pages/searchCinemas.php');
