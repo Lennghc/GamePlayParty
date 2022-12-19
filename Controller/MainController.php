@@ -1,19 +1,22 @@
 <?php
-require 'Models/Main.php';
+require_once 'HomeController.php';
 
 class MainController {
     public function __construct() {
-        $this->Main = new Main();
+        $this->HomeController = new HomeController();
     }
     public function __destruct() {}
     public function handleRequest() {
         try{
 
-            $controller = isset($_GET['con']) ? $_GET['con'] : '';
+            $controller = isset($_GET['con']) ? $_GET['con'] : 'home';
 
             switch ($controller) {
+                case 'home':
+                $this->HomeController->handleRequest();
+                break;
                 default:
-                include("Views/Pages/home.php");
+                http_response_code(404);
                 break;
             }
 

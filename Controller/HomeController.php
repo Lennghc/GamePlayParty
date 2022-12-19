@@ -1,0 +1,45 @@
+<?php
+require_once 'Models/Auth.php';
+
+class HomeController
+{
+    public function __construct()
+    {
+        $this->Auth = new Auth();
+    }
+    public function __destruct()
+    {
+    }
+    public function handleRequest()
+    {
+        try {
+
+            $action = isset($_GET['op']) ? $_GET['op'] : 'index';
+
+
+            switch ($action) {
+                case 'index':
+                    $this->index();
+                    break;
+                case 'registreer':
+                    $this->registreren();
+                    break;
+                default:
+                    http_response_code(404);
+                    break;
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function index()
+    {
+        include 'Views/Pages/home.php';
+    }
+
+    public function registreren()
+    {
+        include 'Views/Pages/registreer.php';
+    }
+}
