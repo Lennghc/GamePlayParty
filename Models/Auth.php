@@ -31,4 +31,13 @@ class Auth extends Main
             throw $e;
         }
     }
+
+    public function login()
+    {
+        try {
+            
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }

@@ -24,6 +24,8 @@ class HomeController
                 case 'registreer':
                     $this->registreren();
                     break;
+                case 'login':
+                    $this->login();
                 default:
                     http_response_code(404);
                     break;
@@ -41,5 +43,14 @@ class HomeController
     public function registreren()
     {
         include 'Views/Pages/registreer.php';
+    }
+
+    public function login()
+    {
+        if($_REQUEST['submit']) {
+            include '../Models/Auth.php';
+        } else {
+            include 'Views/Pages/login.php';
+        }
     }
 }
