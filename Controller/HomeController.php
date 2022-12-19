@@ -26,6 +26,9 @@ class HomeController
                     break;
                 case 'login':
                     $this->login();
+                case 'cinemaDetails':
+                    $this->cinemaDetails();
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -52,5 +55,10 @@ class HomeController
         } else {
             include 'Views/Pages/login.php';
         }
+    }
+
+    public function cinemaDetails()
+    {
+        include("Views/Pages/cinemaDetails.php");
     }
 }

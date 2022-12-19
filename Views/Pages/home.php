@@ -16,7 +16,7 @@
 
     <?php include 'Views/Layout/navbar.php'; ?>
 
-    <div class="container">
+    <div class="container"> 
 
         <div class="row">
             <p> Breng jouw spel naar het volgende niveau op het grote scherm! Met een privé-theater dat speciaal voor jou en je crew is gereserveerd, heb je nog nooit eerder zo gespeeld. Maak er een toernooi van! </p>
