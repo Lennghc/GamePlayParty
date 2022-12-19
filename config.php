@@ -15,6 +15,5 @@ define('DB_PASS', 'leUaqCKb');
 // define('DB_USER', 'root');
 // define('DB_PASS', '');
 
-//define('PATH_DIR', pathinfo($_SERVER['PHP_SELF'])['dirname']);
 define('PATH_DIR', (pathinfo($_SERVER['PHP_SELF'])['dirname'] != '/' ? pathinfo($_SERVER['PHP_SELF'])['dirname'] : null ));
 define('PATH_URL', '//' . $_SERVER['HTTP_HOST'] . PATH_DIR);

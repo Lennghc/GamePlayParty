@@ -11,12 +11,12 @@
 <body>
     <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
     <div class="container row">
-        <div class="col-md-7 title-under-logo" >Power to the players</div>
+        <div class="col-md-7 title-under-logo">Power to the players</div>
     </div>
 
     <?php include 'Views/Layout/navbar.php'; ?>
 
-    <div class="container"> 
+    <div class="container">
 
         <div class="row">
             <p> Breng jouw spel naar het volgende niveau op het grote scherm! Met een privé-theater dat speciaal voor jou en je crew is gereserveerd, heb je nog nooit eerder zo gespeeld. Maak er een toernooi van! </p>
