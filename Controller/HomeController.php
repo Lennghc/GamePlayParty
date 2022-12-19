@@ -32,8 +32,11 @@ class HomeController
                 case 'login':
                     $this->login();
                     break;
-                case 'handleLogin':
+                case 'handlelogin':
                     $this->handleLogin();
+                    break;
+                case 'logout':
+                    $this->logout();
                     break;
                 case 'cinemaDetails':
                     $this->cinemaDetails();
@@ -97,15 +100,38 @@ class HomeController
 
     public function handleLogin()
     {
-        if(isset($_REQUEST['email'])) {
-            $email = $_REQUEST['email'];
-        }
-        if(isset($_REQUEST['psw'])) {
-            $password = $_REQUEST['psw'];
+
+        $validation = new Validation();
+        $validation->name('email')->pattern('email')->required();
+        $validation->name('password')->required()->return();
+
+        $success = $validation->isSuccess();
+
+        if ($success) {
+            $result = $this->Auth->login($success->email, $success->password);
+
+            if (!isset($result->errors)) {
+                echo Functions::toJSON(array(
+                    'username' => $result['user_username']
+                ));
+
+                exit;
+            }
         }
 
-        $res = $this->Auth->login($email,$password);
-        include 'Views/Pages/test.php';
+        echo Functions::toJSON(array(
+            'errors' => !$success ? $validation->result() : (!empty($result->errors) ? $result->errors : null)
+        ));
+    }
+
+
+    public function logout()
+    {
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
+        }
+
+        header('location: ' . PATH_URL);
     }
 
     public function cinemaDetails()
