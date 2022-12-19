@@ -24,6 +24,9 @@ class HomeController
                 case 'registreer':
                     $this->registreren();
                     break;
+                case 'cinemaDetails':
+                    $this->cinemaDetails();
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -41,5 +44,10 @@ class HomeController
     public function registreren()
     {
         include 'Views/Pages/registreer.php';
+    }
+
+    public function cinemaDetails() 
+    {
+        include("Views/Pages/cinemaDetails.php");
     }
 }
