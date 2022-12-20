@@ -20,7 +20,7 @@ class MainController
         try {
 
             $controller = isset($_GET['con']) ? $_GET['con'] : 'home';
-
+            
             switch ($controller) {
                 case 'home':
                     $this->HomeController->handleRequest();

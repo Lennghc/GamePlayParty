@@ -2,10 +2,6 @@
 <html lang="en">
 
 <head>
-        <title style="color: brown">Sidebar 5</title>
-        <meta name="author" content="Zaur">
-        <meta descryption content="Presentation of website">
-        <meta name="keywords" content="technology, cyber security, software">
         <meta http-equiv="refresh" content="100">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
@@ -41,31 +37,17 @@
 					<footer class="sidebar-tools-footer">
 					<button type="button">
 						<i class="fa-solid fa-lock"></i>
-						<span style="animation-delay: .1s">Logout</span>
+						<span style="animation-delay: .1s"><a href="index.php?con=home&op=logout">Uitloggen</a></span>
 					</button>
 				</footer>
 				</div>
 				<div class="sidebar-menu-container"></div>
 				<nav class="sidebar-menu">
 					<button type="button">
-						<i class="fa-brands fa-bitcoin"></i>
-						<span style="animation-delay: .6s">Blockchain</span>
-					</button>
-					<button type="button">
-						<i class="fa-solid fa-database"></i>
-						<span style="animation-delay: .4s">Database</span>
-					</button>
-					<button type="button">
-					<i class="fa-solid fa-layer-group"></i>
-						<span style="animation-delay: .4s">Levels</span>
-					</button>
-					<button type="button">
-						<i class="fa-solid fa-user"></i>
-						<span style="animation-delay: .3s">Accounts</span>
-					</button>
-					<button type="button">
-						<i class="fa-solid fa-folder-open"></i>
-						<span style="animation-delay: .2s">Folders</span>
+                        <a href="?con=home&op=cinema">
+                            <i class="fa-solid fa-film"></i>
+                            <span style="animation-delay: .2s">Bioscoop</span>
+                        </a>
 					</button>
 				</nav>
 			</div>

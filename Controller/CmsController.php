@@ -1,5 +1,5 @@
 <?php
-require_once 'Models/Auth.php';
+require_once 'Models/Cms.php';
 require_once './Classes/Functions.php';
 require_once './Classes/Validation.php';
 
@@ -7,7 +7,7 @@ class CmsController
 {
     public function __construct()
     {
-        $this->Auth = new Auth();
+        $this->Cms = new Cms();
     }
     public function __destruct()
     {

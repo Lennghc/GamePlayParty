@@ -27,7 +27,7 @@
                         <?= isset($_SESSION['user']) ? '' : '<a href="index.php?con=home&op=login" class="footer_list-link">Inloggen</a>'?>
                     </li>
                     <li class="footer_list-item">
-                        <?= isset($_SESSION['bios_admin']) ? '' : '<a href="?con=cms" class="footer_list-link">CMS</a>'?>
+                        <?= isset($_SESSION['Admin']) ? '' : '<a href="?con=cms" class="footer_list-link">CMS</a>' ?>
                     </li>
                 </ul>
             </div>

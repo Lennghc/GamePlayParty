@@ -181,7 +181,7 @@ button {
 	left: 0;
 	width: 72px;
 	height: 100%;
-	background: #66bfbf;
+	background: #08c447;
 	padding: 1rem 0;
 	transition: width .4s;
 }
@@ -263,7 +263,7 @@ body.open .sidebar-logo {
 	height: 100%;
 	flex: 1 1 auto;
 	background: rgba(0, 0, 0, .1125);
-	border-right: 1px solid #55a7b4;
+	border-right: 1px solid #08c447;
 }
 
 footer {
