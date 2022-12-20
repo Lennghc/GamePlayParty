@@ -3,7 +3,7 @@
 
 <head>
     <?php
-    $title = "Home";
+    $title = "Bioscopen";
     include 'Views/Layout/header.php';
     ?>
 </head>
@@ -11,41 +11,20 @@
 <body>
     <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
     <div class="container row">
-        <div class="col-md-7 title-under-logo">Bioscopen in Utrecht</div>
+        <div class="col-md-7 title-under-logo">Bioscopen in de buurt</div>
     </div>
 
     <?php include 'Views/Layout/navbar.php'; ?>
 
     <div class="container">
 
-        <div class="row">
+        <div class="row mb-4">
 
-            <div class="col-md-12">
-                <h2></h2>
-                <div class="list-group">
-                    <a class="list-group-item list-group-item-action active" href="index.php?con=cinema&op=details&id=1" role="button">Kinepolis Jaarbeurs</a>
-                    <a class="list-group-item list-group-item-action" href="#" role="button">...</a>
-                    <a class="list-group-item list-group-item-action" href="#" role="button">...</a>
-                    <a class="list-group-item list-group-item-action" href="#" role="button">...</a>
-                </div>
-
-            </div>
+            <?= !empty($list) ? $list : null ?>
 
         </div>
 
     </div>
-
-    
-
-    
-
-
-
-
-
-
-
-
 
     <?php include 'Views/Layout/footer.php'; ?>
 
