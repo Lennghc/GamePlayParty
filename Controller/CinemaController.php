@@ -28,6 +28,9 @@ class CinemaController
                 case 'details':
                     $this->detailCinema($cinema_id);
                     break;
+                case 'index':
+                    $this->allCinema();
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -37,12 +40,17 @@ class CinemaController
         }
     }
 
-    public function detailCinema($cinema_id) 
+    public function detailCinema($cinema_id)
     {
-
-       $result = $this->Lounge->timeSlots($cinema_id);
-       $button = $this->Display->createTimeslotButtons($result);
-
+        $result = $this->Lounge->timeSlots($cinema_id);
+        $button = $this->Display->createTimeslotButtons($result);
         include 'Views/Pages/cinemaDetails.php';
+    }
+
+    public function allCinema()
+    {
+        $result = $this->Cinema->all();
+        $list = $this->Display->createCinemaList($result);
+        include 'Views/Pages/searchCinemas.php';
     }
 }

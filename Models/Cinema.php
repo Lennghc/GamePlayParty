@@ -5,10 +5,10 @@ require_once 'Main.php';
 
 class Cinema extends Main
 {
-    public function allCinema()
+    public function all()
     {
         try {
-            $sql = "SELECT * FROM Cinema JOIN Lounge USING(cinema_id)";
+            $sql = "SELECT cinema_id,cinema_name FROM Cinema";
             $results = self::readsData($sql);
             return $results;
         } catch (Exception $e) {
