@@ -38,9 +38,6 @@ class HomeController
                 case 'logout':
                     $this->logout();
                     break;
-                case 'searchCinemas':
-                    $this->searchCinemas();
-                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -132,8 +129,4 @@ class HomeController
         header('location: ' . PATH_URL);
     }
 
-    public function searchCinemas()
-    {
-        include('Views/Pages/searchCinemas.php');
-    }
 }
