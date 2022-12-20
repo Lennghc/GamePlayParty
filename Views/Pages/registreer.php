@@ -15,7 +15,7 @@
     <main class="form-signin w-100 m-auto">
         <div class="formstyle">
             <form onsubmit="event.preventDefault();" id="signup-form" method="POST">
-                <img class="mb-4" src="<?= PATH_DIR ?>/Assets/Img/Lunn.jpg" alt="" width="72" height="57">
+                <img class="mb-4" src="<?= PATH_DIR ?>/Assets/Img/login.png" alt="" width="100" height="100">
                 <h1 class="h3 mb-3 fw-normal">Registreren</h1>
 
                 <div class="form-floating">
@@ -35,7 +35,7 @@
                     <label for="retype">Herhaal Wachtwoord</label>
                 </div>
 
-                <button class="w-100 btn btn-lg btn-success" id="signup_button" type="submit">Inloggen</button>
+                <button class="w-100 btn btn-lg btn-success" id="signup_button" type="submit">Registreren</button>
                 <a href="index.php?con=home&op=login">Inloggen</a>
                 <a href="index.php">Ga terug</a>
                 <p class="mt-5 mb-3 text-muted">&copy; WebWorld</p>
