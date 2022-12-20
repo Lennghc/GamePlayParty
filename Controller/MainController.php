@@ -1,6 +1,8 @@
 <?php
 require_once 'HomeController.php';
 require_once 'CinemaController.php';
+require_once 'CmsController.php';
+
 
 class MainController
 {
@@ -8,6 +10,7 @@ class MainController
     {
         $this->HomeController = new HomeController();
         $this->CinemaController = new CinemaController();
+        $this->CmsController = new CmsController();
     }
     public function __destruct()
     {
@@ -24,6 +27,9 @@ class MainController
                     break;
                 case 'cinema':
                     $this->CinemaController->handleRequest();
+                    break;
+                case 'cms':
+                    $this->CmsController->handleRequest();
                     break;
 
 

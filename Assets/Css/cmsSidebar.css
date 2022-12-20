@@ -1,10 +1,13 @@
 *{
+	
+	
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	text-decoration: none;
 	outline: none;
 	list-style: none;
+
 }
 
 
@@ -36,6 +39,19 @@
 	
 	/* Color style */
 	
+	/*
+	--color-primary:#c51350;
+	--color-secondary:#ff9a3c;
+	--color-body:#333;
+	--color-bg: #006600;
+	--color-primary-dark:#007f67;
+	--color-error:#cc3333;
+	--color-success:#4bb544;
+	--color-link:#cdcdcc;
+	--color-border:darkgrey;
+	--bs:#ffa857;
+	*/
+	
 	--color-primary: #0575E6;
 	--color-secondary: #6dd5ed;
 	--color-primary-light:#8dc6ff;
@@ -47,14 +63,14 @@
 	--color-header-dark:#393e46;
 	--color-background:#f5f9ee;
 	--color-border-sc:#ececec;
-	--color-border-focus:#F09819;
+	--color-border-focus:#69c2ff;
 	--color-border:#d3d6db;
 	--bs:#ffa857;
 	--color-button:#f8e7e7;
 	--color-percentage:#5f6769;
 	--color-header-light:#9ba6a5;
-	--color-border-focus:#F09819;
-	--color-input-background:#1d1f20;
+	--color-border-focus:#a9d7f6;
+	--color-input-background:#f5f9ee;
 	--gradient: linear-gradient(135deg var(--color-primary), var(--color-secondary));
 	
 	
@@ -95,6 +111,7 @@ body {
   font-family: var(--ff-primary);
 }
 
+
 /* A elements that don't have a class get default styles */
 a:not([class]) {
  text-decoration-skip-ink: auto;
@@ -131,10 +148,6 @@ select {
   }
 }
 
-html, body {
-	height: 100%;
-}
-
 
 
 /* ======================================================================== */ 
@@ -147,139 +160,190 @@ html, body {
 
 
 body {
-	color: #262626;
-	background: #fafafa;
+	position: relative;
+	background: #121212;
+	overflow: hidden;
 }
 
-.sidebar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 250px;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	background: #fff;
-	border: 1px solid #dbdbdb;
-	padding: 2.5rem .5rem 2rem .5rem;
-}
-
-.sidebar button {
-	color: inherit;
+button {
 	background: transparent;
-	height: 60px;
-	font-family: inherit;
-	border: 0;
-	outline: 0;
-	padding: 0;
+	border: none;
+	outline: none;
 	cursor: pointer;
 }
 
-.sidebar_header {
-	width: 100%;
-	margin-bottom: 2.9rem;
+:is(.sidebar, .sidebar-inner, .sidebar-menu) {
+	position: absolute;
+	top: 0;
 }
 
-.sidebar_header p {
-	height: 5.1vh;
-  font-size: var(--step-0);
-  font-weight: 600;
-	margin-left: .9rem;
+.sidebar {
+	left: 0;
+	width: 72px;
+	height: 100%;
+	background: #66bfbf;
+	padding: 1rem 0;
+	transition: width .4s;
 }
 
-.sidebar_header i {
-	width: 51px;
-	height: 15px;
-	font-size: var(--step-0);
-	text-align: center;
-	display: none;
+body.open .sidebar {
+	width: 340px;
 }
 
-.sidebar nav {
-	display: flex;
-	flex-direction: column;
-	flex: 1 1 auto;
-	width: 100%;
-}
-
-.sidebar > nav button:last-child {
-	margin-top: auto;
-}
-
-.sidebar button > span {
+.sidebar button {
 	display: flex;
 	align-items: center;
-	grid-gap: .9rem;
-	height: 6.8vh;
-	border-radius: 1.8rem;
-	padding: 0 .9rem;
+	width: 72px;
+	height: 50px;
+	grid-gap: 2rem;
+	font-size: var(--step-0);
+	font-weight: 200;
 	line-height: 1;
-}
-
-.sidebar button:hover > span {
-	background: #f2f2f2;
-}
-
-@media (width < 580px) {
-	.sidebar_header p {
-		display: none;
-	}
-	
-	.sidebar_header i {
-		display: block;
-	}
-	
-	.sidebar {
-		width: 73px;
-	}
-	
-	.sidebar button > span > span {
-		opacity: 0;
-		visibility: hidden;
-	}
+	padding: 0 1.5rem;
 }
 
 .sidebar button i {
-	position: relative;
-	font-size: var(--step-0);
+  color: #f9f9f9;
 }
 
-.sidebar button img {
-		width: 28px;
-		height: 28px;
-    border-radius: 50%;
-		transition: .2s;
+.sidebar-tools-footer button {
+	grid-gap: 6rem;
 }
 
-.sidebar button > span > i span {
-	position: absolute;
-	top: -6px;
-	right: -12px;
-	height: 20px;
+.sidebar-inner {
+	width: 380px;
+	height: 100%;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	
+}
+
+.sidebar-header {
+	height: 72px;
+	display: flex;
+	align-items: center;
+	padding: 0 1.125rem 0 0;
+	background: rgba(0, 0, 0, .1);
+}
+
+.sidebar-burger {
+	width: 72px;
+	height: 72px;
 	display: grid;
 	place-items: center;
+	background: url(images/icon-burger.svg) no-repeat center center;
+	transition: .3s;
+}
+
+body.open .sidebar-burger {
+	background: url(images/icon-close.svg) no-repeat center center;
+}
+
+.sidebar-logo {
+	height: 25px;
+	opacity: 0;
+	visibility: hidden;
+	transition: .3s;
+}
+
+body.open .sidebar-logo {
+	opacity: 1;
+	visibility: visible;
+}
+
+.sidebar-tools-container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.sidebar-tools {
+	width: 72px;
+	height: 100%;
+	flex: 1 1 auto;
+	background: rgba(0, 0, 0, .1125);
+	border-right: 1px solid #55a7b4;
+}
+
+footer {
+	display: flex;
+	flex: 0 1 auto;
+	width: 72px;
+	height: 72px;
+	background: rgba(0, 0, 0, .1125);
+}
+
+.sidebar-menu {
+	flex: 1 1 auto;
+	top: 72px;
+	left: 72px;
+}
+
+.sidebar-menu > button,
+footer span {
+	opacity: 0;
+	visibility: hidden;
+	transition: .4s;
+}
+
+body.open .sidebar-menu > button,
+body.open footer span{
+	opacity: 1;
+	visibility: visible;
+	animation: appear .4s both;
+}
+
+@keyframes appear {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	
+	100% {
+		opacity: 1;
+		transform: translate(0, 0);
+	}
+}
+
+button > span {
 	color: #f9f9f9;
-	background: #ff2f40;
-	font-family: BlinkMacSystemFont;
-	font-style: normal;
-	font-size: .6rem;
-	border: 1px solid #fff;
-	border-radius: 10px;
-	padding: 0 5px;
+	transition: .4s;
 }
 
-.sidebar button > span > i em {
+button:hover span {
+	padding-left: 1.5rem;
+}
+
+body.open button > span {
+	animation: span .3s both
+} 
+
+@keyframes span {
+	0% {
+		opacity: 0;
+		transform: translate(0, 50px);
+	}
+	
+	100% {
+		opacity: 1;
+	}
+}
+
+.copy {
 	position: absolute;
-	top: 1px;
-	right: -2px;
-	width: 9px;
-	height: 9px;
-	background: #ff2f40;
-	border-radius: 50%;
-	border: 1px solid #fff;
+	top: 50%;
+	left: 50%;
+	transform: translate(-30%, -50%);
+	font-size: var(--step-0);
+	font-weight: 200;
 }
 
-.sidebar button > span {
+.copy p {
+	color: #f9f9f9;
+}
+
+.copy a {
+	color: #66bfbf;
 	font-size: var(--step--1);
-	font-weight: 400;
 }
