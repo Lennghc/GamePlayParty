@@ -23,7 +23,7 @@
             <div class="col-md-12">
                 <h2></h2>
                 <div class="list-group">
-                    <a class="list-group-item list-group-item-action active" href="?con=cinema&op=details&id=1" role="button">Kinepolis Jaarbeurs</a>
+                    <a class="list-group-item list-group-item-action active" href="index.php?con=cinema&op=details&id=1" role="button">Kinepolis Jaarbeurs</a>
                     <a class="list-group-item list-group-item-action" href="#" role="button">...</a>
                     <a class="list-group-item list-group-item-action" href="#" role="button">...</a>
                     <a class="list-group-item list-group-item-action" href="#" role="button">...</a>

@@ -81,4 +81,5 @@ class Functions
 
         return $_SESSION['toast'];
     }
+
 }

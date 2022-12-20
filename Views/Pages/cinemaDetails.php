@@ -12,7 +12,7 @@
 <body>
     <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
     <div class="container row">
-        <div class="col-md-7 title-under-logo" >Jaarbeurs Utrecht</div>
+        <div class="col-md-7 title-under-logo">Jaarbeurs Utrecht</div>
     </div>
 
     <?php include 'Views/Layout/navbar.php'; ?>
@@ -20,9 +20,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-            
+
                 <strong>Informatie over Kinepolis</strong>
-                <br>
                 <p class="text-start fw-normal">
                     Kinepolis Jaarbeurs Utrecht is gevestigd aan het Jaarbeursplein in Utrecht en heeft 14 moderne zalen met
                     2.988 comfortabele zitplaatsen. Het filmaanbod is heel breed en ons personeel staat altijd klaar om je te
@@ -30,10 +29,9 @@
                     en een drankje bij een van de vele restaurants die rondom de bioscoop gevestigd zijn. Combineer je filmuitje
                     met een etentje bij een van onderstaande CineMenu-partners en profiteer van korting op je diner en
                     filmkaartje. De bioscoop is met de fiets, het openbaar vervoer of met de auto goed bereikbaar. Betaald
-                    parkeren kan rondom de bioscoop en de bussen stoppen op loopafstand van de bioscoop.
-                <br><br>
+                    parkeren kan rondom de bioscoop en de bussen stoppen op loopafstand van de bioscoop.</p>
                 <strong>Belevingen</strong>
-                <br>
+                <p class="text-start fw-normal">
                     Kinepolis Jaarbeurs Utrecht is op gebied van beeld en geluid uitgerust met de modernste technieken voor de
                     beste filmbeleving. Daarnaast is de bioscoop ook uitgerust met een Laser ULTRA zaal die is voorzien van een
                     4K-laserprojector en Dolby Atmos geluid voor de ultieme filmbeleving. Wil je nog een stapje verder gaan?
@@ -41,24 +39,23 @@
                     gevoel krijgt middenin de film te zitten. Of bezoek een MX4D voorstelling en laat je zintuigen maximaal
                     prikkelen door de bewegende stoelen en speciale omgevingseffecten. Naast de reguliere stoelen zijn bijna
                     alle zalen ook voorzien van Cosy Seats die extra ruimte en privacy bieden zodat je in je eigen bubbel van
-                    film kan genieten.
-                <br><br>
+                    film kan genieten.</p>
                 <strong>Events</strong>
-                <br>
+                <p class="text-start fw-normal">
                     Kinepolis Jaarbeurs Utrecht organiseert op regelmatige basis leuke events voor jong en oud. Denk hierbij aan
                     een Ladies Night voor met vriendinnen, een Bier & Blockbusters avond voor vrienden, de CinePlus voor de iets
-                    oudere of het Kids Weekend voor de kleintjes.
-                <br><br>
-                <strong>Beschrikbare game tijden</strong>
-                <br>
-                    Donderdag 16.00-19.00<br>
-                    Vrijdag 20.00-22.00<br>
-                    Zaterdag 18.00-22.00<br>
-                    Zondag 16.00-19.00<br>
-                </p>
+                    oudere of het Kids Weekend voor de kleintjes.</p>
+                <strong><p>Beschikbare game tijden</p></strong>
+
+                <div class="btn-group-vertical" role="group">
+
+                    <?= !empty($button) ? $button : null ?>
+                </div>
+
+
 
             </div>
-<div class="col-md-3">
+            <div class="col-md-3">
 
 
                 <div class="group-right">
@@ -72,31 +69,31 @@
                         Zaterdag 10.00-22.00<br>
                         Zondag 10.00-22.00<br>
                     <h2>Adres</h2>
-                        Kinepolis Jaarbeurs<br>
-                        Jaarbeursboulevard 300<br>
-                        3521 BC Utrecht<br>
-                        Nederland<br>
-                        Tel. 030-2003000<br><br>
+                    Kinepolis Jaarbeurs<br>
+                    Jaarbeursboulevard 300<br>
+                    3521 BC Utrecht<br>
+                    Nederland<br>
+                    Tel. 030-2003000<br><br>
                     <h2>Beschikbaarheid</h2>
-                        Kinepolis Jaarbeurs ligt aan de Jaarbeurszijde van het Centraal Station, tegen de Jaarbeurshallen aan, en op loopafstand van de historische binnenstad via de Moreelsebrug.
-                        <br><br>
+                    Kinepolis Jaarbeurs ligt aan de Jaarbeurszijde van het Centraal Station, tegen de Jaarbeurshallen aan, en op loopafstand van de historische binnenstad via de Moreelsebrug.
+                    <br><br>
                     <strong>Auto</strong>
-                        <br>
-                        Met de auto bereik je Kinepolis Jaarbeurs door op de Ring Utrecht de blauwe ANWB-borden met de aanduiding 'Jaarbeurs' te volgen. Rondom de Jaarbeurs is volop parkeergelegenheid.
-                        Alle automobilisten die een kaartje voor de film hebben kunnen 4 uur parkeren voor slechts € 5,-. Hierna geldt het reguliere parkeertarief van € 4,25 per uur. Klik hier voor meer informatie.
-                        P1 en P3 zijn het gunstigst gelegen t.o.v. de bioscoop. Dit parkeertarief is alleen geldig op het Jaarbeursterrein en niet geldig bij parkeergarage Croeselaan. Houd rekening met extra drukte op de parkeerplaatsen tijdens de beurzen in de Jaarbeurshallen.
-                        <br><br>
+                    <br>
+                    Met de auto bereik je Kinepolis Jaarbeurs door op de Ring Utrecht de blauwe ANWB-borden met de aanduiding 'Jaarbeurs' te volgen. Rondom de Jaarbeurs is volop parkeergelegenheid.
+                    Alle automobilisten die een kaartje voor de film hebben kunnen 4 uur parkeren voor slechts € 5,-. Hierna geldt het reguliere parkeertarief van € 4,25 per uur. Klik hier voor meer informatie.
+                    P1 en P3 zijn het gunstigst gelegen t.o.v. de bioscoop. Dit parkeertarief is alleen geldig op het Jaarbeursterrein en niet geldig bij parkeergarage Croeselaan. Houd rekening met extra drukte op de parkeerplaatsen tijdens de beurzen in de Jaarbeurshallen.
+                    <br><br>
                     <strong>Openbaar vervoer</strong>
-                        <br>
-                        Kinepolis Jaarbeurs ligt naast de Jaarbeurshallen tegenover het Centraal Station van Utrecht en is dus uitstekend te bereiken met trein, bus en tram. Volg vanaf het Centraal Station de borden ‘Jaarbeursplein’ en loop richting de Jaarbeurshallen. Binnen enkele minuten vind je de bioscoop aan uw linkerhand.
-                        <br><br>
+                    <br>
+                    Kinepolis Jaarbeurs ligt naast de Jaarbeurshallen tegenover het Centraal Station van Utrecht en is dus uitstekend te bereiken met trein, bus en tram. Volg vanaf het Centraal Station de borden ‘Jaarbeursplein’ en loop richting de Jaarbeurshallen. Binnen enkele minuten vind je de bioscoop aan uw linkerhand.
+                    <br><br>
                     <strong>Fiets</strong>
-                        <br>
-                        Je kunt jouw fiets vlak naast de bioscoop kwijt in de gratis fietsenstalling, gelegen op de promenade naast hal 1 van de Jaarbeurs.
-                        <br><br>
+                    <br>
+                    Je kunt jouw fiets vlak naast de bioscoop kwijt in de gratis fietsenstalling, gelegen op de promenade naast hal 1 van de Jaarbeurs.
+                    <br><br>
                     <strong>Rolstoeltoegankelijkheid</strong>
-                        <br>
-                        Kinepolis Jaarbeurs heeft rolstoelplaatsen in elke zaal. Lift en mindervalidentoilet zijn ook aanwezig.
+                    <br>
+                    Kinepolis Jaarbeurs heeft rolstoelplaatsen in elke zaal. Lift en mindervalidentoilet zijn ook aanwezig.
                     </p>
 
                 </div>
@@ -110,7 +107,7 @@
 
 
 
-        <?php include 'Views/Layout/footer.php'; ?>
+    <?php include 'Views/Layout/footer.php'; ?>
 
 </body>
 

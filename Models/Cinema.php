@@ -8,10 +8,9 @@ class Cinema extends Main
     public function allCinema()
     {
         try {
-            $sql = "";
-            $result = self::readsData($sql);
-
-            return $result;
+            $sql = "SELECT * FROM Cinema JOIN Lounge USING(cinema_id)";
+            $results = self::readsData($sql);
+            return $results;
         } catch (Exception $e) {
             throw $e;
         }

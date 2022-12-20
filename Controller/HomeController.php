@@ -53,6 +53,7 @@ class HomeController
     public function index()
     {
         include 'Views/Pages/home.php';
+
     }
 
     public function registreren()

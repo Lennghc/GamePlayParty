@@ -24,12 +24,12 @@
         <div id='social-sidebar'>
             <ul>
                 <li>
-                    <a class='icon' href="?con=home&op=index"><i class="fa fa-home"></i>
+                    <a class='icon' href="index.php"><i class="fa fa-home"></i>
                         <span>Home</span>
                     </a>
                 </li>
                 <li>
-                    <a class='icon' href='?con=home&op=searchCinemas'><i class="fa fa-solid fa-film"></i>
+                    <a class='icon' href='index.php?con=home&op=searchCinemas'><i class="fa fa-solid fa-film"></i>
                         <span>Bioscopen</span>
                     </a>
                 </li>
