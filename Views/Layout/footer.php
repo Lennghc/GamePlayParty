@@ -26,8 +26,9 @@
                     <li class="footer_list-item">
                         <?= isset($_SESSION['user']) ? '' : '<a href="index.php?con=home&op=login" class="footer_list-link">Inloggen</a>'?>
                     </li>
-
-
+                    <li class="footer_list-item">
+                        <?= isset($_SESSION['bios_admin']) ? '' : '<a href="Views/Pages/cms.php" class="footer_list-link">CMS</a>'?>
+                    </li>
                 </ul>
             </div>
             <div>
