@@ -37,14 +37,11 @@ class Display extends Functions
                     $html .= "<div>";
 
                     $date = $value['lounge_open_date'];
-                    $arrDate = explode('-', $date);
                     $start_time = $value['lounge_start_time'];
                     $end_time = $value['lounge_end_time'];
 
                     setlocale(LC_TIME, 'NL_nl');
-                    $html .= '<h5>'.strftime('%A %d, %B', strtotime($date)).'</h5>';
-
-
+                    $html .= '<h5>' . strftime('%A %d, %B', strtotime($date)) . '</h5>';
 
                     $timeslots = getTimeSlot(90, $start_time, $end_time);
                     foreach ($timeslots as $value) {
@@ -57,6 +54,31 @@ class Display extends Functions
         } else {
             $html .= "Geen tijden doorgegeven.";
         }
+
+        return $html;
+    }
+
+    public function createCinemaList($result)
+    {
+        $html = "";
+        if ($result->rowCount() != 0) {
+            while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
+                $html .= '<div class="col-lg-3"><ul class="list-group">';
+                $item = 0;
+                foreach ($row as $value) {
+                    $cinema_name = $value['cinema_name'];
+                    $cinema_id = $value['cinema_id'];
+
+                    if ($item < $result->rowCount()) {
+                        $html .= "<li class='list-group-item'><a href='index.php?con=cinema&op=details&id={$value['cinema_id']}'>{$value['cinema_name']}</a></li>";
+                        $item++;
+                        $html .= ($item % 5 == 0) ? '</ul></div><div class="col-lg-3"><ul class="list-group">' : "";
+                    }
+                }
+                $html .= '</div>';
+            }
+        }
+
 
         return $html;
     }
