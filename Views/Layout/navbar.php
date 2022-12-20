@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class='icon' href='index.php?con=home&op=searchCinemas'><i class="fa fa-solid fa-film"></i>
+                    <a class='icon' href='index.php?con=cinema'><i class="fa fa-solid fa-film"></i>
                         <span>Bioscopen</span>
                     </a>
                 </li>
