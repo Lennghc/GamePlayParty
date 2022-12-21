@@ -224,7 +224,7 @@ body.dark .search-field input {
 
 .search-field i {
     position: absolute;
-    color: var(--nav-color)!important;
+    color: var(--nav-color) !important;
     right: 15px;
     font-size: 22px;
     cursor: pointer;
@@ -292,17 +292,14 @@ body.dark .search-field i {
 
 
 
+
 i.fa {
-    color: #fff;
+    color: rgb(255, 255, 255);
     font-size: 24px;
 }
 
 i.fa:hover {
     color: white;
-}
-
-[class*="entypo-"]:before {
-    font-family: 'entypo', sans-serif;
 }
 
 /* ---------- GENERAL ---------- */
@@ -318,29 +315,10 @@ i.fa:hover {
 
 /* ---------- Social Sidebar ---------- */
 #social-sidebar {
+    right: 1em;
     position: fixed;
-    right: 0;
-    bottom: 26rem;
-    z-index: 9997;
-    transition: all 0.5s;
-    padding: 15px;
-    /* overflow-y: auto; */
-    justify-content: flex-start !important;
-
+    top: 100px;
 }
-
-@media (max-width: 790px) {
-#social-sidebar{
-    bottom: 0;
-    top:0;
-}
-
-#social-sidebar ul li a{
-    background: var(--nav-color);
-}
-
-}
-
 
 #social-sidebar ul li a {
     border-radius: 0 10px 10px 0;
@@ -372,18 +350,12 @@ i.fa:hover {
 #social-sidebar ul li a span {
     border-radius: 3px;
     line-height: 24px;
-    /* left: -100%; */
     margin-top: -16px;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);
     opacity: 0;
     padding: 4px 8px;
     position: absolute;
-    /* -webkit-transition: opacity .3s, left .4s;
--moz-transition: opacity .3s, left .4s;
--ms-transition: opacity .3s, left .4s;
--o-transition: opacity .3s, left .4s;
-transition: opacity .3s, left .4s; */
     top: 50%;
     z-index: -1;
     width: 80px;
@@ -410,4 +382,20 @@ transition: opacity .3s, left .4s; */
 #social-sidebar ul li a[class*="icon"] span,
 #social-sidebar ul li a[class*="icon"] span:before {
     background: var(--nav-color);
+}
+
+@media (max-width: 790px) {
+    #social-sidebar ul li a span {
+        opacity: 1;
+        left: -220%; 
+        width: 100px;
+    }
+
+    #social-sidebar {
+        right: 1em;
+        /* (li * a:width) / -2 */
+        position: fixed;
+        bottom: 3em;
+        top: unset;
+    }
 }

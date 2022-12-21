@@ -2,8 +2,8 @@
             <div class="nav-bar">
                 <div class="darkLight-searchBox">
                     <div class="dark-light">
-                        <i class="fas fa-cloud-moon moon"></i>
-                        <i class="fas fa-cloud-sun sun"></i>
+                        <i class="fas fa-moon moon"></i>
+                        <i class="fas fa-sun sun"></i>
                         
                     </div>
                     <div class="searchBox">

@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="footer_container">
         <div class="footer_top">
-            <div>
+            <!-- <div>
                 <h6 class="footer_title">Bioscopen</h6>
                 <ul class="footer_list">
                     <li class="footer_list-item">
@@ -16,7 +16,7 @@
                         <a href="" class="footer_list-link">namen</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <div>
                 <h6 class="footer_title">Pagina's</h6>
                 <ul class="footer_list">
