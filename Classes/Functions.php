@@ -55,7 +55,7 @@ class Functions
     {
         if (!empty($_SESSION['user']) && $_SESSION['user']->admin) {
 
-            if ($_SESSION['user']->admin == 1) {
+            if ($_SESSION['user']->admin == 4) {
                 return true;
             }
         }
