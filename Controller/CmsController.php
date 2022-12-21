@@ -34,8 +34,8 @@ class CmsController
 
     public function index()
     {
-        include 'Views/Pages/cms.php';
+        include 'Views/Pages/Admin/cms.php';
 
     }
-   
+
 }

@@ -82,4 +82,62 @@ class Display extends Functions
 
         return $html;
     }
+
+    public function CreateTable($result, $create = false, $actionMode = false, $checkbox = false){
+
+        $tableheader = false;
+        $html = "";
+
+        if($checkbox) {
+          $html .= "<form action='?con={$_GET['con']}&op=delete' method='POST'>";
+        }
+
+        $html .= "<table class='table table-hover table-responsive-sm'>";
+
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+          if ($tableheader == false) {
+            $html .= "<tr>";
+            if($checkbox) {
+              $html .= "<th><input type='checkbox'></th>";
+            }
+            foreach ($row as $key => $value) {
+              $html .= "<th>{$key}</th>";
+            }
+
+            if ($actionMode) {
+              $html .= "<th>Actions</th>";
+            }
+            $html .= "</tr>";
+            $tableheader = true;
+          }
+
+          $html .= "<tr>";
+          if($checkbox) {
+            $html .= "<td><input type='checkbox' name='delete' value={$row['id']}></td>";
+            echo $row['id'] . "<br>";
+          }
+            foreach($row as $value){
+              $html .= "<td>{$value}</td>";
+          }
+
+
+          if ($actionMode) {
+            $html .= "<td style='display: flex; justify-content: space-between;'>";
+            $html .= "<a href='?con={$_GET['con']}&op=update&id={$row['id']}'><i class='fa fa-edit'></i></a>";
+            $html .= "<a href='?con={$_GET['con']}&op=delete&id={$row['id']}'><i class='fa fa-trash'></i></a>";
+            $html .= "<a href='?con={$_GET['con']}&op=read&id={$row['id']}'><i class='fa fa-eye'></i></a>";
+            $html .= "</td>";
+          }
+          $html .= "</tr>";
+        }
+        $html .= "</table>";
+        if ($create) {
+          $html .= "<a href='?con={$_GET['con']}&op=create'><i class='fa-solid fa-circle-plus'></i></a>";
+        }
+        if($checkbox) {
+          $html .= '<input type="submit">';
+          $html .= "</form>";
+        }
+        return $html;
+      }
 }
