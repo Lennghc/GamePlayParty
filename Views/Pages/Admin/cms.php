@@ -44,7 +44,7 @@
 				<div class="sidebar-menu-container"></div>
 				<nav class="sidebar-menu">
 					<button type="button">
-                        <a href="?con=home&op=cinema">
+                        <a href="?con=cinema&op=readAll">
                             <i class="fa-solid fa-film"></i>
                             <span style="animation-delay: .2s">Bioscoop</span>
                         </a>
@@ -53,12 +53,9 @@
 			</div>
 		</aside>
 
-		<div class="copy">
-			<p>
-				Lorem Ipsum
-			</p>
+		<div class="table">
+			<?= $res ?>
 		</div>
-
 
 <script src="<?= PATH_DIR ?>/Assets/Js/cms.js"></script>
 </body>

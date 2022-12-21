@@ -28,8 +28,23 @@ class CinemaController
                 case 'details':
                     $this->detailCinema($cinema_id);
                     break;
+                case 'create':
+                    $this->collectCreate();
+                    break;
+                case 'read':
+                    $this->read($cinema_id);
+                    break;
+                case 'update':
+                    $this->update();
+                    break;
+                case 'delete':
+                    $this->delete();
+                    break;
                 case 'index':
                     $this->allCinema();
+                    break;
+                case 'readAll':
+                    $this->readAll();
                     break;
                 default:
                     http_response_code(404);
@@ -55,5 +70,38 @@ class CinemaController
         $result = $this->Cinema->all();
         $list = $this->Display->createCinemaList($result);
         include 'Views/Pages/searchCinemas.php';
+    }
+    public function collectCreate()
+    {
+        $name = isset($_REQUEST['cinema_name']) ? $_REQUEST['cinema_name'] : null;
+        $desc = isset($_REQUEST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
+        $reachability = isset($_REQUEST['cinema_reachability']) ? $_REQUEST['cinema_reachability'] : null;
+
+        if (isset($_REQUEST['submit'])) {
+            $html = $this->Cinema->create($name, $desc, $reachability);
+        }
+
+        include 'Views/Pages/Admin/Cinema/createCinema.php';
+    }
+    public function read($cinema_id)
+    {
+        $result = $this->Cinema->read($cinema_id);
+        $res = $this->Display->createTable($result);
+
+        include 'Views/Pages/Admin/cms.php';
+    }
+    public function update()
+    {
+
+    }
+    public function delete()
+    {
+
+    }
+    public function readAll()
+    {
+        $result = $this->Cinema->showAll();
+        $res = $this->Display->createTable($result,true, true);
+        include 'Views/Pages/Admin/cms.php';
     }
 }

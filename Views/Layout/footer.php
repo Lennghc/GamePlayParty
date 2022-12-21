@@ -27,7 +27,7 @@
                         <?= isset($_SESSION['user']) ? '' : '<a href="index.php?con=home&op=login" class="footer_list-link">Inloggen</a>'?>
                     </li>
                     <li class="footer_list-item">
-                        <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<a href="index.php?con=cms" class="footer_list-link">CMS</a>' : null ?>
+                        <?= isset($_SESSION['4']) ? '' : '<a href="?con=cms" class="footer_list-link">CMS</a>' ?>
                     </li>
                 </ul>
             </div>
