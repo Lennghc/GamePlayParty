@@ -23,7 +23,6 @@ i {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     row-gap: 20px;
-    justify-items: flex-end;
 }
 
 .footer_title {

@@ -65,5 +65,8 @@ body.dark {
     .home-image {
         margin: 0;
     }
+    .conatiner_landing_page{
+        margin-top: unset;
+    }
 
 }
