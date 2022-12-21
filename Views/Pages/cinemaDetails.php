@@ -19,44 +19,26 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
 
-                <strong>Informatie over Kinepolis</strong>
-                <p class="text-start fw-normal">
-                    Kinepolis Jaarbeurs Utrecht is gevestigd aan het Jaarbeursplein in Utrecht en heeft 14 moderne zalen met
-                    2.988 comfortabele zitplaatsen. Het filmaanbod is heel breed en ons personeel staat altijd klaar om je te
-                    helpen bij het uitkiezen van de geschikte film voor jouw filmuitje. Maak je filmuitje compleet met een hapje
-                    en een drankje bij een van de vele restaurants die rondom de bioscoop gevestigd zijn. Combineer je filmuitje
-                    met een etentje bij een van onderstaande CineMenu-partners en profiteer van korting op je diner en
-                    filmkaartje. De bioscoop is met de fiets, het openbaar vervoer of met de auto goed bereikbaar. Betaald
-                    parkeren kan rondom de bioscoop en de bussen stoppen op loopafstand van de bioscoop.</p>
-                <strong>Belevingen</strong>
-                <p class="text-start fw-normal">
-                    Kinepolis Jaarbeurs Utrecht is op gebied van beeld en geluid uitgerust met de modernste technieken voor de
-                    beste filmbeleving. Daarnaast is de bioscoop ook uitgerust met een Laser ULTRA zaal die is voorzien van een
-                    4K-laserprojector en Dolby Atmos geluid voor de ultieme filmbeleving. Wil je nog een stapje verder gaan?
-                    Bezoek dan onze ScreenX voorstelling en laat je meesleuren in een 170 graden kijkervaring waardoor je het
-                    gevoel krijgt middenin de film te zitten. Of bezoek een MX4D voorstelling en laat je zintuigen maximaal
-                    prikkelen door de bewegende stoelen en speciale omgevingseffecten. Naast de reguliere stoelen zijn bijna
-                    alle zalen ook voorzien van Cosy Seats die extra ruimte en privacy bieden zodat je in je eigen bubbel van
-                    film kan genieten.</p>
-                <strong>Events</strong>
-                <p class="text-start fw-normal">
-                    Kinepolis Jaarbeurs Utrecht organiseert op regelmatige basis leuke events voor jong en oud. Denk hierbij aan
-                    een Ladies Night voor met vriendinnen, een Bier & Blockbusters avond voor vrienden, de CinePlus voor de iets
-                    oudere of het Kids Weekend voor de kleintjes.</p>
-                <strong><p>Beschikbare game tijden</p></strong>
+            <div class="col-md-9" id="information">
 
-                <div class="btn-group-vertical" role="group">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a type="button" class="btn btn-primary" href="#tijden">Beschikbare Tijden</a>
+                <a type="button" class="btn btn-primary" href="#information">Informatie</a>
+                <a type="button" class="btn btn-primary" href="#adres">Adres</a>
+            </div>
+
+                <?= !empty($informationText) ? $informationText : null ?>
+
+                <div class="btn-group-vertical" id="tijden" role="group">
 
                     <?= !empty($button) ? $button : null ?>
+
                 </div>
 
-
-
             </div>
-            <div class="col-md-3">
 
+            <div class="col-md-3" id="adres">
 
                 <div class="group-right">
                     <h2>Openingstijden</h2>

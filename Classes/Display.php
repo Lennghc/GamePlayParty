@@ -78,7 +78,19 @@ class Display extends Functions
                 $html .= '</div>';
             }
         }
+        return $html;
+    }
 
+    public function convertToText($result)
+    {
+        $html = "";
+        if ($result->rowCount() != 0) {
+            while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
+                foreach ($row as $value) {
+                    $html .= $value['cinema_desc'];
+                }
+            }
+        }
 
         return $html;
     }

@@ -44,6 +44,9 @@ class CinemaController
     {
         $result = $this->Lounge->timeSlots($cinema_id);
         $button = $this->Display->createTimeslotButtons($result);
+
+        $result = $this->Cinema->read($cinema_id);
+        $informationText = $this->Display->convertToText($result);
         include 'Views/Pages/cinemaDetails.php';
     }
 
