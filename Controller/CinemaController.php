@@ -37,8 +37,11 @@ class CinemaController
                 case 'update':
                     $this->update();
                     break;
-                case 'delete':
-                    $this->delete();
+                case 'deactivate':
+                    $this->deactivate($cinema_id);
+                    break;
+                case 'activate':
+                    $this->activate($cinema_id);
                     break;
                 case 'index':
                     $this->allCinema();
@@ -76,9 +79,11 @@ class CinemaController
         $name = isset($_REQUEST['cinema_name']) ? $_REQUEST['cinema_name'] : null;
         $desc = isset($_REQUEST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
         $reachability = isset($_REQUEST['cinema_reachability']) ? $_REQUEST['cinema_reachability'] : null;
+        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
 
         if (isset($_REQUEST['submit'])) {
-            $html = $this->Cinema->create($name, $desc, $reachability);
+            $html = $this->Cinema->create($name, $desc, $reachability, $user_id);
+            header('Location: ?con=cinema&op=readAll');
         }
 
         include 'Views/Pages/Admin/Cinema/createCinema.php';
@@ -94,9 +99,27 @@ class CinemaController
     {
 
     }
-    public function delete()
+    public function deactivate($cinema_id)
     {
+        $result = $this->Cinema->deactivate($cinema_id);
+        $res = $this->Display->deactivateWarning($result);
 
+        if(isset($_REQUEST['deactive'])) {
+            $res = $this->Cinema->deactivate($cinema_id);
+            header('Location: ?con=cinema&op=readAll');
+        }
+        include 'Views/Pages/Admin/cms.php';
+    }
+    public function activate($cinema_id)
+    {
+        $result = $this->Cinema->activate($cinema_id);
+        $res = $this->Display->activateWarning($result);
+
+        if(isset($_REQUEST['deactive'])) {
+            $res = $this->Cinema->activate($cinema_id);
+            header('Location: ?con=cinema&op=readAll');
+        }
+        include 'Views/Pages/Admin/cms.php';
     }
     public function readAll()
     {

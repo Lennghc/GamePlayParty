@@ -16,37 +16,36 @@
 
 <aside class="sidebar">
 			<div class="sidebar-inner">
-				<header class="sidebar-header">
-					<button type="button" class="sidebar-burger" onclick="toggleSidebar()">
-					  <i class="fa-solid fa-bars burger-icon"></i>
-					</button>
-					<img src="images/blocklord-logo.png" class="sidebar-logo">
-				</header>
-				<div class="sidebar-tools-container">
 				<nav class="sidebar-tools">
 					<button type="button">
-						<i class="fa-solid fa-house"></i>
+						<a href="?con=home">
+							<i class="fa-solid fa-house"></i>
+						</a>
 					</button>
 					<button type="button">
-						<i class="fa-solid fa-gear"></i>
+						<a href="?con=cinema&op=readAll">
+							<i class="fa-solid fa-film"></i>
+						</a>
 					</button>
-					<button type="button">
+					<!-- <button type="button">
 						<i class="fa-solid fa-folder-open"></i>
-					</button>
+					</button> -->
 				</nav>
 					<footer class="sidebar-tools-footer">
+					<a href="index.php?con=home&op=logout">
 					<button type="button">
 						<i class="fa-solid fa-lock"></i>
-						<span style="animation-delay: .1s"><a href="index.php?con=home&op=logout">Uitloggen</a></span>
+
+						<span style="animation-delay: .1s">Uitloggen</span>
+
 					</button>
+				</a>
 				</footer>
-				</div>
 				<div class="sidebar-menu-container"></div>
 				<nav class="sidebar-menu">
 					<button type="button">
                         <a href="?con=cinema&op=readAll">
                             <i class="fa-solid fa-film"></i>
-                            <span style="animation-delay: .2s">Bioscoop</span>
                         </a>
 					</button>
 				</nav>

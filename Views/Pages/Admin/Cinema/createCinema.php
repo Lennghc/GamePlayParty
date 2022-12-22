@@ -10,7 +10,11 @@
 
     <script>
       tinymce.init({
-        selector: '#mytextarea'
+        selector: '#cinema_desc'
+      });
+
+      tinymce.init({
+        selector: '#cinema_reachabilty'
       });
     </script>
 </head>
@@ -18,22 +22,24 @@
 
 <main class="form-signin w-100 m-auto">
     <div class="formstyle">
-        <form onsubmit="event.preventDefault();" method="POST">
+        <form action="?con=cinema&op=create" method="POST">
             <i class="fa-solid fa-square-plus"></i>
             <h1 class="h3 mb-3 fw-normal">Create</h1>
 
             <div class="form-floating">
-            <input type="text" name="cinema_name" class="form-control" id="cinema_name" placeholder="naam@voorbeeld.com">
-            <label for="cinema_name">Bioscoop naam</label>
+                <input type="text" name="cinema_name" class="form-control" id="cinema_name" placeholder="Bioscoop naam">
+                <label for="cinema_name">Bioscoop naam</label>
             </div>
 
             <div class="form-floating">
-            <label for="cinema_desc">Beschrijving Bioscoop</label>
-            <textarea id="mytextarea" rows="15"></textarea>
-
+                <textarea name="cinema_desc" id="cinema_desc" rows="15" placeholder="Beschrijving Bioscoop"></textarea>
             </div>
 
-            <input class="w-100 btn btn-lg btn-success" type="submit" id="" value="Create"></input>
+            <div class="form-floating">
+                <textarea name="cinema_reachabilty" id="cinema_reachabilty" rows="15" placeholder="Bereikbaarheid Bioscoop"></textarea>
+            </div>
+
+            <input class="w-100 btn btn-lg btn-success" type="submit" name="submit" value="Create"></input>
 
             <p class="mt-5 mb-3 text-muted">&copy; WebWorld</p>
         </form>

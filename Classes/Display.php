@@ -136,15 +136,17 @@ class Display extends Functions
           if ($actionMode) {
             $html .= "<td style='display: flex; justify-content: space-between;'>";
             $html .= "<a href='?con={$_GET['con']}&op=update&id={$row['id']}'><i class='fa fa-edit'></i></a>";
-            $html .= "<a href='?con={$_GET['con']}&op=delete&id={$row['id']}'><i class='fa fa-trash'></i></a>";
             $html .= "<a href='?con={$_GET['con']}&op=read&id={$row['id']}'><i class='fa fa-eye'></i></a>";
+            $html .= "<a href='?con={$_GET['con']}&op=deactivate&id={$row['id']}'><i class='fa-solid fa-lock'></i></a>";
+            $html .= "<a href='?con={$_GET['con']}&op=activate&id={$row['id']}'><i class='fa-solid fa-unlock'></i></a>";
+
             $html .= "</td>";
           }
           $html .= "</tr>";
         }
         $html .= "</table>";
         if ($create) {
-          $html .= "<a href='?con={$_GET['con']}&op=create'><i class='fa-solid fa-circle-plus'></i></a>";
+          $html .= "<a href='?con={$_GET['con']}&op=create&id={$_GET['con']}'><i class='fa-solid fa-circle-plus'></i></a>";
         }
         if($checkbox) {
           $html .= '<input type="submit">';
@@ -152,4 +154,21 @@ class Display extends Functions
         }
         return $html;
       }
+    public function deactivateWarning()
+    {
+      $html = "";
+      $html .= "Weet u zeker dat u deze bioscoop op <b> inactief </b> wilt zetten?";
+      $html .= "<a href='?con={$_GET['con']}&op=deactivate' name='deactive'><i class='fa-regular fa-square-check'></i></a>";
+      $html .= "<button onclick='history.back()'><i class='fa-regular fa-rectangle-xmark'></i></button>";
+      return $html;
+    }
+
+    public function activateWarning()
+    {
+      $html = "";
+      $html .= "Weet u zeker dat u deze bioscoop op <b> actief </b> wilt zetten?";
+      $html .= "<a href='?con={$_GET['con']}&op=activate' name='deactive'><i class='fa-regular fa-square-check'></i></a>";
+      $html .= "<button onclick='history.back()'><i class='fa-regular fa-rectangle-xmark'></i></button>";
+      return $html;
+    }
 }
