@@ -85,7 +85,7 @@ class CinemaController
     }
     public function read($cinema_id)
     {
-        $result = $this->Cinema->read($cinema_id);
+        $result = $this->Cinema->readAdmin($cinema_id);
         $res = $this->Display->createTable($result);
 
         include 'Views/Pages/Admin/cms.php';

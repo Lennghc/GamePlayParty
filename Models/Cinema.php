@@ -36,7 +36,7 @@ class Cinema extends Main
             throw $e;
         }
     }
-    public function read($cinema_id)
+    public function readAdmin($cinema_id)
     {
         try {
             $sql = "SELECT cinema_name AS Naam, cinema_desc AS Beschrijving FROM Cinema WHERE cinema_id = $cinema_id";
