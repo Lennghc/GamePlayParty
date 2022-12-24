@@ -27,6 +27,9 @@
 							<i class="fa-solid fa-film"></i>
 						</a>
 					</button>
+					<button type="button">
+						<a href="index.php?con=lounge&op=create"><i class="fa-solid fa-plus"></i></a>
+					</button>
 					<!-- <button type="button">
 						<i class="fa-solid fa-folder-open"></i>
 					</button> -->
