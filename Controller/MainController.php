@@ -2,6 +2,8 @@
 require_once 'HomeController.php';
 require_once 'CinemaController.php';
 require_once 'CmsController.php';
+require_once 'ReservationController.php';
+require_once 'LoungeController.php';
 
 
 class MainController
@@ -11,6 +13,8 @@ class MainController
         $this->HomeController = new HomeController();
         $this->CinemaController = new CinemaController();
         $this->CmsController = new CmsController();
+        $this->ReservationController = new ReservationController();
+        $this->LoungeController = new LoungeController();
     }
     public function __destruct()
     {
@@ -30,6 +34,12 @@ class MainController
                     break;
                 case 'cms':
                     $this->CmsController->handleRequest();
+                    break;
+                case 'lounge':
+                    $this->LoungeController->handleRequest();
+                    break;
+                case 'reserv':
+                    $this->ReservationController->handleRequest();
                     break;
 
 
