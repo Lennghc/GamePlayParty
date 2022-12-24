@@ -10,12 +10,12 @@
 </head>
 
 <body>
-    <!-- <img src="Assets/Img/gpp.svg" id="logo_image" alt=""> -->
+    <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
     <div class="container row">
         <div class="col-md-7 title-under-logo">Jaarbeurs Utrecht</div>
     </div>
 
-    <?php // include 'Views/Layout/navbar.php'; 
+    <?php  include 'Views/Layout/navbar.php'; 
     ?>
 
     <div class="container">
