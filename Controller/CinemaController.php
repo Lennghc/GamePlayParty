@@ -1,6 +1,7 @@
 <?php
 require_once './Models/Cinema.php';
 require_once './Models/Lounge.php';
+require_once './Models/Reservation.php';
 require_once './Classes/Display.php';
 
 class CinemaController
@@ -10,6 +11,7 @@ class CinemaController
         $this->Cinema = new Cinema();
         $this->Lounge = new Lounge();
         $this->Display = new Display();
+        $this->Reservation = new Reservation();
     }
 
     public function __destruct()
@@ -37,12 +39,6 @@ class CinemaController
                 case 'update':
                     $this->update();
                     break;
-                case 'deactivate':
-                    $this->deactivate($cinema_id);
-                    break;
-                case 'activate':
-                    $this->activate($cinema_id);
-                    break;
                 case 'index':
                     $this->allCinema();
                     break;
@@ -61,7 +57,11 @@ class CinemaController
     public function detailCinema($cinema_id)
     {
         $result = $this->Lounge->timeSlots($cinema_id);
-        $button = $this->Display->createTimeslotButtons($result);
+        $reservated = $this->Reservation->beforeCheckTimeSlot();
+
+
+        $button = $this->Display->createTimeslotButtons([$result,$reservated]);
+
 
         $result = $this->Cinema->read($cinema_id);
         $informationText = $this->Display->convertToText($result);
@@ -74,16 +74,15 @@ class CinemaController
         $list = $this->Display->createCinemaList($result);
         include 'Views/Pages/searchCinemas.php';
     }
+
     public function collectCreate()
     {
         $name = isset($_REQUEST['cinema_name']) ? $_REQUEST['cinema_name'] : null;
         $desc = isset($_REQUEST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
         $reachability = isset($_REQUEST['cinema_reachability']) ? $_REQUEST['cinema_reachability'] : null;
-        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
 
         if (isset($_REQUEST['submit'])) {
-            $html = $this->Cinema->create($name, $desc, $reachability, $user_id);
-            header('Location: ?con=cinema&op=readAll');
+            $html = $this->Cinema->create($name, $desc, $reachability);
         }
 
         include 'Views/Pages/Admin/Cinema/createCinema.php';
@@ -97,7 +96,6 @@ class CinemaController
     }
     public function update()
     {
-
     }
     public function deactivate($cinema_id)
     {
@@ -114,7 +112,6 @@ class CinemaController
     {
         $result = $this->Cinema->activate($cinema_id);
         $res = $this->Display->activateWarning($result);
-
         if(isset($_REQUEST['deactive'])) {
             $res = $this->Cinema->activate($cinema_id);
             header('Location: ?con=cinema&op=readAll');
@@ -124,7 +121,7 @@ class CinemaController
     public function readAll()
     {
         $result = $this->Cinema->showAll();
-        $res = $this->Display->createTable($result,true, true);
+        $res = $this->Display->createTable($result, true, true);
         include 'Views/Pages/Admin/cms.php';
     }
 }

@@ -19,7 +19,7 @@ class Cinema extends Main
     public function read($cinema_id)
     {
         try {
-            $sql = "SELECT cinema_id AS ID,cinema_name AS bioscoop_naam,cinema_desc AS Beschrijving FROM Cinema WHERE cinema_id = $cinema_id";
+            $sql = "SELECT cinema_id,cinema_name,cinema_desc,lounge_id FROM Cinema JOIN Lounge USING(cinema_id) WHERE cinema_id = $cinema_id";
             $results = self::readsData($sql);
             return $results;
         } catch (Exception $e) {
