@@ -69,4 +69,8 @@ body.dark {
         margin-top: unset;
     }
 
+    .reservDetails-inputfield{
+        width: 40%!important;
+    }
+
 }

@@ -74,3 +74,10 @@
         </div>
     </div>
 </footer>
+
+<?php
+if (isset($_SESSION['toast'])) {
+    echo $_SESSION['toast'];
+    unset($_SESSION['toast']);
+}
+?>

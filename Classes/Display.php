@@ -10,7 +10,68 @@ class Display extends Functions
     $this->LoungeController = new LoungeController();
   }
 
+  public function reservDetailsForm($result)
+  {
+    $html = "";
+    $row = $result->fetchall(PDO::FETCH_ASSOC);
+    if ($result->rowCount() != 0) {
+      foreach ($row as $value) {
+        $html .= "<div class='container'>
+        <form action='' method='POST'>
+            <h4>{$value['user_username']} gegevens</h4>
+            <div class='row'>
+                <div class='col-md-4 form-group'>
+                    <label for='fName'>Voornaam</label>
+                    <input type='text' name='fname' value='{$value['user_fname']}' class='form-control' />
+                </div>
+                <div class='col-md-4 form-group'>
+                    <label for='mName'>Tussenvoegsel</label>
+                    <input type='text' name='mName' value='{$value['user_insertion']}' class='form-control'>
+                </div>
+                <div class='col-md-4 form-group'>
+                    <label for='lName'>Achternaam</label>
+                    <input type='text' name='lName' value='{$value['user_lname']}' class='form-control'>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 form-group'>
+                    <label for='street'>Straat naam</label>
+                    <input type='text' name='street' value='{$value['user_streetname']}'  class='form-control'>
+                </div>
+                <div class='col-md-6 form-group'>
+                    <label for='houseNumber'>Huis nummer</label>
+                    <input type='text' name='houseNumber' value='{$value['user_house_nmr']}' class='form-control'>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 form-group'>
+                    <label for='zipcode'>Postcode</label>
+                    <input type='text' name='zipcode' value='{$value['user_zipcode']}' class='form-control'>
+                </div>
+                <div class='col-md-6 form-group'>
+                    <label for='city'>Stad</label>
+                    <input type='text' name='city' value='{$value['user_city']}' class='form-control'>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 form-group'>
+                    <label for='tel'>Telefoon nummer</label>
+                    <input type='text' name='tel' value='{$value['user_tel']}' class='form-control'>
+                </div>
+                <div class='col-md-6 form-group'>
+                    <label for='email'>Email</label>
+                    <input type='email' name='email' value='{$value['user_email']}' class='form-control' readonly>
+                </div>
 
+            </div>
+        </form>
+
+    </div>";
+      }
+    }
+    return $html;
+
+  }
   public function createTimeslotButtons($result)
   {
     $html = "";
@@ -20,6 +81,7 @@ class Display extends Functions
         foreach ($resArray as $value) {
           $resTime = json_decode($value['reservated_timeslot'], true);
           $resDate = $value['reservated_date'];
+          $lounge_id = $value['lounge_id'];
         }
 
         foreach ($row as $item) {
@@ -32,7 +94,7 @@ class Display extends Functions
             foreach ($resTime as $value) {
               if (!empty($time)) {
                 for ($i = 0; $i < count($time); $i++) {
-                  if ($resDate == $item['lounge_open_date']) {
+                  if ($resDate == $item['lounge_open_date'] || $lounge_id == $item['lounge_id']) {
                     if ($time[$i]['slot_start_time'] == $value['slot_start_time'] || $time[$i]['slot_end_time'] == $value['slot_end_time']) {
                       unset($time[$i]);
                       $newTime = array_values($time);

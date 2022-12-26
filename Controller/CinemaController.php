@@ -56,16 +56,12 @@ class CinemaController
 
     public function detailCinema($cinema_id)
     {
-        $result = $this->Lounge->timeSlots($cinema_id);
-        $reservated = $this->Reservation->beforeCheckTimeSlot();
-
-
-        $button = $this->Display->createTimeslotButtons([$result,$reservated]);
-
-
-        $result = $this->Cinema->read($cinema_id);
-        $informationText = $this->Display->convertToText($result);
-        include 'Views/Pages/cinemaDetails.php';
+            $result = $this->Lounge->timeSlots($cinema_id);
+            $reservated = $this->Reservation->getReservatedTimeSlots();
+            $button = $this->Display->createTimeslotButtons([$result, $reservated]);
+            $result = $this->Cinema->read($cinema_id);
+            $informationText = $this->Display->convertToText($result);
+            include 'Views/Pages/cinemaDetails.php';
     }
 
     public function allCinema()
@@ -102,7 +98,7 @@ class CinemaController
         $result = $this->Cinema->deactivate($cinema_id);
         $res = $this->Display->deactivateWarning($result);
 
-        if(isset($_REQUEST['deactive'])) {
+        if (isset($_REQUEST['deactive'])) {
             $res = $this->Cinema->deactivate($cinema_id);
             header('Location: ?con=cinema&op=readAll');
         }
@@ -112,7 +108,7 @@ class CinemaController
     {
         $result = $this->Cinema->activate($cinema_id);
         $res = $this->Display->activateWarning($result);
-        if(isset($_REQUEST['deactive'])) {
+        if (isset($_REQUEST['deactive'])) {
             $res = $this->Cinema->activate($cinema_id);
             header('Location: ?con=cinema&op=readAll');
         }
