@@ -20,15 +20,10 @@
             <div>
                 <h6 class="footer_title">Pagina's</h6>
                 <ul class="footer_list">
-                    <li class="footer_list-item">
-                        <?= isset($_SESSION['user']) ? '<a href="index.php?con=home&op=logout" class="footer_list-link">Uitloggen</a>' : '<a href="index.php?con=home&op=registreer" class="footer_list-link">Registreren</a>'?>
-                    </li>
-                    <li class="footer_list-item">
-                        <?= isset($_SESSION['user']) ? '' : '<a href="index.php?con=home&op=login" class="footer_list-link">Inloggen</a>'?>
-                    </li>
-                    <li class="footer_list-item">
-                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<a href="index.php?con=cms" class="footer_list-link">CMS</a>' : null ?>
-                    </li>
+                        <?= isset($_SESSION['user']) ? '<li class="footer_list-item"><a href="index.php?con=home&op=logout" class="footer_list-link">Uitloggen</a>' : '<a href="index.php?con=home&op=registreer" class="footer_list-link">Registreren</a></li>'?>
+                        <?= isset($_SESSION['user']) ? '' : '<li class="footer_list-item"><a href="index.php?con=home&op=login" class="footer_list-link">Inloggen</a></li>'?>
+                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li class="footer_list-item"><a href="index.php?con=cms" class="footer_list-link">Beheer paneel</a></li>' : null ?>
+                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li class="footer_list-item"><a href="index.php?con=cms" class="footer_list-link">Beheer paneel</a></li>' : null ?>
                 </ul>
             </div>
             <div>
