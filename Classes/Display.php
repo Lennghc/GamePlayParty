@@ -10,6 +10,61 @@ class Display extends Functions
     $this->LoungeController = new LoungeController();
   }
 
+  public function createTable($result, $edit = false, $delete = false, $read = false, $create = false, $status = false)
+  {
+    $tableheader = false;
+    $html = "";
+    $html .= "<div class='table-responsive'>";
+    $html .= "<table class='table align-middle table-bordered'>";
+
+
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+
+      if ($tableheader == false) {
+        $html .= "<tr>";
+        foreach ($row as $key => $value) {
+          $html .= "<th scope='col'>{$key}</th>";
+        }
+        if ($edit == true || $delete == true || $read == true) {
+          $html .= "<th>Actions</th>";
+        }
+        $html .= "</tr>";
+        $tableheader = true;
+      }
+      $html .= "<tr scope='row'>";
+      foreach ($row as $value) {
+        $html .= "<td>" . (empty($value) ? '<i class="text-black fa fa-ban" aria-hidden="true"></i>' : $value) . "</td>";
+      }
+      if ($edit == true || $delete == true || $read == true) {
+        $html .= "<td style='display: flex; justify-content: space-between;'>";
+        if ($edit == true) {
+          $html .= "<button type='button' class='btn btn-info'><i class='fa fa-edit'></i></button>";
+        }
+        if ($delete == true) {
+          $html .= "<button type='button' class='btn btn-danger'><i class='fa fa-trash'></i></button>";
+        }
+        if ($read == true) {
+          $html .= "<button type='button' class='btn btn-success'><i class='fa fa-eye'></i></button>";
+        }
+        $html .= "</td>";
+      }
+      $html .= "</tr  >";
+    }
+    $html .= "</table>";
+    $html .= "</div>";
+    if ($create == true) {
+      $html .= '<div class="flex flex-row-reverse" style="display:flex;"> 
+        <div class="justify-content-end">
+          <a class="btn btn-lg bg-green rounded-circle" href="#"><span class="text-white fa fa-plus"></span></a>
+        </div>
+    </div>';
+    }
+
+    
+
+    return $html;
+  }
+
   public function reservDetailsForm($result)
   {
     $html = "";
@@ -70,7 +125,6 @@ class Display extends Functions
       }
     }
     return $html;
-
   }
   public function createTimeslotButtons($result)
   {
