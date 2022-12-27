@@ -4,6 +4,18 @@ require_once 'Main.php';
 
 class Auth extends Main
 {
+
+    public function all()
+    {
+        try {
+            $sql = "SELECT user_id AS ID,user_email AS Email,role_name AS Role FROM Users JOIN Roles USING(role_id)";
+            $result = self::readsData($sql);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function create($username, $email, $password)
     {
         try {
@@ -32,7 +44,8 @@ class Auth extends Main
         }
     }
 
-    public function login($email, $password) {
+    public function login($email, $password)
+    {
         try {
             $errors = array();
             $password = Functions::encrypt($password);
@@ -41,7 +54,7 @@ class Auth extends Main
             $result = self::readsData($sql);
             $result = $result->fetch(PDO::FETCH_ASSOC);
 
-            if( !$result ) {
+            if (!$result) {
                 $errors[] = "Password or email are incorrect.";
             } else {
                 $_SESSION['user'] = (object)array(
@@ -60,7 +73,7 @@ class Auth extends Main
             return (object) [
                 'errors' => $errors
             ];
-        } catch (Exception $e){
+        } catch (Exception $e) {
             throw $e;
         }
     }

@@ -4,6 +4,17 @@ require_once 'Main.php';
 class Lounge extends Main
 {
 
+    public function ownLounges($user_id)
+    {
+        try {
+            $sql = "SELECT cinema_name AS BioscoopNaam, lounge_nmr AS ZaalNaam_Nummer, lounge_open_date AS Open_op FROM Cinema JOIN Lounge USING(cinema_id) WHERE user_id = $user_id";
+            $result = self::readsData($sql);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function create($lounge_nmr, $lounge_chair_places,$lounge_wheelchair_places,$lounge_screensize,$lounge_open_date,$lounge_timeslots,$cinema_id)
     {
         try {
