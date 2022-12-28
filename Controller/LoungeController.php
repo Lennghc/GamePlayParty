@@ -22,6 +22,9 @@ class LoungeController
                 case 'create':
                     $this->create();
                     break;
+                case 'index':
+                    $this->index();
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -29,6 +32,19 @@ class LoungeController
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function index()
+    {
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
+
+        if ($role == 3) {
+            $result = $this->Lounge->ownLounges($user_id);
+            $table = $this->Display->createTable($result, false, false, false, true);
+        }
+
+        include './Views/Pages/Admin/Lounge/index.php';
     }
 
     public function create()

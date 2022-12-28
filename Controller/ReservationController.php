@@ -1,5 +1,6 @@
 <?php
 require_once './Models/Reservation.php';
+require_once './Models/Cinema.php';
 
 class ReservationController
 {
@@ -7,6 +8,7 @@ class ReservationController
     {
         $this->Reservation = new Reservation();
         $this->Display = new Display();
+        $this->Cinema = new Cinema();
     }
 
     public function __destruct()
@@ -25,6 +27,10 @@ class ReservationController
                     break;
                 case 'reservDetails':
                     $this->reservDetails($id);
+                    break;
+                case 'index':
+                    $this->index();
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -33,6 +39,37 @@ class ReservationController
             throw $e;
         }
     }
+
+    public function index()
+    {
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
+
+        if ($role == 3) {
+            // Bioscoop eigenaar
+            // Bekijk als Bioscoop eigenaar al een bioscoop op zijn naam heeft
+            $result = $this->Cinema->hasCinema($user_id);
+            if ($result->rowCount() == 0) {
+                // Bioscoop create aanroepen
+                header('Location: index.php?con=cinema&op=create');
+                exit();
+            } else {
+                $result = $this->Reservation->ownCinemasReservations($user_id);
+                $table = $this->Display->createTable($result, false, false, true, false);
+            }
+        } elseif ($role == 4) {
+            // Jack jones eigenaar
+            $result = $this->Reservation->allReservationCinemas();
+            $table = $this->Display->createTable($result);
+        } else {
+            Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
+            header('Location: index.php');
+            exit();
+        }
+
+        include 'Views/Pages/Admin/Reservation/index.php';
+    }
+
 
     public function reservDetails($id)
     {

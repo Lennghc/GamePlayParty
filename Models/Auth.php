@@ -5,10 +5,35 @@ require_once 'Main.php';
 class Auth extends Main
 {
 
-    public function all()
+    public function update($id,$fName,$mName,$lName,$street,$house_nmr,$zipcode,$city,$tel,$role_id)
     {
         try {
-            $sql = "SELECT user_id AS ID,user_email AS Email,role_name AS Role FROM Users JOIN Roles USING(role_id)";
+            $sql = "UPDATE Users SET user_fname = '{$fName}', user_insertion = '{$mName}', user_lname = '{$lName}', user_streetname = '{$street}', user_house_nmr = '{$house_nmr}', user_city = '{$city}', user_zipcode = '{$zipcode}', user_tel = '{$tel}', role_id = '{$role_id}' WHERE user_id = $id";
+            $result = self::updateData($sql);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function collectUserData($id)
+    {
+        try {
+            $sql = "SELECT * FROM Users WHERE user_id = $id";
+            $result = self::readData($sql);
+
+            $sql = "SELECT * FROM Roles";
+            $result2 = self::readsData($sql);
+            return [$result,$result2];
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function all($user_id)
+    {
+        try {
+            $sql = "SELECT user_id AS ID,user_email AS Email,role_name AS Role FROM Users JOIN Roles USING(role_id) WHERE user_id != $user_id";
             $result = self::readsData($sql);
             return $result;
         } catch (Exception $e) {

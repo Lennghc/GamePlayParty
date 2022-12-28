@@ -15,9 +15,9 @@
                         <a href="index.php?con=cms" class="nav-link px-0 align-middle">
                             <i class="fa fa-book-bookmark"></i> <span class="ms-1 d-none d-sm-inline text-white">Reserveringen</span></a>
                     </li>
-                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li><a href="index.php?con=cms&op=lounges" class="nav-link px-0 align-middle"><i class="fa fa-video"></i> <span class="ms-1 d-none d-sm-inline text-white">Zalen</span></a></li>' : null ?>
+                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li><a href="index.php?con=cms&op=lounge" class="nav-link px-0 align-middle"><i class="fa fa-video"></i> <span class="ms-1 d-none d-sm-inline text-white">Zalen</span></a></li>' : null ?>
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=users" class="nav-link px-0 align-middle"><i class="fa fa-users"></i> <span class="ms-1 d-none d-sm-inline text-white">Gebruikers</span></a></li>' : null ?>
-                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=cinemas" class="nav-link px-0 align-middle"><i class="fa fa-video"></i> <span class="ms-1 d-none d-sm-inline text-white">Bioscopen</span></a></li>' : null ?>
+                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=cinema" class="nav-link px-0 align-middle"><i class="fa fa-video"></i> <span class="ms-1 d-none d-sm-inline text-white">Bioscopen</span></a></li>' : null ?>
 
 
                 </ul>
@@ -34,9 +34,16 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="index.php?con=home&op=logout">Uitloggen</a></li>
+                        <li><a class="dropdown-item" href="index.php?con=auth&op=logout">Uitloggen</a></li>
                     </ul>
                 </div>
             </div>
 
         </div>
+
+        <?php
+        if (isset($_SESSION['toast'])) {
+            echo $_SESSION['toast'];
+            unset($_SESSION['toast']);
+        }
+        ?>

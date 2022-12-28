@@ -4,7 +4,7 @@ require_once 'CinemaController.php';
 require_once 'CmsController.php';
 require_once 'ReservationController.php';
 require_once 'LoungeController.php';
-
+require_once 'AuthController.php';
 
 class MainController
 {
@@ -15,6 +15,7 @@ class MainController
         $this->CmsController = new CmsController();
         $this->ReservationController = new ReservationController();
         $this->LoungeController = new LoungeController();
+        $this->AuthController = new AuthController();
     }
     public function __destruct()
     {
@@ -24,7 +25,7 @@ class MainController
         try {
 
             $controller = isset($_GET['con']) ? $_GET['con'] : 'home';
-            
+
             switch ($controller) {
                 case 'home':
                     $this->HomeController->handleRequest();
@@ -40,6 +41,12 @@ class MainController
                     break;
                 case 'reserv':
                     $this->ReservationController->handleRequest();
+                    break;
+                case 'auth':
+                    $this->AuthController->handleRequest();
+                    break;
+                case 'users';
+                    $this->AuthController->handleRequest();
                     break;
 
 

@@ -80,4 +80,15 @@ class Cinema extends Main
             throw $e;
         }
     }
+
+    public function hasCinema($user_id)
+    {
+        try {
+            $sql = "SELECT cinema_id FROM Cinema WHERE user_id = $user_id";
+            $result = self::readData($sql);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }

@@ -26,7 +26,7 @@
             <label for="floatingPassword">Wachtwoord</label>
             </div>
 
-            <input class="w-100 btn btn-lg btn-success" type="submit" id="login_button" value="Inloggen"></input>
+            <button class="w-100 btn btn-lg btn-success" type="submit" id="login_button">Inloggen</button>
             <button class="btn btn-secondary button" onclick="history.back()">Ga terug</button>
             <a class="btn btn-secondary button" href="?con=home&op=registreer">Registreer</a>
 

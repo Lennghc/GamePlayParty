@@ -56,12 +56,12 @@ class CinemaController
 
     public function detailCinema($cinema_id)
     {
-            $result = $this->Lounge->timeSlots($cinema_id);
-            $reservated = $this->Reservation->getReservatedTimeSlots();
-            $button = $this->Display->createTimeslotButtons([$result, $reservated]);
-            $result = $this->Cinema->read($cinema_id);
-            $informationText = $this->Display->convertToText($result);
-            include 'Views/Pages/cinemaDetails.php';
+        $result = $this->Lounge->timeSlots($cinema_id);
+        $reservated = $this->Reservation->getReservatedTimeSlots();
+        $button = $this->Display->createTimeslotButtons([$result, $reservated]);
+        $result = $this->Cinema->read($cinema_id);
+        $informationText = $this->Display->convertToText($result);
+        include 'Views/Pages/cinemaDetails.php';
     }
 
     public function allCinema()
@@ -73,6 +73,16 @@ class CinemaController
 
     public function collectCreate()
     {
+
+        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
+
+        $result = $this->Cinema->hasCinema($user_id);
+        if ($result->rowCount() != 0) {
+            // Naar index van de CMS gaan
+            Functions::toast('1 Bioscoop per gebruiker', 'info', 'toast-top-right');
+            header('Location: index.php?con=cms');
+            exit();
+        }
         $name = isset($_REQUEST['cinema_name']) ? $_REQUEST['cinema_name'] : null;
         $desc = isset($_REQUEST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
         $reachability = isset($_REQUEST['cinema_reachability']) ? $_REQUEST['cinema_reachability'] : null;
@@ -116,8 +126,17 @@ class CinemaController
     }
     public function readAll()
     {
-        $result = $this->Cinema->showAll();
-        $res = $this->Display->createTable($result, true, true);
-        include 'Views/Pages/Admin/cms.php';
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+
+        if ($role == 4) {
+            $result = $this->Cinema->all();
+            $table = $this->Display->createTable($result);
+        } else {
+            Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
+            header('Location: index.php');
+            exit();
+        }
+
+        include './Views/Pages/Admin/Cinema/index.php';
     }
 }
