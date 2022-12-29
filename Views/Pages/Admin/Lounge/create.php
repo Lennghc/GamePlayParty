@@ -3,8 +3,8 @@
 
 <head>
     <?php
-    $title = "Create Cinema";
-    include 'Views/Layout/header.php';
+    $title = 'Create Zaal';
+    include './Views/Layout/header.php';
     ?>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
@@ -19,9 +19,12 @@
     </script>
 </head>
 
-<body class="text-center">
+<body>
 
-    <section class="main">
+
+    <?php include './Views/Pages/Admin/Layout/sidebar.php' ?>
+
+    <div class="col py-3">
         <div class="container">
             <form action="index.php?con=lounge&op=create" method="POST">
                 <h1 class="">Zaal creeren</h1>
@@ -77,8 +80,13 @@
                 </div>
             </form>
         </div>
-    </section>
 
-    <?= $dump ?>
+    </div>
+    </div>
+    </div>
+
+
+
+</body>
 
 </html>
