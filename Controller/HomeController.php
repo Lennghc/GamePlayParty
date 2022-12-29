@@ -1,7 +1,5 @@
 <?php
 require_once 'Models/Auth.php';
-require_once './Classes/Functions.php';
-require_once './Classes/Validation.php';
 
 class HomeController
 {

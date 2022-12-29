@@ -1,6 +1,7 @@
 <?php
 require_once './Models/Reservation.php';
 require_once './Models/Cinema.php';
+require_once './Models/Auth.php';
 
 class ReservationController
 {
@@ -9,6 +10,7 @@ class ReservationController
         $this->Reservation = new Reservation();
         $this->Display = new Display();
         $this->Cinema = new Cinema();
+        $this->Auth = new Auth();
     }
 
     public function __destruct()
@@ -22,14 +24,14 @@ class ReservationController
             $action = isset($_GET['op']) ? $_GET['op'] : 'index';
             $id = isset($_GET['id']) ? $_GET['id'] : NULL;
             switch ($action) {
+                case 'index':
+                    $this->index();
+                    break;
                 case 'handleReservation':
                     $this->handleReservation();
                     break;
                 case 'reservDetails':
                     $this->reservDetails($id);
-                    break;
-                case 'index':
-                    $this->index();
                     break;
                 default:
                     http_response_code(404);
@@ -78,13 +80,31 @@ class ReservationController
 
         $array = $result->fetchall(PDO::FETCH_ASSOC);
         foreach ($array as $value) {
-            if ($user_id != $value['user_id']) {
+            if ($user_id == $value['user_id'] and $id == $value['reservation_id']) {
+                $formInputs = $this->Display->createUserForm($this->Auth->collectUserData($user_id), false, "index.php?con=reserv&op=reservDetails&id={$id}");
+                include 'Views/Pages/reservDetails.php';
+
+
+                if (isset($_POST['submit'])) {
+                    $fName = isset($_POST['fName']) ? $_POST['fName'] : null;
+                    $mName = isset($_POST['mName']) ? $_POST['mName'] : null;
+                    $lName = isset($_POST['lName']) ? $_POST['lName'] : null;
+                    $street = isset($_POST['street']) ? $_POST['street'] : null;
+                    $house_nmr = isset($_POST['houseNumber']) ? $_POST['houseNumber'] : null;
+                    $zipcode = isset($_POST['zipcode']) ? $_POST['zipcode'] : null;
+                    $city = isset($_POST['city']) ? $_POST['city'] : null;
+                    $tel = isset($_POST['tel']) ? $_POST['tel'] : null;
+
+
+                    $this->Reservation->updateUser($user_id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel);
+                    Functions::toast("{$_SESSION['user']->username} met success bijgewerkt!", 'success', 'toast-top-right');
+                    header("Location: index.php?con=reserv&op=reservDetails&id={$id}");
+                    exit();
+                }
+            } else {
                 Functions::toast('Dit mag niet!', 'error', 'toast-top-right');
                 header('Location: index.php');
                 exit();
-            } else {
-                $formInputs = $this->Display->reservDetailsForm($this->Reservation->hasReservation($user_id));
-                include 'Views/Pages/reservDetails.php';
             }
         }
     }
@@ -94,42 +114,48 @@ class ReservationController
         if (isset($_POST['submit'])) {
             if (!isset($_SESSION['user']->id)) {
                 Functions::toast('Meld je eerst aan!', 'error', 'toast-top-right');
-                header('Location: index.php?con=home&op=login');
+                header('Location: index.php?con=auth&op=login');
                 exit();
             }
             $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : 'NULL';
             $hasReservation = $this->Reservation->hasReservation($user_id);
             $res = $hasReservation->fetchall(PDO::FETCH_ASSOC);
-            if (count($res) <= 1) {
+            if ($hasReservation->rowCount() ==  0) {
+                $timeslot = isset($_POST['timeslot']) ? $_POST['timeslot'] : NULL;
+                $date = isset($_POST['date']) ? $_POST['date'] : NULL;
+                $lounge_id = isset($_POST['lounge_id']) ? $_POST['lounge_id'] : NULL;
+                $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : NULL;
+
+                $timeslotArray = explode('-', $timeslot);
+
+                $start_time = $timeslotArray[0];
+                $end_time = $timeslotArray[1];
+
+                $time[1]['slot_start_time'] = $start_time;
+                $time[1]['slot_end_time'] = $end_time;
+
+                $arra = json_encode($time);
+
+                $result = $this->Reservation->setTimeSlot($arra, $date, $lounge_id, $user_id);
+
+                header("Location: index.php?con=reserv&op=reservDetails&id={$result}");
+                exit();
+            } elseif ($hasReservation->rowCount() >= 1) {
                 foreach ($res as $value) {
                     $reservation_id = $value['reservation_id'];
                 }
                 Functions::toast('Deze factuur staat nog open!', 'info', 'toast-top-right');
                 header("Location: index.php?con=reserv&op=reservDetails&id={$reservation_id}");
                 exit();
-            } else {
-                // go to list of view with more reservations of that person 
-                Functions::toast('Je hebt nog betalingen open staan!', 'info', 'toast-top-right');
-                header('Location: index.php');
-                exit();
             }
 
-            $timeslot = isset($_POST['timeslot']) ? $_POST['timeslot'] : NULL;
-            $date = isset($_POST['date']) ? $_POST['date'] : NULL;
-            $lounge_id = isset($_POST['lounge_id']) ? $_POST['lounge_id'] : NULL;
-            $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : NULL;
 
-            $timeslotArray = explode('-', $timeslot);
-
-            $start_time = $timeslotArray[0];
-            $end_time = $timeslotArray[1];
-
-            $time[1]['slot_start_time'] = $start_time;
-            $time[1]['slot_end_time'] = $end_time;
-
-            $arra = json_encode($time);
-
-            $result = $this->Reservation->setTimeSlot($arra, $date, $lounge_id, $user_id);
+            // else {
+            //     // go to list of view with more reservations of that person 
+            //     Functions::toast('Je hebt nog betalingen open staan!', 'info', 'toast-top-right');
+            //     header('Location: index.php');
+            //     exit();
+            // }
         }
     }
 }

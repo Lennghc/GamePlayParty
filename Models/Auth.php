@@ -5,11 +5,12 @@ require_once 'Main.php';
 class Auth extends Main
 {
 
-    public function update($id,$fName,$mName,$lName,$street,$house_nmr,$zipcode,$city,$tel,$role_id)
+    public function update($id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel, $role_id)
     {
         try {
             $sql = "UPDATE Users SET user_fname = '{$fName}', user_insertion = '{$mName}', user_lname = '{$lName}', user_streetname = '{$street}', user_house_nmr = '{$house_nmr}', user_city = '{$city}', user_zipcode = '{$zipcode}', user_tel = '{$tel}', role_id = '{$role_id}' WHERE user_id = $id";
             $result = self::updateData($sql);
+            self::__destruct();
             return $result;
         } catch (Exception $e) {
             throw $e;
@@ -21,10 +22,11 @@ class Auth extends Main
         try {
             $sql = "SELECT * FROM Users WHERE user_id = $id";
             $result = self::readData($sql);
+            
 
             $sql = "SELECT * FROM Roles";
             $result2 = self::readsData($sql);
-            return [$result,$result2];
+            return [$result, $result2];
         } catch (Exception $e) {
             throw $e;
         }
@@ -35,6 +37,7 @@ class Auth extends Main
         try {
             $sql = "SELECT user_id AS ID,user_email AS Email,role_name AS Role FROM Users JOIN Roles USING(role_id) WHERE user_id != $user_id";
             $result = self::readsData($sql);
+            self::__destruct();
             return $result;
         } catch (Exception $e) {
             throw $e;
@@ -48,6 +51,7 @@ class Auth extends Main
 
             $sql = "SELECT * FROM `Users` WHERE `user_username` = '{$username}' AND `user_email`='{$email}'";
             $result = self::readsData($sql);
+            $this->DataHandler->__destruct();
 
             if ($result->rowCount() > 0) {
                 $errors[] = "username or email is already linked to a account.";
@@ -57,7 +61,7 @@ class Auth extends Main
                 $result = self::createData($sql);
 
                 http_response_code(201);
-
+                self::__destruct();
                 return $result;
             }
 
@@ -89,7 +93,7 @@ class Auth extends Main
                 );
 
                 setcookie('user', json_encode($_SESSION['user']));
-
+                self::__destruct();
                 return $result;
             }
 

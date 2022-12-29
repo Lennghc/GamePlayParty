@@ -9,17 +9,19 @@ class Lounge extends Main
         try {
             $sql = "SELECT cinema_name AS BioscoopNaam, lounge_nmr AS ZaalNaam_Nummer, lounge_open_date AS Open_op FROM Cinema JOIN Lounge USING(cinema_id) WHERE user_id = $user_id";
             $result = self::readsData($sql);
+            self::__destruct();
             return $result;
         } catch (Exception $e) {
             throw $e;
         }
     }
 
-    public function create($lounge_nmr, $lounge_chair_places,$lounge_wheelchair_places,$lounge_screensize,$lounge_open_date,$lounge_timeslots,$cinema_id)
+    public function create($lounge_nmr, $lounge_chair_places, $lounge_wheelchair_places, $lounge_screensize, $lounge_open_date, $lounge_timeslots, $cinema_id)
     {
         try {
             $sql = "INSERT INTO `Lounge` (`lounge_nmr`, `lounge_chair_places`,`lounge_wheelchair_places`,`lounge_screensize`,`lounge_open_date`,`lounge_timeslots`,`cinema_id`) VALUES ('{$lounge_nmr}','{$lounge_chair_places}','{$lounge_wheelchair_places}','{$lounge_screensize}','{$lounge_open_date}','{$lounge_timeslots}','{$cinema_id}')";
             $result = self::createData($sql);
+            self::__destruct();
             return $result;
         } catch (Exception $e) {
             throw $e;
@@ -37,10 +39,15 @@ class Lounge extends Main
         }
     }
 
-    public function removeTime($lounge_id,$timeslots)
+    public function removeTime($lounge_id, $timeslots)
     {
         try {
-            $sql = "UPDATE `Lounge` set `lounge_timeslots` = '$timeslots' WHERE lounge_id = $lounge_id";
+            if ($timeslots != NULL) {
+                $encode = json_encode($timeslots);
+            } else {
+                $encode = NULL;
+            }
+            $sql = "UPDATE `Lounge` set `lounge_timeslots` = '$encode' WHERE lounge_id = $lounge_id";
             $results = self::updateData($sql);
             return $results;
         } catch (Exception $e) {

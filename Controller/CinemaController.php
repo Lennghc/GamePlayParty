@@ -2,7 +2,6 @@
 require_once './Models/Cinema.php';
 require_once './Models/Lounge.php';
 require_once './Models/Reservation.php';
-require_once './Classes/Display.php';
 
 class CinemaController
 {
@@ -27,11 +26,11 @@ class CinemaController
 
 
             switch ($action) {
-                case 'details':
-                    $this->detailCinema($cinema_id);
+                case 'index':
+                    $this->index();
                     break;
                 case 'create':
-                    $this->collectCreate();
+                    $this->create();
                     break;
                 case 'read':
                     $this->read($cinema_id);
@@ -39,9 +38,10 @@ class CinemaController
                 case 'update':
                     $this->update();
                     break;
-                case 'index':
-                    $this->allCinema();
+                case 'details':
+                    $this->details($cinema_id);
                     break;
+
                 case 'readAll':
                     $this->readAll();
                     break;
@@ -54,24 +54,43 @@ class CinemaController
         }
     }
 
-    public function detailCinema($cinema_id)
-    {
-        $result = $this->Lounge->timeSlots($cinema_id);
-        $reservated = $this->Reservation->getReservatedTimeSlots();
-        $button = $this->Display->createTimeslotButtons([$result, $reservated]);
-        $result = $this->Cinema->read($cinema_id);
-        $informationText = $this->Display->convertToText($result);
-        include 'Views/Pages/cinemaDetails.php';
-    }
-
-    public function allCinema()
+    public function index()
     {
         $result = $this->Cinema->all();
         $list = $this->Display->createCinemaList($result);
         include 'Views/Pages/searchCinemas.php';
     }
 
-    public function collectCreate()
+    public function readAll()
+    {
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+
+        if ($role == 4) {
+            $result = $this->Cinema->all();
+            $table = $this->Display->createTable($result);
+        } else {
+            Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
+            header('Location: index.php');
+            exit();
+        }
+
+        include './Views/Pages/Admin/Cinema/index.php';
+    }
+
+    public function details($cinema_id)
+    {
+        $result = $this->Lounge->timeSlots($cinema_id);
+        $reservated = $this->Reservation->getReservatedTimeSlots();
+        $button = $this->Display->createTimeslotButtons([$result, $reservated]);
+        $result = $this->Cinema->read($cinema_id);
+        $informationText = $this->Display->convertToText($result);
+
+        include 'Views/Pages/cinemaDetails.php';
+    }
+
+
+
+    public function create()
     {
 
         $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
@@ -103,6 +122,8 @@ class CinemaController
     public function update()
     {
     }
+
+
     public function deactivate($cinema_id)
     {
         $result = $this->Cinema->deactivate($cinema_id);
@@ -123,20 +144,5 @@ class CinemaController
             header('Location: ?con=cinema&op=readAll');
         }
         include 'Views/Pages/Admin/cms.php';
-    }
-    public function readAll()
-    {
-        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
-
-        if ($role == 4) {
-            $result = $this->Cinema->all();
-            $table = $this->Display->createTable($result);
-        } else {
-            Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
-            header('Location: index.php');
-            exit();
-        }
-
-        include './Views/Pages/Admin/Cinema/index.php';
     }
 }

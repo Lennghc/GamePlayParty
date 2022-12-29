@@ -1,9 +1,6 @@
 <?php
 
 require_once './Models/Auth.php';
-require_once './Classes/Display.php';
-require_once './Classes/Functions.php';
-require_once './Classes/Validation.php';
 
 class AuthController
 {
@@ -25,6 +22,9 @@ class AuthController
             $id = isset($_GET['id']) ? $_GET['id'] : null;
 
             switch ($action) {
+                case 'index':
+                    $this->index();
+                    break;
                 case 'registreer':
                     $this->registreren();
                     break;
@@ -37,14 +37,11 @@ class AuthController
                 case 'handlelogin':
                     $this->handleLogin();
                     break;
-                case 'logout':
-                    $this->logout();
-                    break;
                 case 'update';
                     $this->update($id);
                     break;
-                case 'index':
-                    $this->index();
+                case 'logout':
+                    $this->logout();
                     break;
                 default:
                     http_response_code(404);
@@ -70,40 +67,6 @@ class AuthController
         }
 
         include './Views/Pages/Admin/Users/index.php';
-    }
-
-    public function update($id)
-    {
-        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
-
-        if ($role == 4) {
-            $result = $this->Auth->collectUserData($id);
-            $updateForm = $this->Display->createUserUpdateForm($result);
-        } else {
-            Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
-            header('Location: index.php');
-            exit();
-        }
-
-        if (isset($_POST['submit'])) {
-            $fName = isset($_POST['fName']) ? $_POST['fName'] : null;
-            $mName = isset($_POST['mName']) ? $_POST['mName'] : null;
-            $lName = isset($_POST['lName']) ? $_POST['lName'] : null;
-            $street = isset($_POST['street']) ? $_POST['street'] : null;
-            $house_nmr = isset($_POST['houseNumber']) ? $_POST['houseNumber'] : null;
-            $zipcode = isset($_POST['zipcode']) ? $_POST['zipcode'] : null;
-            $city = isset($_POST['city']) ? $_POST['city'] : null;
-            $tel = isset($_POST['tel']) ? $_POST['tel'] : null;
-
-            $role_id = isset($_POST['role']) ? $_POST['role'] : null;
-
-            $this->Auth->update($id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel, $role_id);
-            Functions::toast("ID: {$id} met success bijgewerkt!", 'success', 'toast-top-right');
-            header('Location: index.php?con=cms&op=users');
-            exit();
-        }
-
-        include 'Views/Pages/Admin/Users/update.php';
     }
 
     public function registreren()
@@ -172,6 +135,39 @@ class AuthController
         ));
     }
 
+    public function update($id)
+    {
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+
+        if ($role == 4) {
+            $result = $this->Auth->collectUserData($id);
+            $updateForm = $this->Display->createUserForm($result, true, "index.php?con=users&op=update&id={$id}");
+        } else {
+            Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
+            header('Location: index.php');
+            exit();
+        }
+
+        if (isset($_POST['submit'])) {
+            $fName = isset($_POST['fName']) ? $_POST['fName'] : null;
+            $mName = isset($_POST['mName']) ? $_POST['mName'] : null;
+            $lName = isset($_POST['lName']) ? $_POST['lName'] : null;
+            $street = isset($_POST['street']) ? $_POST['street'] : null;
+            $house_nmr = isset($_POST['houseNumber']) ? $_POST['houseNumber'] : null;
+            $zipcode = isset($_POST['zipcode']) ? $_POST['zipcode'] : null;
+            $city = isset($_POST['city']) ? $_POST['city'] : null;
+            $tel = isset($_POST['tel']) ? $_POST['tel'] : null;
+
+            $role_id = isset($_POST['role']) ? $_POST['role'] : null;
+
+            $this->Auth->update($id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel, $role_id);
+            Functions::toast("ID: {$id} met success bijgewerkt!", 'success', 'toast-top-right');
+            header('Location: index.php?con=cms&op=users');
+            exit();
+        }
+
+        include 'Views/Pages/Admin/Users/update.php';
+    }
 
     public function logout()
     {

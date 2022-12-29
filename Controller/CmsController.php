@@ -1,8 +1,4 @@
 <?php
-require_once 'AuthController.php';
-require_once 'ReservationController.php';
-require_once 'CinemaController.php';
-require_once 'LoungeController.php';
 
 class CmsController
 {
@@ -28,7 +24,7 @@ class CmsController
                     $this->ReservationController->handleRequest();
                     break;
                 case 'lounge':
-                    $this->LoungeController->handleRequest();
+                    $this->LoungeController->index();
                     break;
                 case 'cinema':
                     $this->CinemaController->readAll();

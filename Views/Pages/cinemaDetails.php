@@ -15,19 +15,18 @@
         <div class="col-md-7 title-under-logo">Jaarbeurs Utrecht</div>
     </div>
 
-    <?php  include 'Views/Layout/navbar.php'; 
-    ?>
+    <?php include 'Views/Layout/navbar.php';   ?>
 
     <div class="container">
         <div class="row">
 
             <div class="col-md-9" id="information">
 
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <!-- <div class="btn-group" role="group" aria-label="Basic example">
                     <a type="button" class="btn btn-primary" href="#tijden">Beschikbare Tijden</a>
                     <a type="button" class="btn btn-primary" href="#information">Informatie</a>
                     <a type="button" class="btn btn-primary" href="#adres">Adres</a>
-                </div>
+                </div> -->
 
                 <?= !empty($informationText) ? $informationText : null ?>
 

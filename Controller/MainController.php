@@ -5,6 +5,9 @@ require_once 'CmsController.php';
 require_once 'ReservationController.php';
 require_once 'LoungeController.php';
 require_once 'AuthController.php';
+require_once './Classes/Display.php';
+require_once './Classes/Functions.php';
+require_once './Classes/Validation.php';
 
 class MainController
 {
@@ -16,6 +19,7 @@ class MainController
         $this->ReservationController = new ReservationController();
         $this->LoungeController = new LoungeController();
         $this->AuthController = new AuthController();
+        $this->Display = new Display();
     }
     public function __destruct()
     {

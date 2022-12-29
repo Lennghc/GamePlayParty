@@ -1,16 +1,14 @@
 <?php
-require_once 'Functions.php';
-require_once './Controller/LoungeController.php';
 
-
-class Display extends Functions
+class Display
 {
+
   public function __construct()
   {
-    $this->LoungeController = new LoungeController();
+    $this->Lounge = new Lounge();
   }
 
-  public function createUserUpdateForm($result)
+  public function createUserForm($result, $role = false, $url)
   {
     $html = "";
     if ($result[0]->rowCount() != 0) {
@@ -18,7 +16,7 @@ class Display extends Functions
       while ($row = $result[0]->fetchall(PDO::FETCH_ASSOC)) {
         foreach ($row as $value) {
           $html .= "<div class='container'>
-          <form action='index.php?con=users&op=update&id={$value['user_id']}' method='POST'>
+          <form action='$url' method='POST'>
               <h4>Gegevens {$value['user_username']}</h4>
               <div class='row'>
                   <div class='col-md-4 form-group'>
@@ -64,26 +62,27 @@ class Display extends Functions
                       <input type='email' name='email' value='{$value['user_email']}' class='form-control' readonly>
                   </div>
               </div>
-
-              <div class='row'>
+";
+          if ($role == true) {
+            $html .= "<div class='row'>
               <div class='col-md-4 form-group'>
               <label for='inputRole'>Role</label>
 
 										<select class='form-control' name='role' id='inputRole'>";
-          foreach ($roles as $item) {
-            if ($item['role_id'] == $value['role_id']) {
+            foreach ($roles as $item) {
+              if ($item['role_id'] == $value['role_id']) {
 
-              $html .= "<option selected value=" . $item['role_id'] . ">" . $item['role_name'] . "</option>";
-            } else {
+                $html .= "<option selected value=" . $item['role_id'] . ">" . $item['role_name'] . "</option>";
+              } else {
 
-              $html .= "<option value=" . $item['role_id'] . ">" . $item['role_name'] . "</option>";
+                $html .= "<option value=" . $item['role_id'] . ">" . $item['role_name'] . "</option>";
+              }
             }
-          }
-          $html .= "</select>
+            $html .= "</select>
           </div>
-              </div>
-
-              <div class='mt-2 form-group'>
+              </div>";
+          }
+          $html .= "            <div class='mt-2 form-group'>
               <input type='submit' name='submit' class='btn btn-success btn-sm' value='Opslaan' />
               </div>
           </form>
@@ -145,79 +144,19 @@ class Display extends Functions
       $html .= "<h2>Geen data</h2>";
     }
     if ($create == true) {
-      $html .= '<div class="flex flex-row-reverse" style="display:flex;"> 
-        <div class="justify-content-end">
-          <a class="btn btn-lg bg-green rounded-circle" href="#"><span class="text-white fa fa-plus"></span></a>
+      $html .= "<div class='flex flex-row-reverse' style='display:flex;'> 
+        <div class='justify-content-end'>
+          <a class='btn btn-lg bg-green rounded-circle' href='index.php?con={$_GET['op']}&op=create'><span class='text-white fa fa-plus'></span></a>
         </div>
-    </div>';
-    }
-
-
-
-    return $html;
-  }
-
-  public function reservDetailsForm($result)
-  {
-    $html = "";
-    $row = $result->fetchall(PDO::FETCH_ASSOC);
-    if ($result->rowCount() != 0) {
-      foreach ($row as $value) {
-        $html .= "<div class='container'>
-        <form action='' method='POST'>
-            <h4>{$value['user_username']} gegevens</h4>
-            <div class='row'>
-                <div class='col-md-4 form-group'>
-                    <label for='fName'>Voornaam</label>
-                    <input type='text' name='fname' value='{$value['user_fname']}' class='form-control' />
-                </div>
-                <div class='col-md-4 form-group'>
-                    <label for='mName'>Tussenvoegsel</label>
-                    <input type='text' name='mName' value='{$value['user_insertion']}' class='form-control'>
-                </div>
-                <div class='col-md-4 form-group'>
-                    <label for='lName'>Achternaam</label>
-                    <input type='text' name='lName' value='{$value['user_lname']}' class='form-control'>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col-md-6 form-group'>
-                    <label for='street'>Straat naam</label>
-                    <input type='text' name='street' value='{$value['user_streetname']}'  class='form-control'>
-                </div>
-                <div class='col-md-6 form-group'>
-                    <label for='houseNumber'>Huis nummer</label>
-                    <input type='text' name='houseNumber' value='{$value['user_house_nmr']}' class='form-control'>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col-md-6 form-group'>
-                    <label for='zipcode'>Postcode</label>
-                    <input type='text' name='zipcode' value='{$value['user_zipcode']}' class='form-control'>
-                </div>
-                <div class='col-md-6 form-group'>
-                    <label for='city'>Stad</label>
-                    <input type='text' name='city' value='{$value['user_city']}' class='form-control'>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col-md-6 form-group'>
-                    <label for='tel'>Telefoon nummer</label>
-                    <input type='text' name='tel' value='{$value['user_tel']}' class='form-control'>
-                </div>
-                <div class='col-md-6 form-group'>
-                    <label for='email'>Email</label>
-                    <input type='email' name='email' value='{$value['user_email']}' class='form-control' readonly>
-                </div>
-
-            </div>
-        </form>
-
     </div>";
-      }
     }
+
+
+
     return $html;
   }
+
+
   public function createTimeslotButtons($result)
   {
     $html = "";
@@ -230,24 +169,24 @@ class Display extends Functions
           $lounge_id = $value['lounge_id'];
         }
 
-        foreach ($row as $item) {
+        foreach ($row as $rowValue) {
           $html .= "<div>";
+          if(!empty($rowValue['lounge_timeslots'])){
           $time = [];
-          $time = json_decode($item['lounge_timeslots'], true);
-
+          $time = json_decode($rowValue['lounge_timeslots'], true);
+          }
 
           if ($result[1]->rowCount() != 0) {
-            foreach ($resTime as $value) {
+            foreach ($resTime as $resTimeValue) {
               if (!empty($time)) {
-                for ($i = 0; $i < count($time); $i++) {
-                  if ($resDate == $item['lounge_open_date'] || $lounge_id == $item['lounge_id']) {
-                    if ($time[$i]['slot_start_time'] == $value['slot_start_time'] || $time[$i]['slot_end_time'] == $value['slot_end_time']) {
-                      unset($time[$i]);
-                      $newTime = array_values($time);
+                foreach ($time as $key => $timeValue) {
+                  if ($resDate == $rowValue['lounge_open_date'] || $lounge_id == $rowValue['lounge_id']) {
+                    if ($timeValue['slot_start_time'] == $resTimeValue['slot_start_time'] || $timeValue['slot_end_time'] == $resTimeValue['slot_end_time']) {
+                      unset($time[$key]);
                       if (empty($time)) {
-                        $newTime = NULL;
+                        $time = NULL;
                       }
-                      $this->LoungeController->removeTime($item['lounge_id'], $newTime);
+                      $this->Lounge->removeTime($rowValue['lounge_id'], $time);
                     }
                   }
                 }
@@ -255,8 +194,8 @@ class Display extends Functions
             }
           }
 
-          $date = $item['lounge_open_date'];
-          $lounge_id = $item['lounge_id'];
+          $date = $rowValue['lounge_open_date'];
+          $lounge_id = $rowValue['lounge_id'];
           $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : '';
           setlocale(LC_TIME, 'NL_nl');
 
@@ -274,7 +213,7 @@ class Display extends Functions
               $html .= "<input type='submit' name='submit' class='btn btn-secondary m-1' value='{$time}'>";
               $html .= "</form>";
             }
-          }
+          } 
 
           $html .= "</div>";
         }
@@ -307,6 +246,8 @@ class Display extends Functions
         }
         $html .= '</div>';
       }
+    } else {
+      $html .= '<h2>Geen data</h2>';
     }
     return $html;
   }
@@ -315,10 +256,9 @@ class Display extends Functions
   {
     $html = "";
     if ($result->rowCount() != 0) {
-      while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
-        foreach ($row as $value) {
-          $html .= $value['cinema_desc'];
-        }
+      $row = $result->fetchall(PDO::FETCH_ASSOC);
+      foreach ($row as $value) {
+        $html .= $value['cinema_desc'];
       }
     }
 

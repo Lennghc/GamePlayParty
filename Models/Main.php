@@ -9,6 +9,6 @@ class Main extends DataHandler
     }
 
     public function __destruct() {
-        parent::__destruct($dbh = null);
+        return parent::__destruct($dbh = null);
     }
 }

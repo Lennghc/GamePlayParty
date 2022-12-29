@@ -1,5 +1,4 @@
 <?php
-
 require_once './Models/Lounge.php';
 
 class LoungeController
@@ -7,6 +6,7 @@ class LoungeController
     public function __construct()
     {
         $this->Lounge = new Lounge();
+        $this->Display = new Display();
     }
 
     public function __destruct()
@@ -18,12 +18,13 @@ class LoungeController
         try {
 
             $action = isset($_GET['op']) ? $_GET['op'] : 'index';
+
             switch ($action) {
-                case 'create':
-                    $this->create();
-                    break;
                 case 'index':
                     $this->index();
+                    break;
+                case 'create':
+                    $this->create();
                     break;
                 default:
                     http_response_code(404);
@@ -69,9 +70,4 @@ class LoungeController
         include 'Views/Pages/Admin/Lounge/create.php';
     }
 
-    public function removeTime($lounge_id, $time)
-    {
-        $timeslots = json_encode($time);
-        $this->Lounge->removeTime($lounge_id, $timeslots);
-    }
 }
