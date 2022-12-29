@@ -170,12 +170,10 @@ class Display
         }
 
         foreach ($row as $rowValue) {
-          $html .= "<div>";
-          if(!empty($rowValue['lounge_timeslots'])){
-          $time = [];
-          $time = json_decode($rowValue['lounge_timeslots'], true);
+          if (!empty($rowValue['lounge_timeslots'])) {
+            $time = [];
+            $time = json_decode($rowValue['lounge_timeslots'], true);
           }
-
           if ($result[1]->rowCount() != 0) {
             foreach ($resTime as $resTimeValue) {
               if (!empty($time)) {
@@ -201,7 +199,8 @@ class Display
 
           if (!empty($time)) {
 
-            $html .= '<h5>' . strftime('%A %d, %B', strtotime($date)) . '</h5>';
+            $html .= '<div class="col-md-12 mt-3"><h5>' . strftime('%A %d, %B', strtotime($date)) . '</h5></div>';
+            $html .= "<div class='col-md-8 d-flex flex-wrap mb-3'>";
 
             foreach ($time as $value) {
               $html .= "<form id='form' action='index.php?con=reserv&op=handleReservation' method='POST'>";
@@ -210,12 +209,14 @@ class Display
               $html .= "<input type='hidden' name='lounge_id' value='{$lounge_id}'>";
               $html .= "<input type='hidden' value='{$time}' name='timeslot'>";
               $html .= "<input type='hidden' value='{$date}' name='date'>";
-              $html .= "<input type='submit' name='submit' class='btn btn-secondary m-1' value='{$time}'>";
+              $html .= "<div class='col-md-12'>";
+              $html .= "<button type='submit' name='submit' class='btn btn-secondary m-1' >{$time}</button>";
+              $html .= "</div>";
               $html .= "</form>";
             }
-          } 
 
-          $html .= "</div>";
+            $html .= "</div>";
+          }
         }
 
         return $html;
