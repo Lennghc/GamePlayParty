@@ -16,7 +16,9 @@
                             <i class="fa fa-book-bookmark"></i> <span class="ms-1 d-none d-sm-inline text-white">Reserveringen</span></a>
                     </li>
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li><a href="index.php?con=cms&op=lounge" class="nav-link px-0 align-middle"><i class="fa fa-video"></i> <span class="ms-1 d-none d-sm-inline text-white">Zalen</span></a></li>' : null ?>
-                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=users" class="nav-link px-0 align-middle"><i class="fa fa-users"></i> <span class="ms-1 d-none d-sm-inline text-white">Gebruikers</span></a></li>' : null ?>
+                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li><a href="index.php?con=cms&op=rate" class="nav-link px-0 align-middle"><i class="fa fa-money-bill-wave"></i> <span class="ms-1 d-none d-sm-inline text-white">Tarieven</span></a></li>' : null ?>
+                   
+                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=users" class="nav-link px-0 align-middle"><i class="fa fa-users"></i> <span class="ms-1 d-none d-sm-inline text-white">Gebruikers</span></a></li>' : null ?>  
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=cinema" class="nav-link px-0 align-middle"><i class="fa fa-video"></i> <span class="ms-1 d-none d-sm-inline text-white">Bioscopen</span></a></li>' : null ?>
 
 

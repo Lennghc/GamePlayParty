@@ -51,7 +51,6 @@ class Auth extends Main
 
             $sql = "SELECT * FROM `Users` WHERE `user_username` = '{$username}' AND `user_email`='{$email}'";
             $result = self::readsData($sql);
-            $this->DataHandler->__destruct();
 
             if ($result->rowCount() > 0) {
                 $errors[] = "username or email is already linked to a account.";

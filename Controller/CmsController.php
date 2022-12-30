@@ -8,6 +8,7 @@ class CmsController
         $this->ReservationController = new ReservationController();
         $this->CinemaController = new CinemaController();
         $this->LoungeController = new LoungeController();
+        $this->RatesController = new RatesController();
     }
     public function __destruct()
     {
@@ -32,6 +33,9 @@ class CmsController
                 case 'users':
                     $this->AuthController->index();
                     break;
+                case 'rate':
+                    $this->RatesController->index();
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -40,5 +44,4 @@ class CmsController
             throw $e;
         }
     }
-
 }

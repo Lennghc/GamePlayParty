@@ -21,7 +21,7 @@
         </nav>
 
 
-        <div id='social-sidebar'>
+        <div id='social-sidebar' style="z-index: 10;">
             <ul>
                 <li>
                     <a class='icon' href="index.php"><i class="fa fa-home"></i>

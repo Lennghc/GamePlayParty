@@ -8,6 +8,13 @@ class Display
     $this->Lounge = new Lounge();
   }
 
+  public function quantityButtonMinPlus($result)
+  {
+    $html = "";
+    if ($result->rowCount() != 0) {
+    }
+  }
+
   public function createUserForm($result, $role = false, $url)
   {
     $html = "";
@@ -123,12 +130,12 @@ class Display
           $html .= "<td>" . (empty($value) ? '<i class="text-black fa fa-ban" aria-hidden="true"></i>' : $value) . "</td>";
         }
         if ($edit == true || $delete == true || $read == true) {
-          $html .= "<td style='display: flex; justify-content: space-between;'>";
+          $html .= "<td style='display: flex; justify-content: end;'>";
           if ($edit == true) {
             $html .= "<a type='button' href='index.php?con={$_GET['op']}&op=update&id={$row['ID']}' class='btn btn-info'><i class='fa fa-edit'></i></a>";
           }
           if ($delete == true) {
-            $html .= "<a type='button' class='btn btn-danger'><i class='fa fa-trash'></i></a>";
+            $html .= "<a type='button' href='index.php?con={$_GET['op']}&op=delete&id={$row['ID']}' class='btn btn-danger'><i class='fa fa-trash'></i></a>";
           }
           if ($read == true) {
             $html .= "<a type='button' class='btn btn-success'><i class='fa fa-eye'></i></a>";

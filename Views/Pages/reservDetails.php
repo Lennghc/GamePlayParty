@@ -6,7 +6,11 @@
     $title = "Reserverings gegevens";
     include 'Views/Layout/header.php';
     ?>
-    <link rel="stylesheet" href="Assets/Css/cinemaDetails.css">
+    <link rel="stylesheet" href="<?= PATH_DIR ?>/Assets/Css/reservDetails.css">
+
+    <style>
+
+    </style>
 </head>
 
 <body>
@@ -15,20 +19,16 @@
         <div class="col-md-7 title-under-logo">Reserverings gegevens</div>
     </div>
 
-    <?php include 'Views/Layout/navbar.php';
-    ?>
+    <?php include 'Views/Layout/navbar.php'; ?>
 
-    <div class="container">
+
+    <div class="container container-bottom">
         <div class="row">
-
-            <div class="col-md-6">
-                <!-- gegevens -->
+            <div class="col-md-6 box-left stack-top">
                 <?= !empty($formInputs) ? $formInputs : null ?>
-
             </div>
 
-            <div class="col-md-6">
-                <!-- de bon -->
+            <div class="col-md-6 box-right stack-top">
                 <div class="container">
 
                     <form action="">
@@ -138,6 +138,10 @@
                             <div class="col-md-4">
                                 <p>€ 0,00</p>
                             </div>
+
+                            <div class="d-grid mx-auto">
+                                <button type="button" class="btn bg-primary bg-opacity-10">Volgende</button>
+                            </div>
                         </div>
 
 
@@ -145,15 +149,10 @@
                     </form>
 
                 </div>
-
-
-
-
             </div>
 
         </div>
     </div>
-
 
     <script>
         $('.btn-number').click(function(e) {

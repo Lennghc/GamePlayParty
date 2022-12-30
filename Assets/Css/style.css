@@ -51,7 +51,15 @@ body.dark {
 }
 
 
+#button-group {
+    display: none!important;
+}
+
 @media (max-width: 790px) {
+
+    #button-group {
+        display: inline-flex!important;
+    }
     #logo_image {
         width: 150%;
     }
