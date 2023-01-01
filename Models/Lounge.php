@@ -9,7 +9,6 @@ class Lounge extends Main
         try {
             $sql = "SELECT cinema_name AS BioscoopNaam, lounge_nmr AS ZaalNaam_Nummer, lounge_open_date AS Open_op FROM Cinema JOIN Lounge USING(cinema_id) WHERE user_id = $user_id";
             $result = self::readsData($sql);
-            self::__destruct();
             return $result;
         } catch (Exception $e) {
             throw $e;
@@ -21,7 +20,6 @@ class Lounge extends Main
         try {
             $sql = "INSERT INTO `Lounge` (`lounge_nmr`, `lounge_chair_places`,`lounge_wheelchair_places`,`lounge_screensize`,`lounge_open_date`,`lounge_timeslots`,`cinema_id`) VALUES ('{$lounge_nmr}','{$lounge_chair_places}','{$lounge_wheelchair_places}','{$lounge_screensize}','{$lounge_open_date}','{$lounge_timeslots}','{$cinema_id}')";
             $result = self::createData($sql);
-            self::__destruct();
             return $result;
         } catch (Exception $e) {
             throw $e;

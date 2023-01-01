@@ -11,6 +11,7 @@ class CinemaController
         $this->Lounge = new Lounge();
         $this->Display = new Display();
         $this->Reservation = new Reservation();
+        $this->Auth = new Auth();
     }
 
     public function __destruct()
@@ -83,7 +84,8 @@ class CinemaController
         $reservated = $this->Reservation->getReservatedTimeSlots();
         $button = $this->Display->createTimeslotButtons([$result, $reservated]);
         $result = $this->Cinema->read($cinema_id);
-        $informationText = $this->Display->convertToText($result);
+        $informationText = $this->Display->convertToText($result, true);
+        // $sideBar = $this->Display->convertToSidebar($result);
 
         include 'Views/Pages/cinemaDetails.php';
     }
@@ -121,6 +123,54 @@ class CinemaController
     }
     public function update()
     {
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
+
+        if ($role == 3) {
+
+            $dataCinema = $this->Cinema->read($user_id)->fetchall(PDO::FETCH_ASSOC);
+
+            $reach = json_decode($dataCinema[0]['cinema_reachability'],true);
+
+            if (isset($_POST['submit'])) {
+                $cinema_name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
+                $cinema_desc = isset($_POST['cinema_desc']) ? $_POST['cinema_desc'] : null;
+
+                $open_dates = isset($_POST['open_dates']) ? $_POST['open_dates'] : null;
+                $adres = isset($_POST['adres']) ? $_POST['adres'] : null;
+                $reach_information = isset($_POST['reach_information']) ? $_POST['reach_information'] : null;
+                $reach_car = isset($_POST['reach_car']) ? $_POST['reach_car'] : null;
+                $reach_public_trafic = isset($_POST['reach_public_trafic']) ? $_POST['reach_public_trafic'] : null;
+                $reach_bike = isset($_POST['reach_bike']) ? $_POST['reach_bike'] : null;
+                $reach_wheel_chair = isset($_POST['reach_wheel_chair']) ? $_POST['reach_wheel_chair'] : null;
+
+                ;
+
+                $array[1]['title'] = "Openingstijden";
+                $array[1]['message'] = str_replace(array("\r","\n","'"), "", $open_dates);
+                $array[2]['title'] = "Adres";
+                $array[2]['message'] = str_replace(array("\r","\n","'"), "", $adres);;
+                $array[3]['title'] = "Bereikbaarheid";
+                $array[3]['message'] = str_replace(array("\r","\n","'"), "", $reach_information);;
+                $array[4]['title'] = "Auto";
+                $array[4]['message'] = str_replace(array("\r","\n","'"), "", $reach_car);;
+                $array[5]['title'] = "Openbaar vervoer";
+                $array[5]['message'] = str_replace(array("\r","\n","'"), "", $reach_public_trafic);;
+                $array[6]['title'] = "Fiets";
+                $array[6]['message'] = str_replace(array("\r","\n","'"), "", $reach_bike);;
+                $array[7]['title'] = "Rolstoeltoegankelijkheid";
+                $array[7]['message'] = str_replace(array("\r","\n","'"), "", $reach_wheel_chair);;
+
+
+                $encodeArray = json_encode($array);
+
+                $this->Cinema->update($user_id, $cinema_name, $cinema_desc, $encodeArray);
+
+                Functions::toast('Gegevens met success opgeslagen', 'success', 'toast-top-right');
+            }
+
+            include 'Views/Pages/Admin/Cinema/update.php';
+        }
     }
 
 

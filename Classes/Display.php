@@ -26,54 +26,72 @@ class Display
           <form action='$url' method='POST'>
               <h4>Gegevens {$value['user_username']}</h4>
               <div class='row'>
-                  <div class='col-md-4 form-group'>
-                      <label for='fName'>Voornaam</label>
-                      <input type='text' name='fName' value='{$value['user_fname']}' class='form-control' />
+                  <div class='col-md-4'>
+                    <div class='form-floating mb-3'>
+                        <input type='text' name='fName' id='fName' value='{$value['user_fname']}' placeholder='Voornaam' class='form-control' />
+                        <label for='fName'>Voornaam</label>
+                    </div>
                   </div>
-                  <div class='col-md-4 form-group'>
+                  <div class='col-md-4'>
+                    <div class='form-floating mb-3'>
+                      <input type='text' name='mName' id='mName' value='{$value['user_insertion']}' placeholder='Tussenvoegsel' class='form-control'>
                       <label for='mName'>Tussenvoegsel</label>
-                      <input type='text' name='mName' value='{$value['user_insertion']}' class='form-control'>
+                    </div>
                   </div>
-                  <div class='col-md-4 form-group'>
+                  <div class='col-md-4'>
+                    <div class='form-floating mb-3'>
+                      <input type='text' name='lName' id='lName' value='{$value['user_lname']}' placeholder='Achternaam' class='form-control'>
                       <label for='lName'>Achternaam</label>
-                      <input type='text' name='lName' value='{$value['user_lname']}' class='form-control'>
+                    </div>
                   </div>
               </div>
               <div class='row'>
-                  <div class='col-md-6 form-group'>
-                      <label for='street'>Straat naam</label>
-                      <input type='text' name='street' value='{$value['user_streetname']}'  class='form-control'>
+                  <div class='col-md-6'>
+                    <div class='form-floating mb-3'>
+                      <input type='text' name='street' id='Street' value='{$value['user_streetname']}' placeholder='Straat naam'  class='form-control'>
+                      <label for='Street'>Straat naam</label>
+                      </div>
                   </div>
-                  <div class='col-md-6 form-group'>
+                  <div class='col-md-6'>
+                    <div class='form-floating mb-3'>
+                      <input type='text' name='houseNumber' id='houseNumber' value='{$value['user_house_nmr']}' placeholder='Huis nummer' class='form-control'>
                       <label for='houseNumber'>Huis nummer</label>
-                      <input type='text' name='houseNumber' value='{$value['user_house_nmr']}' class='form-control'>
+                      </div>
                   </div>
               </div>
               <div class='row'>
-                  <div class='col-md-6 form-group'>
-                      <label for='zipcode'>Postcode</label>
-                      <input type='text' name='zipcode' value='{$value['user_zipcode']}' class='form-control'>
+                  <div class='col-md-6'>
+                    <div class='form-floating mb-3'>
+                      <input type='text' name='zipcode' id='zipCode' value='{$value['user_zipcode']}' placeholder='Postcode' class='form-control'>
+                      <label for='zipCode'>Postcode</label>
+                    </div>
                   </div>
-                  <div class='col-md-6 form-group'>
-                      <label for='city'>Stad</label>
-                      <input type='text' name='city' value='{$value['user_city']}' class='form-control'>
+                  <div class='col-md-6'>
+                    <div class='form-floating mb-3'>
+                      <input type='text' name='city' id='City' value='{$value['user_city']}' placeholder='Stad' class='form-control'>
+                      <label for='City'>Stad</label>
+                    </div>
                   </div>
               </div>
               <div class='row'>
-                  <div class='col-md-6 form-group'>
-                      <label for='tel'>Telefoon nummer</label>
-                      <input type='text' name='tel' value='{$value['user_tel']}' class='form-control'>
+                  <div class='col-md-6'>
+                    <div class='form-floating mb-3'>
+                    <input type='text' name='tel' id='Tel' value='{$value['user_tel']}' placeholder='Telefoon nummer' class='form-control'>
+                      <label for='Tel'>Telefoon nummer</label>
+                    </div>
                   </div>
-                  <div class='col-md-6 form-group'>
-                      <label for='email'>Email</label>
-                      <input type='email' name='email' value='{$value['user_email']}' class='form-control' readonly>
+                  <div class='col-md-6'>
+                    <div class='form-floating mb-3'>
+                      <input type='email' name='email' id='Email' value='{$value['user_email']}' placeholder='Email' class='form-control' readonly>
+                      <label for='Email'>Email</label>
+                    </div>
                   </div>
               </div>
 ";
           if ($role == true) {
             $html .= "<div class='row'>
-              <div class='col-md-4 form-group'>
-              <label for='inputRole'>Role</label>
+              <div class='col-md-4'>
+              <div class='form-floating mb-3'>
 
 										<select class='form-control' name='role' id='inputRole'>";
             foreach ($roles as $item) {
@@ -86,6 +104,8 @@ class Display
               }
             }
             $html .= "</select>
+            <label for='inputRole'>Role</label>
+</div>
           </div>
               </div>";
           }
@@ -260,17 +280,50 @@ class Display
     return $html;
   }
 
-  public function convertToText($result)
+  public function convertToSidebar($result)
+  {
+    $html = "";
+    if ($result->rowCount() != 0) {
+      $row = $result->fetchall(PDO::FETCH_ASSOC);
+      foreach ($row as $value) {
+        return var_dump(gettype($value['cinema_reachability']));
+        $reachability = json_decode($value['cinema_reachability'], true);
+        foreach ($reachability as $item) {
+          if (!empty($item['message'])) {
+            $html .= "<h4><strong>{$item['title']}</strong></h4>";
+            $html .= "<p>{$item['message']}</p>";
+          }
+        }
+      }
+      return $html;
+    }
+  }
+
+  public function convertToText($result, $sidebar = false)
   {
     $html = "";
     if ($result->rowCount() != 0) {
       $row = $result->fetchall(PDO::FETCH_ASSOC);
       foreach ($row as $value) {
         $html .= $value['cinema_desc'];
+        if ($sidebar == true) {
+          $side = "";
+          $reachability = json_decode($value['cinema_reachability'], true);
+          foreach ($reachability as $item) {
+            if (!empty($item['message'])) {
+              $side .= "<h4><strong>{$item['title']}</strong></h4>";
+              $side .= $item['message'];
+            }
+          }
+        }
       }
     }
 
-    return $html;
+    if ($sidebar == true) {
+      return [$html, $side];
+    } else {
+      return $html;
+    }
   }
 
 

@@ -10,23 +10,27 @@ class Auth extends Main
         try {
             $sql = "UPDATE Users SET user_fname = '{$fName}', user_insertion = '{$mName}', user_lname = '{$lName}', user_streetname = '{$street}', user_house_nmr = '{$house_nmr}', user_city = '{$city}', user_zipcode = '{$zipcode}', user_tel = '{$tel}', role_id = '{$role_id}' WHERE user_id = $id";
             $result = self::updateData($sql);
-            self::__destruct();
             return $result;
         } catch (Exception $e) {
             throw $e;
         }
     }
 
-    public function collectUserData($id)
+    public function collectUserData($id, $twoData = false)
     {
         try {
             $sql = "SELECT * FROM Users WHERE user_id = $id";
             $result = self::readData($sql);
-            
+
 
             $sql = "SELECT * FROM Roles";
             $result2 = self::readsData($sql);
-            return [$result, $result2];
+
+            if ($twoData == true) {
+                return $result;
+            } else {
+                return [$result, $result2];
+            }
         } catch (Exception $e) {
             throw $e;
         }
@@ -37,7 +41,6 @@ class Auth extends Main
         try {
             $sql = "SELECT user_id AS ID,user_email AS Email,role_name AS Role FROM Users JOIN Roles USING(role_id) WHERE user_id != $user_id";
             $result = self::readsData($sql);
-            self::__destruct();
             return $result;
         } catch (Exception $e) {
             throw $e;
@@ -60,7 +63,6 @@ class Auth extends Main
                 $result = self::createData($sql);
 
                 http_response_code(201);
-                self::__destruct();
                 return $result;
             }
 
@@ -92,7 +94,6 @@ class Auth extends Main
                 );
 
                 setcookie('user', json_encode($_SESSION['user']));
-                self::__destruct();
                 return $result;
             }
 

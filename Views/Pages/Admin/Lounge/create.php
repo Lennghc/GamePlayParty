@@ -29,46 +29,57 @@
             <form action="index.php?con=lounge&op=create" method="POST">
                 <h1 class="">Zaal creeren</h1>
                 <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label for="text">Zaal nummer</label>
-                        <input type="text" name="lounge_nmr" class="form-control" />
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="lounge_nmr" id="lounge_Nmr" placeholder="Zaal nummer">
+                            <label for="lounge_Nmr">Zaal nummer</label>
+                        </div>
                     </div>
 
-                    <div class="col-md-6 form-group">
-                        <label for="text">Scherm groten</label>
-                        <input type="text" name="lounge_screensize" class="form-control" />
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="lounge_screensize" class="form-control" id="lounge_Screensize" placeholder="Scherm groten">
+                            <label for="lounge_Screensize">Scherm groten</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 group-control">
-                        <label for="number">Zit plaatsen</label>
-                        <input type="number" name="lounge_chair_places" class="form-control" />
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="number" name="lounge_chair_places" class="form-control" id="lounge_Chair_Places" placeholder="Zit plaatsen" />
+                            <label for="lounge_Chair_Places">Zit plaatsen</label>
+                        </div>
                     </div>
 
-                    <div class="col-md-6 group-control">
-                        <label for="number">Rolstoel plaatsen</label>
-                        <input type="number" name="lounge_wheelchair_places" class="form-control" />
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="number" name="lounge_wheelchair_places" class="form-control" id="lounge_Wheel_Chair_places" placeholder="Rolstoel plaatsen" />
+                            <label for="lounge_Wheel_Chair_places">Rolstoel plaatsen</label>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row">
-
-                </div>
-                <div class="row">
-                    <div class="col-md-3 group-control">
-                        <label for="time">Start tijd</label>
-                        <input type="time" name="slot_start_time" class="form-control" />
+                    <div class="col-md-3 ">
+                        <div class="form-floating mb-3">
+                            <input type="time" name="slot_start_time" class="form-control" id="slot_Start_Time" placeholder="Start tijd" />
+                            <label for="slot_Start_Time">Start tijd</label>
+                        </div>
                     </div>
 
-                    <div class="col-md-3 group-control">
-                        <label for="time">Eind tijd</label>
-                        <input type="time" name="slot_end_time" class="form-control" />
+                    <div class="col-md-3">
+                        <div class="form-floating mb-3">
+                            <input type="time" name="slot_end_time" class="form-control" id="slot_End_Time" placeholder="Eind tijd" />
+                            <label for="slot_End_Time">Eind tijd</label>
+                        </div>
                     </div>
 
 
-                    <div class="col-md-3 col-6 group-control">
-                        <label for="date">Datum</label>
-                        <input type="date" name="reservated_date" class="form-control" />
+                    <div class="col-md-3">
+                        <div class="form-floating mb-3">
+                            <input type="date" name="reservated_date" class="form-control" id="reservated_Date" placeholder="Datum" />
+                            <label for="reservated_Date">Datum</label>
+                        </div>
                     </div>
                     <div class="form-group">
 

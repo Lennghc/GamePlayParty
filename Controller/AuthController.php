@@ -19,7 +19,8 @@ class AuthController
         try {
 
             $action = isset($_GET['op']) ? $_GET['op'] : 'index';
-            $id = isset($_GET['id']) ? $_GET['id'] : null;
+            $user = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
+            $id = isset($_GET['id']) ? $_GET['id'] : $user;
 
             switch ($action) {
                 case 'index':
@@ -142,6 +143,10 @@ class AuthController
         if ($role == 4) {
             $result = $this->Auth->collectUserData($id);
             $updateForm = $this->Display->createUserForm($result, true, "index.php?con=users&op=update&id={$id}");
+        } elseif ($role == 3) {
+            $result = $this->Auth->collectUserData($id);
+            $updateForm = $this->Display->createUserForm($result, false, "index.php?con=users&op=update&id={$id}");
+            
         } else {
             Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
             header('Location: index.php');
@@ -158,11 +163,11 @@ class AuthController
             $city = isset($_POST['city']) ? $_POST['city'] : null;
             $tel = isset($_POST['tel']) ? $_POST['tel'] : null;
 
-            $role_id = isset($_POST['role']) ? $_POST['role'] : null;
+            $role_id = isset($_POST['role']) ? $_POST['role'] : $_SESSION['user']->role_id;
 
             $this->Auth->update($id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel, $role_id);
             Functions::toast("ID: {$id} met success bijgewerkt!", 'success', 'toast-top-right');
-            header('Location: index.php?con=cms&op=users');
+            header('Location: index.php?con=cms');
             exit();
         }
 
