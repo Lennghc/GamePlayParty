@@ -7,6 +7,7 @@ class LoungeController
     {
         $this->Lounge = new Lounge();
         $this->Display = new Display();
+        $this->Cinema = new Cinema();
     }
 
     public function __destruct()
@@ -50,6 +51,10 @@ class LoungeController
 
     public function create()
     {
+        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
+
+        $result = $this->Cinema->hasCinema($user_id)->fetchall(PDO::FETCH_ASSOC);
+
         if (isset($_POST['submit'])) {
             $lounge_nmr = isset($_POST['lounge_nmr']) ? $_POST['lounge_nmr'] : null;
             $lounge_chair_places = isset($_POST['lounge_chair_places']) ? $_POST['lounge_chair_places'] : null;
@@ -62,7 +67,7 @@ class LoungeController
 
             $time = Functions::getTimeSlot(90, $lounge_start_time, $lounge_end_time);
             $lounge_timeslots = json_encode($time);
-            $cinema_id = 1;
+            $cinema_id = $result[0]['cinema_id'];
 
             $res = $this->Lounge->create($lounge_nmr, $lounge_chair_places, $lounge_wheelchair_places, $lounge_screensize, $lounge_open_date, $lounge_timeslots, $cinema_id);
             $dump = var_dump($res);
