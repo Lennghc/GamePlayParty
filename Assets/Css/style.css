@@ -103,3 +103,7 @@ body.dark {
     top: 10em;
     right: 0;
 }
+
+[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
+  display: none;
+}

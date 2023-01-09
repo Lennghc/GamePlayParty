@@ -44,7 +44,12 @@
                     </div>
 
                     <a class="" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        Read more
+                    <span class="collapsed">
+                            Show more
+                    </span>    
+                    <span class="expanded">
+                            Show Less
+                    </span>
                     </a>
 
                 </div>
