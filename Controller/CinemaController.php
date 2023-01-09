@@ -104,9 +104,9 @@ class CinemaController
             header('Location: index.php?con=cms');
             exit();
         }
-        $name = isset($_REQUEST['cinema_name']) ? $_REQUEST['cinema_name'] : null;
-        $desc = isset($_REQUEST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
-        $reachability = isset($_REQUEST['cinema_reachability']) ? $_REQUEST['cinema_reachability'] : null;
+        $name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
+        $desc = isset($_POST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
+        $reachability = isset($_POST['cinema_reachabilty']) ? $_POST['cinema_reachabilty'] : null;
 
         if (isset($_REQUEST['submit'])) {
             $html = $this->Cinema->create($name, $desc, $reachability);
