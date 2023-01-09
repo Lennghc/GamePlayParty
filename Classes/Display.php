@@ -187,7 +187,7 @@ class Display
           }
           if ($edit == true || $delete == true || $read == true) {
             $html .= "<th>Actions</th>";
-          } elseif ($status == true){
+          } elseif ($status == true) {
             $html .= "<th>Actief/Inactief</th>";
           }
           $html .= "</tr>";
@@ -210,10 +210,10 @@ class Display
           }
           if ($status == true) {
             if ($row['is_active'] == 1) {
-              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=deactivate&id={$row['id']}' class='btn btn-success'><i class='fa-solid fa-toggle-on'></i></a>";
+              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=deactivate&id={$row['id']}' class='btn btn-success'><i class='fa-solid fa-check'></i>Actief</a>";
             }
             if ($row['is_active'] == 0) {
-              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=activate&id={$row['id']}' class='btn btn-danger'><i class='fa-solid fa-toggle-off'></i></a>";
+              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=activate&id={$row['id']}' class='btn btn-danger'><i class='fa-solid fa-xmark'></i>&nbsp; Inactief</a>";
             }
 
           }
