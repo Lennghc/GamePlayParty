@@ -108,16 +108,17 @@ class CinemaController
             Functions::toast('1 Bioscoop per gebruiker', 'info', 'toast-top-right');
             header('Location: index.php?con=cms');
             exit();
-        }
-        $name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
-        $desc = isset($_POST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
-        $reachability = isset($_POST['cinema_reachabilty']) ? $_POST['cinema_reachabilty'] : null;
+        } else {
+            $name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
+            $desc = isset($_POST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
+            $reachability = isset($_POST['cinema_reachabilty']) ? $_POST['cinema_reachabilty'] : null;
 
-        if (isset($_REQUEST['submit'])) {
-            $html = $this->Cinema->create($name, $desc, $reachability, $user_id);
-        }
+            if (isset($_REQUEST['submit'])) {
+                $html = $this->Cinema->create($name, $desc, $reachability, $user_id);
+            }
 
-        include 'Views/Pages/Admin/Cinema/createCinema.php';
+            include 'Views/Pages/Admin/Cinema/createCinema.php';
+        }
     }
     public function read($cinema_id)
     {
@@ -135,7 +136,12 @@ class CinemaController
 
             $dataCinema = $this->Cinema->read($user_id)->fetchall(PDO::FETCH_ASSOC);
 
-            $reach = json_decode($dataCinema[0]['cinema_reachability'], true);
+            if (isset($dataCinema[0]['cinema_reachability'])) {
+                $reach = json_decode($dataCinema[0]['cinema_reachability'], true);
+            }
+
+            // var_dump($this->Cinema->read($user_id));
+
 
             if (isset($_POST['submit'])) {
                 $cinema_name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
@@ -169,7 +175,7 @@ class CinemaController
 
                 $this->Cinema->update($user_id, $cinema_name, $cinema_desc, $encodeArray);
 
-                Functions::toast('Gegevens met success opgeslagen', 'success', 'toast-top-right');
+                header("Location: index.php?con=cinema&op=update");
             }
 
             include 'Views/Pages/Admin/Cinema/update.php';

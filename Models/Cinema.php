@@ -8,7 +8,7 @@ class Cinema extends Main
     public function all()
     {
         try {
-            $sql = "SELECT cinema_id AS id,cinema_name as BioscoopNaam, is_active FROM Cinema WHERE cinema_desc IS NOT NULL";
+            $sql = "SELECT cinema_id,cinema_name FROM Cinema WHERE cinema_desc IS NOT NULL";
             $results = self::readsData($sql);
             return $results;
         } catch (Exception $e) {
@@ -16,10 +16,14 @@ class Cinema extends Main
         }
     }
 
-    public function read($cinema_id)
+    public function read($cinema_id, $update = false)
     {
         try {
-            $sql = "SELECT cinema_id,cinema_name,cinema_desc,cinema_reachability,lounge_id FROM Cinema JOIN Lounge USING(cinema_id) WHERE cinema_id = $cinema_id OR user_id = $cinema_id LIMIT 1";
+            if ($update == true) {
+                $sql = "SELECT cinema_id,cinema_name,cinema_desc,cinema_reachability,lounge_id FROM Cinema JOIN Lounge USING(cinema_id) WHERE cinema_id = $cinema_id OR user_id = $cinema_id LIMIT 1";
+            } else {
+                $sql = "SELECT cinema_id,cinema_name,cinema_desc,cinema_reachability FROM Cinema WHERE cinema_id = $cinema_id OR user_id = $cinema_id LIMIT 1";
+            }
             $results = self::readData($sql);
             return $results;
         } catch (Exception $e) {
