@@ -46,6 +46,8 @@ i {
     text-decoration: none;
     color: inherit;
     transition: color .25s;
+    z-index: 200;
+    position: relative;
 }
 
 .footer_list-link {

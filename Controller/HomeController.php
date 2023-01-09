@@ -21,6 +21,21 @@ class HomeController
                 case 'index':
                     $this->index();
                     break;
+                case 'cookies':
+                    $this->cookies();
+                    break;
+                case 'privacy_nl':
+                    $this->privacy_nl();
+                    break;
+                case 'privacy_en':
+                    $this->privacy_en();
+                    break;
+                case 'return_refund':
+                    $this->return_refund();
+                    break;
+                case 'terms_conditions':
+                    $this->terms_conditions();
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -35,5 +50,34 @@ class HomeController
         include 'Views/Pages/home.php';
 
     }
+
+    public function cookies() 
+    {
+        include 'Views/Policy/termsfeed-cookies-policy-html-english.php';
+    }
+
+    public function privacy_nl() 
+    {
+        include 'Views/Policy/termsfeed-privacy-policy-html-dutch.php';
+    }
+
+    public function privacy_en() 
+    {
+        include 'Views/Policy/termsfeed-privacy-policy-html-english.php';
+    }
+
+    public function return_refund() 
+    {
+        include 'Views/Policy/termsfeed-return-refund-policy-html-english.php';
+    }
+
+
+    public function terms_conditions() 
+    {
+        include 'Views/Policy/termsfeed-terms-conditions-html-english.php';
+    }
+
+
+    
 
 }
