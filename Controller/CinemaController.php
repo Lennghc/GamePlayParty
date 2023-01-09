@@ -109,12 +109,12 @@ class CinemaController
             header('Location: index.php?con=cms');
             exit();
         }
-        $name = isset($_REQUEST['cinema_name']) ? $_REQUEST['cinema_name'] : null;
-        $desc = isset($_REQUEST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
-        $reachability = isset($_REQUEST['cinema_reachability']) ? $_REQUEST['cinema_reachability'] : null;
+        $name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
+        $desc = isset($_POST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
+        $reachability = isset($_POST['cinema_reachabilty']) ? $_POST['cinema_reachabilty'] : null;
 
         if (isset($_REQUEST['submit'])) {
-            $html = $this->Cinema->create($name, $desc, $reachability);
+            $html = $this->Cinema->create($name, $desc, $reachability, $user_id);
         }
 
         include 'Views/Pages/Admin/Cinema/createCinema.php';
@@ -135,7 +135,7 @@ class CinemaController
 
             $dataCinema = $this->Cinema->read($user_id)->fetchall(PDO::FETCH_ASSOC);
 
-            $reach = json_decode($dataCinema[0]['cinema_reachability'],true);
+            $reach = json_decode($dataCinema[0]['cinema_reachability'], true);
 
             if (isset($_POST['submit'])) {
                 $cinema_name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
@@ -147,24 +147,22 @@ class CinemaController
                 $reach_car = isset($_POST['reach_car']) ? $_POST['reach_car'] : null;
                 $reach_public_trafic = isset($_POST['reach_public_trafic']) ? $_POST['reach_public_trafic'] : null;
                 $reach_bike = isset($_POST['reach_bike']) ? $_POST['reach_bike'] : null;
-                $reach_wheel_chair = isset($_POST['reach_wheel_chair']) ? $_POST['reach_wheel_chair'] : null;
-
-                ;
+                $reach_wheel_chair = isset($_POST['reach_wheel_chair']) ? $_POST['reach_wheel_chair'] : null;;
 
                 $array[1]['title'] = "Openingstijden";
-                $array[1]['message'] = str_replace(array("\r","\n","'"), "", $open_dates);
+                $array[1]['message'] = str_replace(array("\r", "\n", "'"), "", $open_dates);
                 $array[2]['title'] = "Adres";
-                $array[2]['message'] = str_replace(array("\r","\n","'"), "", $adres);;
+                $array[2]['message'] = str_replace(array("\r", "\n", "'"), "", $adres);;
                 $array[3]['title'] = "Bereikbaarheid";
-                $array[3]['message'] = str_replace(array("\r","\n","'"), "", $reach_information);;
+                $array[3]['message'] = str_replace(array("\r", "\n", "'"), "", $reach_information);;
                 $array[4]['title'] = "Auto";
-                $array[4]['message'] = str_replace(array("\r","\n","'"), "", $reach_car);;
+                $array[4]['message'] = str_replace(array("\r", "\n", "'"), "", $reach_car);;
                 $array[5]['title'] = "Openbaar vervoer";
-                $array[5]['message'] = str_replace(array("\r","\n","'"), "", $reach_public_trafic);;
+                $array[5]['message'] = str_replace(array("\r", "\n", "'"), "", $reach_public_trafic);;
                 $array[6]['title'] = "Fiets";
-                $array[6]['message'] = str_replace(array("\r","\n","'"), "", $reach_bike);;
+                $array[6]['message'] = str_replace(array("\r", "\n", "'"), "", $reach_bike);;
                 $array[7]['title'] = "Rolstoeltoegankelijkheid";
-                $array[7]['message'] = str_replace(array("\r","\n","'"), "", $reach_wheel_chair);;
+                $array[7]['message'] = str_replace(array("\r", "\n", "'"), "", $reach_wheel_chair);;
 
 
                 $encodeArray = json_encode($array);

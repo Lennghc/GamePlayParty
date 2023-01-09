@@ -30,7 +30,7 @@ class Reservation extends Main
     public function hasReservation($user_id)
     {
         try {
-            $sql = "SELECT user_fname, user_insertion, user_lname, user_streetname, user_city, user_zipcode, user_tel, user_house_nmr, user_username, user_email, reservation_id, user_id FROM Reservation JOIN Users USING(user_id) WHERE status_id = 4 OR status_id = 5 AND user_id = $user_id";
+            $sql = "SELECT user_fname, user_insertion, user_lname, user_streetname, user_city, user_zipcode, user_tel, user_house_nmr, user_username, user_email, reservation_id, user_id,lounge_id FROM Reservation JOIN Users USING(user_id) WHERE status_id = 4 OR status_id = 5 AND user_id = $user_id";
             $result = self::readData($sql);
             return $result;
         } catch (Exception $e) {
@@ -74,4 +74,6 @@ class Reservation extends Main
             throw $e;
         }
     }
+
+
 }

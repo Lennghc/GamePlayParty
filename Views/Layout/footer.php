@@ -30,7 +30,7 @@
                 <h6 class="footer_title">Privacybeleid</h6>
                 <ul class="footer_list">
                     <li class="footer_list-item">
-                        <a href="Views/Policy/termsfeed-cookies-policy-html-english.html" class="footer_list-link">Cookies (EN)</a>
+                        <a href="index.php?con=home&op=cookies" class="footer_list-link">Cookies (EN)</a>
                     </li>
                     <li class="footer_list-item">
                         <a href="Views/Policy/termsfeed-privacy-policy-html-dutch.html" class="footer_list-link">Privacy (NL)</a>

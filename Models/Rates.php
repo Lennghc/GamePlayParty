@@ -14,7 +14,7 @@ class Rates extends Main
                 $cinema_id = $value['cinema_id'];
             }
 
-            $sql = "SELECT rates_id as ID, rates_desc as Beschrijving, Replace(Replace(Concat('€ ', Format(`rates_price`, 2)), ',', ''), '.', ',') AS Prijs FROM Rates WHERE cinema_id = $cinema_id";
+            $sql = "SELECT rates_id as ID, rates_desc as Beschrijving, Replace(Replace(Concat('€ ', Format(`rates_price`, 2)), ',', ''), '.', ',') AS Prijs FROM Rates WHERE cinema_id = $cinema_id ORDER BY rates_price DESC";
             $result = self::readsData($sql);
             return $result;
         } catch (Exception $e) {
@@ -60,6 +60,17 @@ class Rates extends Main
         try {
             $sql = "DELETE FROM Rates WHERE rates_id = $rates_id";
             $result = self::deleteData($sql);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function getCinemaRates($cinema_id)
+    {
+        try {
+            $sql = "SELECT rates_id, Replace(Replace(Concat('€ ', Format(`rates_price`, 2)), ',', ''), '.', ',') as rates_price, rates_desc FROM Rates WHERE cinema_id = $cinema_id ORDER BY rates_price ASC";
+            $result = self::readsData($sql);
             return $result;
         } catch (Exception $e) {
             throw $e;

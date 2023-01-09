@@ -11,6 +11,8 @@ class ReservationController
         $this->Display = new Display();
         $this->Cinema = new Cinema();
         $this->Auth = new Auth();
+        $this->Lounge = new Lounge();
+        $this->Rates = new Rates();
     }
 
     public function __destruct()
@@ -82,6 +84,9 @@ class ReservationController
         foreach ($array as $value) {
             if ($user_id == $value['user_id'] and $id == $value['reservation_id']) {
                 $formInputs = $this->Display->createUserForm($this->Auth->collectUserData($user_id), false, "index.php?con=reserv&op=reservDetails&id={$id}");
+                $cinemaID = $this->Lounge->getCinemaIDByLoungeID($value['lounge_id']);
+                $cinema_id = $cinemaID->fetchall(PDO::FETCH_ASSOC);
+                $rates = $this->Display->createRatesForm($this->Rates->getCinemaRates($cinema_id[0]['cinema_id']));
                 include 'Views/Pages/reservDetails.php';
 
 
@@ -98,7 +103,7 @@ class ReservationController
 
                     $this->Reservation->updateUser($user_id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel);
                     Functions::toast("{$_SESSION['user']->username} met success bijgewerkt!", 'success', 'toast-top-right');
-                    header("Location: index.php?con=reserv&op=reservDetails&id={$id}");
+                    // header("Location: index.php?con=reserv&op=reservDetails&id={$id}");
                     exit();
                 }
             } else {

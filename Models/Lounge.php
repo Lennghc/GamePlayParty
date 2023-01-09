@@ -52,4 +52,15 @@ class Lounge extends Main
             throw $e;
         }
     }
+
+    public function getCinemaIDByLoungeID($lounge_id)
+    {
+        try {
+            $sql = "SELECT cinema_id FROM Lounge JOIN Cinema USING(cinema_id) WHERE lounge_id = $lounge_id";
+            $result = self::readData($sql);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }

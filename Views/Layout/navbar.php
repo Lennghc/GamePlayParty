@@ -1,6 +1,6 @@
         <nav>
             <div class="nav-bar">
-                <div class="darkLight-searchBox">
+                <!-- <div class="darkLight-searchBox">
                     <div class="dark-light">
                         <i class="fas fa-moon moon"></i>
                         <i class="fas fa-sun sun"></i>
@@ -16,7 +16,7 @@
                             <i class="fa fa-search"></i>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </nav>
 

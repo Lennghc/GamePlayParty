@@ -15,6 +15,43 @@ class Display
     }
   }
 
+  public function createRatesForm($result)
+  {
+    $html = "";
+    if ($result->rowCount() != 0) {
+      $html .= "<div class='container'><form action=''>";
+      $html .= "<h4>Tarieven per persoon</h4>";
+      while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
+        foreach ($row as $value) {
+          $html .= "            
+              <div class='row'>
+                  <div class='col-md-5'>
+                      <p>{$value['rates_desc']} | {$value['rates_price']}</p>
+                  </div>
+                  <div class='col-sm-3 reservDetails-inputfield'>
+                      <div class='input-group input-group-sm'>
+                          <button type='button' class='btn btn-danger sub' disabled='disabled' data-type='minus' data-field='quant[1]'>
+                              <span class='fa fa-minus'></span>
+                          </button>
+                          <input type='text' name='quant[1]' class='form-control input-number' value='0' min='0' max='30'>
+                          <button type='button' class='btn btn-success add' data-type='plus' data-field='quant[1]'>
+                              <span class='fa fa-plus'></span>
+                          </button>
+                      </div>
+                  </div>
+
+                  <div class='col-md-4'>
+                      <p>€ 0,00</p>
+                  </div>
+              </div>";
+        }
+      }
+      $html .= '</form></div>';
+
+      return $html;
+    }
+  }
+
   public function createUserForm($result, $role = false, $url)
   {
     $html = "";
@@ -22,6 +59,17 @@ class Display
       $roles = $result[1]->fetchall(PDO::FETCH_ASSOC);
       while ($row = $result[0]->fetchall(PDO::FETCH_ASSOC)) {
         foreach ($row as $value) {
+          !empty($value['user_fname']) ? $value['user_fname'] : null;
+          !empty($value['user_insertion']) ? $value['user_insertion'] : null;
+          !empty($value['user_lname']) ? $value['user_lname'] : null;
+          !empty($value['user_streetname']) ? $value['user_streetname'] : null;
+          !empty($value['user_house_nmr']) ? $value['user_house_nmr'] : null;
+          !empty($value['user_zipcode']) ? $value['user_zipcode'] : null;
+          !empty($value['user_city']) ? $value['user_city'] : null;
+          !empty($value['user_tel']) ? $value['user_tel'] : null;
+          !empty($value['user_email']) ? $value['user_email'] : null;
+
+
           $html .= "<div class='container'>
           <form action='$url' method='POST'>
               <h4>Gegevens {$value['user_username']}</h4>
