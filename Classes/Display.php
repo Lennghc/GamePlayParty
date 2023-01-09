@@ -23,7 +23,7 @@ class Display
       $html .= "<h4>Tarieven per persoon</h4>";
       while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
         foreach ($row as $value) {
-          $html .= "            
+          $html .= "
               <div class='row'>
                   <div class='col-md-5'>
                       <p>{$value['rates_desc']} | {$value['rates_price']}</p>
@@ -180,13 +180,12 @@ class Display
 
 
       while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-        
         if ($tableheader == false) {
           $html .= "<tr>";
           foreach ($row as $key => $value) {
             $html .= "<th scope='col'>{$key}</th>";
           }
-          if ($edit == true || $delete == true || $read == true) {
+          if ($edit == true || $delete == true || $read == true || $status == true) {
             $html .= "<th>Actions</th>";
           }
           $html .= "</tr>";
@@ -197,7 +196,7 @@ class Display
           $html .= "<td>" . (empty($value) ? '<i class="text-black fa fa-ban" aria-hidden="true"></i>' : $value) . "</td>";
         }
         if ($edit == true || $delete == true || $read == true || $status == true) {
-          $html .= "<td style='display: flex; justify-content: end;'>";
+          $html .= "<td style='display: flex; justify-content: ;'>";
           if ($edit == true) {
             $html .= "<a type='button' href='index.php?con={$_GET['op']}&op=update&id={$row['ID']}' class='btn btn-info'><i class='fa fa-edit'></i></a>";
           }
@@ -209,10 +208,10 @@ class Display
           }
           if ($status == true) {
             if ($row['is_active'] == 1) {
-              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=deactivate&id={$row['id']}' class='btn btn-light'><i class='fa-solid fa-lock'></i> Inactief</a>";
+              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=deactivate&id={$row['id']}' class='btn btn-success'><i class='fa-solid fa-toggle-on'></i></a>";
             }
             if ($row['is_active'] == 0) {
-              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=activate&id={$row['id']}' class='btn btn-light'><i class='fa-solid fa-lock-open'></i> Actief</a>";
+              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=activate&id={$row['id']}' class='btn btn-danger'><i class='fa-solid fa-toggle-off'></i></a>";
             }
 
           }

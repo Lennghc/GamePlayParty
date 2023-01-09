@@ -5,6 +5,15 @@
     $title = 'Bioscopen';
     include './Views/Layout/header.php';
     ?>
+    <style>
+        th:nth-child(3), td:nth-child(3) {
+            display: none;
+        }
+
+        a {
+            /* margin: auto; */
+        }
+    </style>
 </head>
 
 <body>
@@ -23,5 +32,6 @@
 
 
 </body>
+
 
 </html>
