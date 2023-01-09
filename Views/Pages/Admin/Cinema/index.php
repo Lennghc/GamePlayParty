@@ -6,12 +6,12 @@
     include './Views/Layout/header.php';
     ?>
     <style>
-        th:nth-child(3), td:nth-child(3) {
+        th:nth-child(1), td:nth-child(1) {
             display: none;
         }
 
-        a {
-            /* margin: auto; */
+        th:nth-child(3), td:nth-child(3) {
+            display: none;
         }
     </style>
 </head>
