@@ -134,8 +134,7 @@ class Display
                       <label for='Email'>Email</label>
                     </div>
                   </div>
-              </div>
-";
+              </div>";
           if ($role == true) {
             $html .= "<div class='row'>
               <div class='col-md-4'>
@@ -161,7 +160,7 @@ class Display
               <input type='submit' name='submit' class='btn btn-success btn-sm' value='Opslaan' />
               </div>
           </form>
-  
+
       </div>";
         }
       }
@@ -181,7 +180,7 @@ class Display
 
 
       while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-
+        
         if ($tableheader == false) {
           $html .= "<tr>";
           foreach ($row as $key => $value) {
@@ -197,7 +196,7 @@ class Display
         foreach ($row as $value) {
           $html .= "<td>" . (empty($value) ? '<i class="text-black fa fa-ban" aria-hidden="true"></i>' : $value) . "</td>";
         }
-        if ($edit == true || $delete == true || $read == true) {
+        if ($edit == true || $delete == true || $read == true || $status == true) {
           $html .= "<td style='display: flex; justify-content: end;'>";
           if ($edit == true) {
             $html .= "<a type='button' href='index.php?con={$_GET['op']}&op=update&id={$row['ID']}' class='btn btn-info'><i class='fa fa-edit'></i></a>";
@@ -208,9 +207,18 @@ class Display
           if ($read == true) {
             $html .= "<a type='button' class='btn btn-success'><i class='fa fa-eye'></i></a>";
           }
+          if ($status == true) {
+            if ($row['is_active'] == 1) {
+              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=deactivate&id={$row['id']}' class='btn btn-light'><i class='fa-solid fa-lock'></i> Inactief</a>";
+            }
+            if ($row['is_active'] == 0) {
+              $html .="<a type='button' href='index.php?con={$_GET['op']}&op=activate&id={$row['id']}' class='btn btn-light'><i class='fa-solid fa-lock-open'></i> Actief</a>";
+            }
+
+          }
           $html .= "</td>";
         }
-        $html .= "</tr  >";
+        $html .= "</tr>";
       }
 
       $html .= "</table>";
@@ -219,12 +227,14 @@ class Display
       $html .= "<h2>Geen data</h2>";
     }
     if ($create == true) {
-      $html .= "<div class='flex flex-row-reverse' style='display:flex;'> 
+      $html .= "<div class='flex flex-row-reverse' style='display:flex;'>
         <div class='justify-content-end'>
           <a class='btn btn-lg bg-green rounded-circle' href='index.php?con={$_GET['op']}&op=create'><span class='text-white fa fa-plus'></span></a>
         </div>
     </div>";
     }
+
+
 
 
 
