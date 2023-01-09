@@ -42,7 +42,12 @@ class CinemaController
                 case 'details':
                     $this->details($cinema_id);
                     break;
-
+                case 'activate':
+                    $this->activate($cinema_id);
+                    break;
+                case 'deactivate':
+                    $this->deactivate($cinema_id);
+                    break;
                 case 'readAll':
                     $this->readAll();
                     break;
@@ -68,7 +73,7 @@ class CinemaController
 
         if ($role == 4) {
             $result = $this->Cinema->all();
-            $table = $this->Display->createTable($result);
+            $table = $this->Display->createTable($result, false, false, false, false, true);
         } else {
             Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
             header('Location: index.php');
@@ -177,22 +182,15 @@ class CinemaController
     public function deactivate($cinema_id)
     {
         $result = $this->Cinema->deactivate($cinema_id);
-        $res = $this->Display->deactivateWarning($result);
 
-        if (isset($_REQUEST['deactive'])) {
-            $res = $this->Cinema->deactivate($cinema_id);
-            header('Location: ?con=cinema&op=readAll');
-        }
-        include 'Views/Pages/Admin/cms.php';
+        header('Location: index.php?con=cms&op=cinema');
+        include 'Views/Pages/Admin/Cinema/index.php';
     }
     public function activate($cinema_id)
     {
         $result = $this->Cinema->activate($cinema_id);
-        $res = $this->Display->activateWarning($result);
-        if (isset($_REQUEST['deactive'])) {
-            $res = $this->Cinema->activate($cinema_id);
-            header('Location: ?con=cinema&op=readAll');
-        }
-        include 'Views/Pages/Admin/cms.php';
+
+        header('Location: index.php?con=cms&op=cinema');
+        include 'Views/Pages/Admin/Cinema/index.php';
     }
 }
