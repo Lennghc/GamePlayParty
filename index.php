@@ -15,7 +15,7 @@ if (!SHOW_ERRORS) {
     });
 }
 
-require_once 'controller/MainController.php';
+require_once 'Controller/MainController.php';
 
 $controller = new MainController();
 $controller->handleRequest();
