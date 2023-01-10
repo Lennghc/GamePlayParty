@@ -156,7 +156,7 @@ class ReservationController
 
 
             // else {
-            //     // go to list of view with more reservations of that person 
+            //     // go to list of view with more reservations of that person
             //     Functions::toast('Je hebt nog betalingen open staan!', 'info', 'toast-top-right');
             //     header('Location: index.php');
             //     exit();

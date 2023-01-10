@@ -152,7 +152,7 @@ class Display
             }
             $html .= "</select>
             <label for='inputRole'>Role</label>
-</div>
+            </div>
           </div>
               </div>";
           }
@@ -234,10 +234,6 @@ class Display
         </div>
     </div>";
     }
-
-
-
-
 
     return $html;
   }
@@ -384,7 +380,6 @@ class Display
       return $html;
     }
   }
-
 
   public function deactivateWarning()
   {

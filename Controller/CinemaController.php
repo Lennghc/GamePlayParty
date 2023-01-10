@@ -72,7 +72,7 @@ class CinemaController
         $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
 
         if ($role == 4) {
-            $result = $this->Cinema->all();
+            $result = $this->Cinema->allAdmin();
             $table = $this->Display->createTable($result, false, false, false, false, true);
         } else {
             Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');

@@ -8,7 +8,18 @@ class Cinema extends Main
     public function all()
     {
         try {
-            $sql = "SELECT cinema_id,cinema_name FROM Cinema WHERE cinema_desc IS NOT NULL";
+            $sql = "SELECT cinema_id,cinema_name FROM Cinema WHERE cinema_desc IS NOT NULL AND is_active = 1";
+            $results = self::readsData($sql);
+            return $results;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function allAdmin()
+    {
+        try {
+            $sql = "SELECT cinema_id as id,cinema_name as BioscoopNaam, is_active FROM Cinema WHERE cinema_desc IS NOT NULL";
             $results = self::readsData($sql);
             return $results;
         } catch (Exception $e) {
