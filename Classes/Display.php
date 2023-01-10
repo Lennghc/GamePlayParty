@@ -24,28 +24,35 @@ class Display
       while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
         foreach ($row as $value) {
           $html .= "
-              <div class='row'>
+              <div id='rates{$value['rates_id']}' class='row'>
                   <div class='col-md-5'>
-                      <p>{$value['rates_desc']} | {$value['rates_price']}</p>
+                      <p>{$value['rates_desc']} | <span id='price'>{$value['rates_price']}</span></p>
                   </div>
                   <div class='col-sm-3 reservDetails-inputfield'>
                       <div class='input-group input-group-sm'>
-                          <button type='button' class='btn btn-danger sub' disabled='disabled' data-type='minus' data-field='quant[1]'>
+                          <button type='button' class='btn btn-danger sub' onclick='ratesCalculate({$value['rates_id']},1)' data-type='minus' data-field='quant[1]'>
                               <span class='fa fa-minus'></span>
                           </button>
-                          <input type='text' name='quant[1]' class='form-control input-number' value='0' min='0' max='30'>
-                          <button type='button' class='btn btn-success add' data-type='plus' data-field='quant[1]'>
+                          <input type='number' id='inputField{$value['rates_id']}' name='quant[1]' class='form-control input-number' value='0' min='0' max='30'/>
+                          <button type='button' class='btn btn-success add' onclick='ratesCalculate({$value['rates_id']},2)' data-type='plus' data-field='quant[1]'>
                               <span class='fa fa-plus'></span>
                           </button>
                       </div>
                   </div>
 
                   <div class='col-md-4'>
-                      <p>€ 0,00</p>
+                      <p id='subtotal'>€ 0,00</p>
                   </div>
               </div>";
         }
       }
+      $html .= "<div class='row'>
+      <div class='col-md-8'>
+      <p>Totaal:</p>
+      </div>
+      <div class='col-md-4'>
+      <p class='float-right' id='total'>€ 0,00</p>
+      </div></div><div class='d-grid col-md-9'><button class='btn bg-primary bg-opacity-10'>Volgende</button></div>";
       $html .= '</form></div>';
 
       return $html;

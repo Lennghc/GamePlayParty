@@ -36,12 +36,72 @@
     </div>
 
     <script>
-        $('.add').click(function() {
-            $(this).prev().val(+$(this).prev().val() + 1);
-        });
-        $('.sub').click(function() {
-            if ($(this).next().val() > 0) $(this).next().val(+$(this).next().val() - 1);
-        });
+        function ratesCalculate(id, calc) {
+
+            var parrentRow = document.querySelector('#rates' + id);
+            var price = parrentRow.querySelector('#price');
+            var replaceDot = price.innerText.replace(",", ".");
+            var calculateNumber = Number(replaceDot.slice(2));
+            var totalText = document.querySelector('#total');
+
+            let Euro = new Intl.NumberFormat('nl-NL', {
+                style: 'currency',
+                currency: 'EUR'
+            });
+
+            if (calc == 2) {
+
+                function add(id) {
+
+                    var value = parrentRow.querySelector('#inputField' + id).value;
+                    value = isNaN(value) ? 0 : value;
+                    value++;
+
+                    if (value != 31) {
+                        document.querySelector('#inputField' + id).value = value;
+                        var newPrice = calculateNumber * value;
+                        parrentRow.querySelector('#subtotal').innerHTML = Euro.format(newPrice);
+                    }
+
+                    return value;
+                }
+                add(id);
+            }
+
+            if (calc == 1) {
+                function sub(id) {
+
+                    var value = parrentRow.querySelector('#inputField' + id).value
+                    value = isNaN(value) ? 0 : value;
+                    value--;
+
+                    if (value != -1) {
+                        document.querySelector('#inputField' + id).value = value;
+                        var newPrice = calculateNumber * value;
+                        parrentRow.querySelector('#subtotal').innerHTML = Euro.format(newPrice);
+                    }
+
+                    return value;
+                }
+                sub(id);
+            }
+
+
+            var allPrice = document.querySelectorAll('#subtotal');
+
+
+            var total = 0;
+
+            allPrice.forEach(element => {
+                var removeDot = element.innerText.replace(",", ".");
+                var calculateTotalNumber = Number(removeDot.slice(2));
+                total = total + calculateTotalNumber;
+            });
+
+            totalText.innerText = Euro.format(total);
+
+
+        }
     </script>
 
 
