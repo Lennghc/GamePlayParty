@@ -41,10 +41,10 @@ class Cinema extends Main
             throw $e;
         }
     }
-    public function create($name, $desc, $reachability, $user_id)
+    public function create($name, $user_id)
     {
         try {
-            $sql = "INSERT INTO Cinema (`cinema_name`, `cinema_desc`,`cinema_reachability`, `user_id`) VALUES ('{$name}', '{$desc}', '{$reachability}', '{$user_id}')";
+            $sql = "INSERT INTO Cinema (`cinema_name`, `user_id`) VALUES ('{$name}', '{$user_id}')";
             $results = self::createData($sql);
             return $results;
         } catch (Exception $e) {

@@ -6,8 +6,6 @@
     $title = "Create Cinema";
     include 'Views/Layout/header.php';
     ?>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-
     <script>
       tinymce.init({
         selector: '#cinema_desc'
@@ -17,31 +15,65 @@
         selector: '#cinema_reachabilty'
       });
     </script>
+
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .formPosition {
+            margin: auto;
+        }
+    </style>
 </head>
 <body class="text-center">
 
 <main class="form-signin w-100 m-auto">
     <div class="formstyle">
         <form action="?con=cinema&op=create" method="POST">
-            <i class="fa-solid fa-square-plus"></i>
-            <h1 class="h3 mb-3 fw-normal">Create</h1>
+            <h1 class="h3 mb-3 fw-normal">Wat is de naam van uw bioscoop?</h1>
+        <div class="container formPosition">
 
-            <div class="form-floating">
-                <input type="text" name="cinema_name" class="form-control" id="cinema_name" placeholder="Bioscoop naam">
-                <label for="cinema_name">Bioscoop naam</label>
+            <div class="row">
+                <div class="col-sm-3"></div>
+
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <input type="text" name="cinema_name" class="form-control" id="cinema_name" placeholder="Bioscoop naam">
+                        <label for="cinema_name">Bioscoop naam</label>
+                    </div>
+                </div>
+
+                <div class="col-sm-3"></div>
             </div>
 
-            <div class="form-floating">
-                <textarea name="cinema_desc" id="cinema_desc" rows="15" placeholder="Beschrijving Bioscoop"></textarea>
+            <!-- <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <textarea name="cinema_desc" id="cinema_desc" rows="15" placeholder="Beschrijving Bioscoop"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-sm">
+                    <div class="form-floating">
+                        <textarea name="cinema_reachabilty" id="cinema_reachabilty" rows="15" placeholder="Bereikbaarheid Bioscoop"></textarea>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="row">
+                <div class="col-sm-3"></div>
+
+                <div class="col-sm-6">
+                    <input class="w-100 btn btn-lg btn-success" type="submit" name="submit" value="Bevestig"></input>
+                </div>
+
+                <div class="col-sm-3"></div>
             </div>
+        </div>
 
-            <div class="form-floating">
-                <textarea name="cinema_reachabilty" id="cinema_reachabilty" rows="15" placeholder="Bereikbaarheid Bioscoop"></textarea>
-            </div>
-
-            <input class="w-100 btn btn-lg btn-success" type="submit" name="submit" value="Create"></input>
-
-            <p class="mt-5 mb-3 text-muted">&copy; WebWorld</p>
+        <p class="mt-5 mb-3 text-muted">&copy; WebWorld</p>
         </form>
     </div>
 </main>

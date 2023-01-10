@@ -110,11 +110,10 @@ class CinemaController
             exit();
         } else {
             $name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
-            $desc = isset($_POST['cinema_desc']) ? $_REQUEST['cinema_desc'] : null;
-            $reachability = isset($_POST['cinema_reachabilty']) ? $_POST['cinema_reachabilty'] : null;
 
             if (isset($_REQUEST['submit'])) {
-                $html = $this->Cinema->create($name, $desc, $reachability, $user_id);
+                $html = $this->Cinema->create($name, $user_id);
+                header("Location: index.php?con=cinema&op=update");
             }
 
             include 'Views/Pages/Admin/Cinema/createCinema.php';
