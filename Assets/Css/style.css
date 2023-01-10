@@ -33,7 +33,7 @@ body.dark {
     padding: 1em;
     text-align: left;
     transform: rotate(-15deg);
-    font: bold 3em/9em 'Open Sans';
+    font: bold 3em/9em 'sans-serif';
     color: var(--text-color-text)
 }
 
@@ -71,7 +71,7 @@ body.dark {
         padding: 0;
         text-align: left;
         transform: rotate(-15deg);
-        font: bold 2em/10.5em 'Open Sans' !important;
+        font: bold 2em/10.5em 'sans-serif' !important;
         margin-bottom: -2.5em;
 
     }
