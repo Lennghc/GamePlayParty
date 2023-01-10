@@ -79,7 +79,6 @@
                         document.querySelector('#inputField' + id).value = value;
                         var newPrice = calculateNumber * value;
                         parrentRow.querySelector('#subtotal').innerHTML = Euro.format(newPrice);
-
                     }
 
                     return value;
@@ -94,11 +93,8 @@
             var total = 0;
 
             allPrice.forEach(element => {
-                // console.log(element.innerText);
                 var removeDot = element.innerText.replace(",", ".");
                 var calculateTotalNumber = Number(removeDot.slice(2));
-                // console.log(calculateTotalNumber);
-
                 total = total + calculateTotalNumber;
             });
 

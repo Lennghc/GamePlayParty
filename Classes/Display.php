@@ -46,15 +46,14 @@ class Display
               </div>";
         }
       }
-      $html .= '</form>';
       $html .= "<div class='row'>
       <div class='col-md-8'>
       <p>Totaal:</p>
       </div>
       <div class='col-md-4'>
       <p class='float-right' id='total'>€ 0,00</p>
-      </div></div>";
-      $html .= '</div>';
+      </div></div><div class='d-grid col-md-9'><button class='btn bg-primary bg-opacity-10'>Volgende</button></div>";
+      $html .= '</form></div>';
 
       return $html;
     }
