@@ -6,7 +6,7 @@
 
 h1 {
     color: var(--text-color-text);
-    font: bold 3em/1em 'Open Sans' !important;
+    font: bold 3em/1em 'Sans Serif' !important;
 
 }
 
@@ -33,7 +33,7 @@ body.dark {
     padding: 1em;
     text-align: left;
     transform: rotate(-15deg);
-    font: bold 3em/9em 'Open Sans';
+    font: bold 3em/9em 'Open Sans'!important;
     color: var(--text-color-text)
 }
 
