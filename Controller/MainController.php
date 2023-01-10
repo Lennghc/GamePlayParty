@@ -57,7 +57,6 @@ class MainController
                 case 'rate':
                     $this->RatesController->handleRequest();
                     break;
-
                 default:
                     http_response_code(404);
                     break;
