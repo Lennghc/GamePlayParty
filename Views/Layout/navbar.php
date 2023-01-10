@@ -40,7 +40,7 @@
                 </li>
             </ul>
         </div>
-        <script src="Assets/Js/navbar.js"></script>
+        <!-- <script src="Assets/Js/navbar.js"></script> -->
         </body>
 
         </html>
