@@ -21,6 +21,9 @@ class HomeController
                 case 'index':
                     $this->index();
                     break;
+                case 'about_us':
+                    $this->about_us();
+                    break;
                 case 'cookies':
                     $this->cookies();
                     break;
@@ -49,6 +52,11 @@ class HomeController
     {
         include 'Views/Pages/home.php';
 
+    }
+
+    public function about_us()
+    {
+        include 'Views/Pages/about_us.php';
     }
 
     public function cookies() 
