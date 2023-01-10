@@ -16,7 +16,7 @@
 <body>
     <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
     <div class="container row">
-        <div class="col-md-7 title-under-logo">Reserverings gegevens</div>
+        <div class="col-md-7 title-under-logo"><span style="font-family:sans-serif!important;">Reserverings gegevens</span></div>
     </div>
 
     <?php include 'Views/Layout/navbar.php'; ?>
@@ -35,74 +35,7 @@
         </div>
     </div>
 
-    <script>
-        function ratesCalculate(id, calc) {
-
-            var parrentRow = document.querySelector('#rates' + id);
-            var price = parrentRow.querySelector('#price');
-            var replaceDot = price.innerText.replace(",", ".");
-            var calculateNumber = Number(replaceDot.slice(2));
-            var totalText = document.querySelector('#total');
-
-            let Euro = new Intl.NumberFormat('nl-NL', {
-                style: 'currency',
-                currency: 'EUR'
-            });
-
-            if (calc == 2) {
-
-                function add(id) {
-
-                    var value = parrentRow.querySelector('#inputField' + id).value;
-                    value = isNaN(value) ? 0 : value;
-                    value++;
-
-                    if (value != 31) {
-                        document.querySelector('#inputField' + id).value = value;
-                        var newPrice = calculateNumber * value;
-                        parrentRow.querySelector('#subtotal').innerHTML = Euro.format(newPrice);
-                    }
-
-                    return value;
-                }
-                add(id);
-            }
-
-            if (calc == 1) {
-                function sub(id) {
-
-                    var value = parrentRow.querySelector('#inputField' + id).value
-                    value = isNaN(value) ? 0 : value;
-                    value--;
-
-                    if (value != -1) {
-                        document.querySelector('#inputField' + id).value = value;
-                        var newPrice = calculateNumber * value;
-                        parrentRow.querySelector('#subtotal').innerHTML = Euro.format(newPrice);
-                    }
-
-                    return value;
-                }
-                sub(id);
-            }
-
-
-            var allPrice = document.querySelectorAll('#subtotal');
-
-
-            var total = 0;
-
-            allPrice.forEach(element => {
-                var removeDot = element.innerText.replace(",", ".");
-                var calculateTotalNumber = Number(removeDot.slice(2));
-                total = total + calculateTotalNumber;
-            });
-
-            totalText.innerText = Euro.format(total);
-
-
-        }
-    </script>
+    <script src="<?=PATH_DIR?>/Assets/Js/ratesform.js"></script>
 
 
 

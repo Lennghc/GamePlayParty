@@ -11,7 +11,7 @@
 <body>
     <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
     <div class="container row">
-        <div class="col-md-7 title-under-logo">Jaarbeurs Utrecht</div>
+        <div class="col-md-7 title-under-logo"><span style="font-family:sans-serif!important;"><?= !empty($informationText[2]) ? $informationText[2] : null ?></span></div>
     </div>
 
     <?php include 'Views/Layout/navbar.php';   ?>

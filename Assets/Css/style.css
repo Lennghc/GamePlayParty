@@ -4,6 +4,10 @@
 
 }
 
+* {
+    font-family: sans-serif;
+}
+
 h1 {
     color: var(--text-color-text);
     font: bold 3em/1em 'Sans Serif' !important;
@@ -71,7 +75,7 @@ body.dark {
         padding: 0;
         text-align: left;
         transform: rotate(-15deg);
-        font: bold 2em/10.5em 'sans-serif' !important;
+        font: bold 1.9em/10.5em 'sans-serif' !important;
         margin-bottom: -2.5em;
 
     }
@@ -87,7 +91,7 @@ body.dark {
         width: 40%!important;
     }
 
-    .img-gameconsole {
+    #img-gameconsole {
         display: none;
     }
 }
@@ -96,15 +100,14 @@ body.dark {
     color: #08c447 !important;
 }
 
-.img-gameconsole {
-    width: 400px;
-    height: 275px;
+.img-fluid {
+    height: 20rem;
 }
 
 .box-right {
     position: absolute;
     top: 10em;
-    right: 0;
+    left: 60rem;
 }
 
 [aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {

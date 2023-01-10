@@ -90,7 +90,6 @@ class CinemaController
         $button = $this->Display->createTimeslotButtons([$result, $reservated]);
         $result = $this->Cinema->read($cinema_id);
         $informationText = $this->Display->convertToText($result, true);
-        // $sideBar = $this->Display->convertToSidebar($result);
 
         include 'Views/Pages/cinemaDetails.php';
     }

@@ -8,18 +8,12 @@ class Display
     $this->Lounge = new Lounge();
   }
 
-  public function quantityButtonMinPlus($result)
-  {
-    $html = "";
-    if ($result->rowCount() != 0) {
-    }
-  }
 
   public function createRatesForm($result)
   {
     $html = "";
     if ($result->rowCount() != 0) {
-      $html .= "<div class='container'><form action=''>";
+      $html .= "<div class='container'><form id='rates-form' method='POST'>";
       $html .= "<h4>Tarieven per persoon</h4>";
       while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
         foreach ($row as $value) {
@@ -52,7 +46,7 @@ class Display
       </div>
       <div class='col-md-4'>
       <p class='float-right' id='total'>€ 0,00</p>
-      </div></div><div class='d-grid col-md-9'><button class='btn bg-primary bg-opacity-10'>Volgende</button></div>";
+      </div></div><div class='d-grid col-md-9'><button id='rates_button' class='btn bg-primary bg-opacity-10'>Volgende</button></div>";
       $html .= '</form></div>';
 
       return $html;
@@ -364,10 +358,12 @@ class Display
   public function convertToText($result, $sidebar = false)
   {
     $html = "";
+    $title = "";
     if ($result->rowCount() != 0) {
       $row = $result->fetchall(PDO::FETCH_ASSOC);
       foreach ($row as $value) {
         $html .= $value['cinema_desc'];
+        $title .= $value['cinema_name'];
         if ($sidebar == true) {
           $side = "";
           $reachability = json_decode($value['cinema_reachability'], true);
@@ -382,7 +378,7 @@ class Display
     }
 
     if ($sidebar == true) {
-      return [$html, $side];
+      return [$html, $side, $title];
     } else {
       return $html;
     }
