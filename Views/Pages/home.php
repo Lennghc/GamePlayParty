@@ -56,7 +56,7 @@
 
             </div>
 
-            <div class="col-md-6 box-right">
+            <div class="col-md-6 box-right-home">
                 <img src="Assets/Img/gameconsole.jpg" alt="" id="img-gameconsole" class="img-fluid"></img>
             </div>
     </div>

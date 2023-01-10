@@ -16,7 +16,7 @@
 
     <?php include 'Views/Layout/navbar.php';   ?>
 
-    <div class="container">
+    <div class="container conatiner_landing_page">
         <div class="row">
 
             <div class="col-md-9" id="information">
