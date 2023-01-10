@@ -34,7 +34,8 @@ body.dark {
     text-align: left;
     transform: rotate(-15deg);
     font: bold 3em/9em 'Open Sans';
-    color: var(--text-color-text)
+    color: var(--text-color-text);
+    margin-bottom: -7rem;
 }
 
 .home-image {
