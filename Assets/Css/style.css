@@ -87,6 +87,9 @@ body.dark {
         width: 40%!important;
     }
 
+    .img-gameconsole {
+        display: none;
+    }
 }
 
 .text-color {
@@ -95,7 +98,7 @@ body.dark {
 
 .img-gameconsole {
     width: 400px;
-    height: 250px;
+    height: 275px;
 }
 
 .box-right {
