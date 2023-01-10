@@ -36,7 +36,7 @@
                 </div>
 
                 <button class="w-100 btn btn-lg btn-success" id="signup_button" type="submit">Registreren</button>
-                <a href="index.php?con=home&op=login">Inloggen</a>
+                <a href="index.php?con=auth&op=login">Inloggen</a>
                 <a href="index.php">Ga terug</a>
                 <p class="mt-5 mb-3 text-muted">&copy; WebWorld</p>
             </form>

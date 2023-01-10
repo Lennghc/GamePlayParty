@@ -49,7 +49,7 @@
         </div>
         <hr class="footer_divider">
         <div class="footer_bottom">
-            <span class="copyright">© 2022 Webworld. Alle rechten voorbehouden</span>
+            <span class="copyright">© 2023 Webworld. Alle rechten voorbehouden</span>
             <ul class="footer-list">
                 <li class="footer_list-item">
                     <a href="https://www.facebook.com/Kinepolis.Nederland" class="footer_list-link">

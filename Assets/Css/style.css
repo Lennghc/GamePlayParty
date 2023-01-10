@@ -88,3 +88,22 @@ body.dark {
     }
 
 }
+
+.text-color {
+    color: #08c447 !important;
+}
+
+.img-gameconsole {
+    width: 400px;
+    height: 250px;
+}
+
+.box-right {
+    position: absolute;
+    top: 10em;
+    right: 0;
+}
+
+[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
+  display: none;
+}
