@@ -70,7 +70,7 @@ class LoungeController
             $cinema_id = $result[0]['cinema_id'];
 
             $res = $this->Lounge->create($lounge_nmr, $lounge_chair_places, $lounge_wheelchair_places, $lounge_screensize, $lounge_open_date, $lounge_timeslots, $cinema_id);
-            $dump = var_dump($res);
+            //$dump = var_dump($res);
         }
         include 'Views/Pages/Admin/Lounge/create.php';
     }
