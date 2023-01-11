@@ -79,7 +79,6 @@ $('#rates_button').on('click', function () {
     var inputArray = [];
     var sendData = [];
     var Data = [];
-    const continu = true;
     var inputs = document.querySelectorAll('.input-number');
     inputs.forEach(input => {
             $(input).attr("readonly", true);
@@ -114,8 +113,9 @@ $('#rates_button').on('click', function () {
             cache: false,
             success: function (data, textStatus, xhr) {
                 stopLoading('#rates_button', 'Pre-order success');
+                toast('U heeft met success een pre-order gemaatkt!', 'success', 'toast-top-right');
 
-                if (xhr.status == 201) {
+                if (xhr.status == 200) {
                     // if status is (201 created), set de input fields to empty and give one message back of success
                     // $('#rates-form')[0].reset();
                     toast('U heeft met success een pre-order gemaatkt!', 'success', 'toast-top-right');

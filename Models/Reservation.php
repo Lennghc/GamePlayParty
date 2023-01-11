@@ -11,20 +11,20 @@ class Reservation extends Main
             $sql = "SELECT cinema_name, cinema_reachability, reservated_date, reservation_date, reservated_people, reservated_timeslot, status_id, status_text, lounge_id ,cinema_id FROM reservation JOIN lounge USING(lounge_id) JOIN cinema USING(cinema_id) JOIN status USING(status_id) WHERE reservation_id = $reservation_id";
             $result = self::readData($sql);
 
-            http_response_code(201);
+            http_response_code(200);
             return $result;
         } catch (Exception $e) {
             throw $e;
         }
     }
 
-    public function setReservationPeople($encode, $reservation_id)
+    public function setReservationPeople($encode, $reservation_id, $status)
     {
         try {
-            $sql = "UPDATE Reservation SET reservated_people = '{$encode}' WHERE reservation_id = $reservation_id";
+            $sql = "UPDATE Reservation SET reservated_people = '{$encode}', status_id= '{$status}' WHERE reservation_id = $reservation_id";
             $result = self::updateData($sql);
 
-            http_response_code(201);
+            http_response_code(200);
             return $result;
         } catch (Exception $e) {
             throw $e;

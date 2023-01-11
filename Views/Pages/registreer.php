@@ -6,7 +6,7 @@
     $title = "Registreren";
     include 'Views/Layout/header.php';
     ?>
-    <link rel="stylesheet" href="<?= PATH_DIR ?>/Assets/Css/Login.css">
+    <link rel="stylesheet" href="<?= PATH_DIR ?>/Assets/Css/login.css">
 
 </head>
 

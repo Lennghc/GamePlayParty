@@ -80,7 +80,9 @@ class ReservationController
 
             $encode = json_encode($array);
 
-            $setPeople = $this->Reservation->setReservationPeople($encode, $reservation_id);
+            $status = 2;
+
+            $setPeople = $this->Reservation->setReservationPeople($encode, $reservation_id, $status);
 
             if (!isset($setPeople->errors)) {
                 echo Functions::toJSON(array(
