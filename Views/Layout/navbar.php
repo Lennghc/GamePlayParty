@@ -34,8 +34,8 @@
                     </a>
                 </li>
                 <li>
-                    <a class='icon' href='#'><i class="fa fa-phone-volume"></i>
-                        <span>Contact</span>
+                    <a class='icon' href='index.php?con=home&op=about_us'><i class="fa fa-address-card"></i>
+                        <span>About Us</span>
                     </a>
                 </li>
             </ul>

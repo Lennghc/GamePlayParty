@@ -35,6 +35,12 @@ class ReservationController
                 case 'reservDetails':
                     $this->reservDetails($id);
                     break;
+                case 'pdf':
+                    $this->createUrl();
+                    break;
+                case 'invoice':
+                    $this->invoice($id);
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -43,6 +49,49 @@ class ReservationController
             throw $e;
         }
     }
+
+    public function invoice($id)
+    {
+
+        $result = $this->Reservation->getDataforPDF($id);
+
+        if(!isset($result->errors)){
+            var_dump($result->fetchall(PDO::FETCH_ASSOC));
+        }
+    }
+
+    public function createUrl()
+    {
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
+
+        if ($role == 2 or $role == 4) {
+
+            $data = isset($_POST['data']) ? $_POST['data'] : null;
+            $reservation_id = isset($_POST['id']) ? $_POST['id'] : null;
+            $array = [];
+
+            for ($i = 0; $i < count($data); $i++) {
+                foreach ($data[$i] as $key => $value) {
+                    $array[$i]['rates_id'] = $value['rates_id'];
+                    $array[$i]['people'] = $value['people'];
+                }
+            }
+
+            $encode = json_encode($array);
+
+            $setPeople = $this->Reservation->setReservationPeople($encode, $reservation_id);
+
+            if (!isset($setPeople->errors)) {
+                echo Functions::toJSON(array(
+                    'url' => 'index.php?con=reserv&op=invoice&id=' . $reservation_id,
+                ));
+
+                exit;
+            }
+        }
+    }
+
 
     public function index()
     {

@@ -8,18 +8,12 @@ class Display
     $this->Lounge = new Lounge();
   }
 
-  public function quantityButtonMinPlus($result)
-  {
-    $html = "";
-    if ($result->rowCount() != 0) {
-    }
-  }
 
   public function createRatesForm($result)
   {
     $html = "";
     if ($result->rowCount() != 0) {
-      $html .= "<div class='container'><form action=''>";
+      $html .= "<div class='container'><form onsubmit=\"event.preventDefault();\" id='rates-form' method='POST'>";
       $html .= "<h4>Tarieven per persoon</h4>";
       while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
         foreach ($row as $value) {
@@ -30,11 +24,12 @@ class Display
                   </div>
                   <div class='col-sm-3 reservDetails-inputfield'>
                       <div class='input-group input-group-sm'>
-                          <button type='button' class='btn btn-danger sub' onclick='ratesCalculate({$value['rates_id']},1)' data-type='minus' data-field='quant[1]'>
+                          <button type='button' class='btn btn-danger minplus' onclick='ratesCalculate({$value['rates_id']},1)' data-type='minus' data-field='quant[1]'>
                               <span class='fa fa-minus'></span>
                           </button>
-                          <input type='number' id='inputField{$value['rates_id']}' name='quant[1]' class='form-control input-number' value='0' min='0' max='30'/>
-                          <button type='button' class='btn btn-success add' onclick='ratesCalculate({$value['rates_id']},2)' data-type='plus' data-field='quant[1]'>
+                          <input type='hidden' id='reservation' value='{$_GET['id']}' />
+                          <input type='number' id='inputField_{$value['rates_id']}' name='quant[1]' class='form-control input-number' data-type='{$value['rates_id']}' value='0' min='0' max='30'/>
+                          <button type='submit' class='btn btn-success minplus' onclick='ratesCalculate({$value['rates_id']},2)' data-type='plus' data-field='quant[1]'>
                               <span class='fa fa-plus'></span>
                           </button>
                       </div>
@@ -52,7 +47,7 @@ class Display
       </div>
       <div class='col-md-4'>
       <p class='float-right' id='total'>€ 0,00</p>
-      </div></div><div class='d-grid col-md-9'><button class='btn bg-primary bg-opacity-10'>Volgende</button></div>";
+      </div></div><div class='d-grid col-md-9' id='download'><button id='rates_button' class='btn bg-primary bg-opacity-10'>Volgende</button></div>";
       $html .= '</form></div>';
 
       return $html;
@@ -364,10 +359,12 @@ class Display
   public function convertToText($result, $sidebar = false)
   {
     $html = "";
+    $title = "";
     if ($result->rowCount() != 0) {
       $row = $result->fetchall(PDO::FETCH_ASSOC);
       foreach ($row as $value) {
         $html .= $value['cinema_desc'];
+        $title .= $value['cinema_name'];
         if ($sidebar == true) {
           $side = "";
           $reachability = json_decode($value['cinema_reachability'], true);
@@ -382,7 +379,7 @@ class Display
     }
 
     if ($sidebar == true) {
-      return [$html, $side];
+      return [$html, $side, $title];
     } else {
       return $html;
     }
