@@ -5,6 +5,32 @@ require_once 'Main.php';
 class Reservation extends Main
 {
 
+    public function getDataforPDF($reservation_id)
+    {
+        try {
+            $sql = "SELECT cinema_name, cinema_reachability, reservated_date, reservation_date, reservated_people, reservated_timeslot, status_id, status_text, lounge_id ,cinema_id FROM reservation JOIN lounge USING(lounge_id) JOIN cinema USING(cinema_id) JOIN status USING(status_id) WHERE reservation_id = $reservation_id";
+            $result = self::readData($sql);
+
+            http_response_code(201);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function setReservationPeople($encode, $reservation_id)
+    {
+        try {
+            $sql = "UPDATE Reservation SET reservated_people = '{$encode}' WHERE reservation_id = $reservation_id";
+            $result = self::updateData($sql);
+
+            http_response_code(201);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function setTimeSlot($timeslot, $date, $lounge_id, $user_id)
     {
         try {
@@ -74,6 +100,4 @@ class Reservation extends Main
             throw $e;
         }
     }
-
-
 }
