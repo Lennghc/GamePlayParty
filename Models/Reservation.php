@@ -21,7 +21,7 @@ class Reservation extends Main
     public function setReservationPeople($encode, $reservation_id, $status)
     {
         try {
-            $sql = "UPDATE Reservation SET reservated_people = '{$encode}', status_id= '{$status}' WHERE reservation_id = $reservation_id";
+            $sql = "UPDATE Reservation SET reservated_people = '{$encode}', status_id = $status WHERE reservation_id = $reservation_id";
             $result = self::updateData($sql);
 
             http_response_code(200);

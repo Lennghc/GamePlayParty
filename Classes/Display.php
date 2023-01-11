@@ -279,7 +279,8 @@ class Display
           $date = $rowValue['lounge_open_date'];
           $lounge_id = $rowValue['lounge_id'];
           $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : '';
-          setlocale(LC_TIME, 'NL_nl');
+          setlocale(LC_ALL, 'nl_NL');
+          
 
           if (!empty($time)) {
 
