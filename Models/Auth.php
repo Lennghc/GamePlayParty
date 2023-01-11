@@ -4,6 +4,49 @@ require_once 'Main.php';
 
 class Auth extends Main
 {
+
+    public function update($id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel, $role_id)
+    {
+        try {
+            $sql = "UPDATE Users SET user_fname = '{$fName}', user_insertion = '{$mName}', user_lname = '{$lName}', user_streetname = '{$street}', user_house_nmr = '{$house_nmr}', user_city = '{$city}', user_zipcode = '{$zipcode}', user_tel = '{$tel}', role_id = '{$role_id}' WHERE user_id = $id";
+            $result = self::updateData($sql);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function collectUserData($id, $twoData = false)
+    {
+        try {
+            $sql = "SELECT * FROM Users WHERE user_id = $id";
+            $result = self::readData($sql);
+
+
+            $sql = "SELECT * FROM Roles";
+            $result2 = self::readsData($sql);
+
+            if ($twoData == true) {
+                return $result;
+            } else {
+                return [$result, $result2];
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function all($user_id)
+    {
+        try {
+            $sql = "SELECT user_id AS ID,user_email AS Email,role_name AS Role FROM Users JOIN Roles USING(role_id) WHERE user_id != $user_id";
+            $result = self::readsData($sql);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function create($username, $email, $password)
     {
         try {
@@ -20,7 +63,6 @@ class Auth extends Main
                 $result = self::createData($sql);
 
                 http_response_code(201);
-
                 return $result;
             }
 
@@ -32,7 +74,8 @@ class Auth extends Main
         }
     }
 
-    public function login($email, $password) {
+    public function login($email, $password)
+    {
         try {
             $errors = array();
             $password = Functions::encrypt($password);
@@ -41,7 +84,7 @@ class Auth extends Main
             $result = self::readsData($sql);
             $result = $result->fetch(PDO::FETCH_ASSOC);
 
-            if( !$result ) {
+            if (!$result) {
                 $errors[] = "Password or email are incorrect.";
             } else {
                 $_SESSION['user'] = (object)array(
@@ -51,7 +94,6 @@ class Auth extends Main
                 );
 
                 setcookie('user', json_encode($_SESSION['user']));
-
                 return $result;
             }
 
@@ -60,7 +102,7 @@ class Auth extends Main
             return (object) [
                 'errors' => $errors
             ];
-        } catch (Exception $e){
+        } catch (Exception $e) {
             throw $e;
         }
     }

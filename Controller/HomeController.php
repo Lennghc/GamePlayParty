@@ -1,7 +1,5 @@
 <?php
-require_once 'Models/Auth.php';
-require_once './Classes/Functions.php';
-require_once './Classes/Validation.php';
+require_once './Models/Auth.php';
 
 class HomeController
 {
@@ -23,20 +21,23 @@ class HomeController
                 case 'index':
                     $this->index();
                     break;
-                case 'registreer':
-                    $this->registreren();
+                case 'about_us':
+                    $this->about_us();
                     break;
-                case 'handleregister':
-                    $this->handleRegister();
+                case 'cookies':
+                    $this->cookies();
                     break;
-                case 'login':
-                    $this->login();
+                case 'privacy_nl':
+                    $this->privacy_nl();
                     break;
-                case 'handlelogin':
-                    $this->handleLogin();
+                case 'privacy_en':
+                    $this->privacy_en();
                     break;
-                case 'logout':
-                    $this->logout();
+                case 'return_refund':
+                    $this->return_refund();
+                    break;
+                case 'terms_conditions':
+                    $this->terms_conditions();
                     break;
                 default:
                     http_response_code(404);
@@ -53,80 +54,38 @@ class HomeController
 
     }
 
-    public function registreren()
+    public function about_us()
     {
-        include 'Views/Pages/registreer.php';
+        include 'Views/Pages/about_us.php';
     }
 
-    public function handleRegister()
+    public function cookies() 
     {
-
-        $validation = new Validation();
-        $validation->name('email')->pattern('email')->required();
-        $validation->name('username')->pattern('alpha')->required();
-        $password = $validation->name('password')->required()->return();
-        $validation->name('password_confirmation')->required()->equal($password);
-
-        $success = $validation->isSuccess();
-
-        if ($success) {
-            $result = $this->Auth->create($success->username, $success->email, $success->password);
-
-            if (!isset($result->errors)) {
-                echo Functions::toJSON(array(
-                    'id' => $result
-                ));
-
-                exit;
-            }
-        }
-
-        http_response_code(400);
-
-        echo Functions::toJSON(array(
-            'errors' => !$success ? $validation->result() : (!empty($result->errors) ? $result->errors : null)
-        ));
+        include 'Views/Policy/termsfeed-cookies-policy-html-english.php';
     }
 
-    public function login()
+    public function privacy_nl() 
     {
-        include 'Views/Pages/login.php';
+        include 'Views/Policy/termsfeed-privacy-policy-html-dutch.php';
     }
 
-    public function handleLogin()
+    public function privacy_en() 
     {
+        include 'Views/Policy/termsfeed-privacy-policy-html-english.php';
+    }
 
-        $validation = new Validation();
-        $validation->name('email')->pattern('email')->required();
-        $validation->name('password')->required()->return();
-
-        $success = $validation->isSuccess();
-
-        if ($success) {
-            $result = $this->Auth->login($success->email, $success->password);
-
-            if (!isset($result->errors)) {
-                echo Functions::toJSON(array(
-                    'username' => $result['user_username']
-                ));
-
-                exit;
-            }
-        }
-
-        echo Functions::toJSON(array(
-            'errors' => !$success ? $validation->result() : (!empty($result->errors) ? $result->errors : null)
-        ));
+    public function return_refund() 
+    {
+        include 'Views/Policy/termsfeed-return-refund-policy-html-english.php';
     }
 
 
-    public function logout()
+    public function terms_conditions() 
     {
-        if (isset($_SESSION['user'])) {
-            unset($_SESSION['user']);
-        }
-
-        header('location: ' . PATH_URL);
+        include 'Views/Policy/termsfeed-terms-conditions-html-english.php';
     }
+
+
+    
 
 }

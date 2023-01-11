@@ -1,10 +1,16 @@
 :root {
     --text-color-text: #2c3e50;
+    --nav-color: #08c447;
+
+}
+
+* {
+    font-family: sans-serif;
 }
 
 h1 {
     color: var(--text-color-text);
-    font: bold 3em/1em 'Open Sans' !important;
+    font: bold 3em/1em 'Sans Serif' !important;
 
 }
 
@@ -31,7 +37,7 @@ body.dark {
     padding: 1em;
     text-align: left;
     transform: rotate(-15deg);
-    font: bold 3em/9em 'Open Sans';
+    font: bold 3em/9em 'sans-serif'!important;
     color: var(--text-color-text)
 }
 
@@ -44,8 +50,20 @@ body.dark {
     margin-top: -8em;
 }
 
+.bg-green {
+    background-color: var(--nav-color)!important;
+}
+
+
+#button-group {
+    display: none!important;
+}
 
 @media (max-width: 790px) {
+
+    #button-group {
+        display: inline-flex!important;
+    }
     #logo_image {
         width: 150%;
     }
@@ -57,7 +75,7 @@ body.dark {
         padding: 0;
         text-align: left;
         transform: rotate(-15deg);
-        font: bold 2em/10.5em 'Open Sans' !important;
+        font: bold 1.3em/14.5em 'sans-serif' !important;
         margin-bottom: -2.5em;
 
     }
@@ -69,4 +87,29 @@ body.dark {
         margin-top: unset;
     }
 
+    .reservDetails-inputfield{
+        width: 40%!important;
+    }
+
+    #img-gameconsole {
+        display: none;
+    }
+}
+
+.text-color {
+    color: #08c447 !important;
+}
+
+.img-fluid {
+    height: 20rem;
+}
+
+.box-right-home {
+    position: absolute;
+    top: 10em;
+    left: 60rem;
+}
+
+[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
+  display: none;
 }

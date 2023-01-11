@@ -1,0 +1,37 @@
+.box-right {
+    position: absolute;
+    top: 10em;
+    right: 0;
+}
+
+.box-left {
+    position: absolute;
+    top: 24em;
+    left: 0;
+}
+
+.stack-top {
+    z-index: 9;
+}
+
+.container-bottom {
+    margin-bottom: 14rem;
+}
+
+@media (max-width: 790px) {
+    .stack-top {
+        z-index: unset;
+    }
+
+    .box-right {
+        position: unset;
+    }
+
+    .box-left {
+        position: unset;
+    }
+
+    .container-bottom {
+        margin-bottom: 0;
+    }
+}

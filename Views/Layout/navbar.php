@@ -1,6 +1,6 @@
         <nav>
             <div class="nav-bar">
-                <div class="darkLight-searchBox">
+                <!-- <div class="darkLight-searchBox">
                     <div class="dark-light">
                         <i class="fas fa-moon moon"></i>
                         <i class="fas fa-sun sun"></i>
@@ -16,12 +16,12 @@
                             <i class="fa fa-search"></i>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </nav>
 
 
-        <div id='social-sidebar'>
+        <div id='social-sidebar' style="z-index: 10;">
             <ul>
                 <li>
                     <a class='icon' href="index.php"><i class="fa fa-home"></i>
@@ -34,13 +34,13 @@
                     </a>
                 </li>
                 <li>
-                    <a class='icon' href='#'><i class="fa fa-phone-volume"></i>
-                        <span>Contact</span>
+                    <a class='icon' href='index.php?con=home&op=about_us'><i class="fa fa-address-card"></i>
+                        <span>About Us</span>
                     </a>
                 </li>
             </ul>
         </div>
-        <script src="Assets/Js/navbar.js"></script>
+        <!-- <script src="Assets/Js/navbar.js"></script> -->
         </body>
 
         </html>

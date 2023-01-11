@@ -1,13 +1,14 @@
 <?php
-require_once 'Models/Cms.php';
-require_once './Classes/Functions.php';
-require_once './Classes/Validation.php';
 
 class CmsController
 {
     public function __construct()
     {
-        $this->Cms = new Cms();
+        $this->AuthController = new AuthController();
+        $this->ReservationController = new ReservationController();
+        $this->CinemaController = new CinemaController();
+        $this->LoungeController = new LoungeController();
+        $this->RatesController = new RatesController();
     }
     public function __destruct()
     {
@@ -17,11 +18,23 @@ class CmsController
         try {
 
             $action = isset($_GET['op']) ? $_GET['op'] : 'index';
-
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
 
             switch ($action) {
                 case 'index':
-                    $this->index();
+                    $this->ReservationController->handleRequest();
+                    break;
+                case 'lounge':
+                    $this->LoungeController->index();
+                    break;
+                case 'cinema':
+                    $this->CinemaController->readAll();
+                    break;
+                case 'users':
+                    $this->AuthController->index();
+                    break;
+                case 'rate':
+                    $this->RatesController->index();
                     break;
                 default:
                     http_response_code(404);
@@ -31,11 +44,4 @@ class CmsController
             throw $e;
         }
     }
-
-    public function index()
-    {
-        include 'Views/Pages/Admin/cms.php';
-
-    }
-
 }

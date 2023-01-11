@@ -10,7 +10,7 @@ $('#signup_button').on('click', function() {
         $("#signup_button").attr("disabled", "disabled");
 
         $.ajax({
-            url: "index.php?con=home&op=handleregister",
+            url: "index.php?con=auth&op=handleregister",
             type: "POST",
             data: {
                 username: username,
@@ -31,7 +31,7 @@ $('#signup_button').on('click', function() {
                     toast('Registration successful!', 'success', 'toast-top-right');
 
                     setTimeout(() => {
-                        window.location.replace('index.php?con=home&op=login');
+                        window.location.replace('index.php?con=auth&op=login');
                     }, 2000);
 
                 }
@@ -68,7 +68,7 @@ $('#login_button').on('click', function () {
         $("#login_button").attr("disabled", "disabled");
 
         $.ajax({
-            url: "index.php?con=home&op=handlelogin",
+            url: "index.php?con=auth&op=handlelogin",
             type: "POST",
             data: {
                 email: email,
@@ -79,7 +79,7 @@ $('#login_button').on('click', function () {
             },
             cache: false,
             success: function (data, textStatus, xhr)  {
-                stopLoading('#login_button', 'Login');
+                stopLoading('#login_button', 'Inloggen');
                 toast(`Welcome back, ${data.username}`, 'success', 'toast-top-right');
 
                 setTimeout(() => {
@@ -87,7 +87,7 @@ $('#login_button').on('click', function () {
                 }, 2000);
             },
             error: function (data) {
-                stopLoading('#login_button', 'Login');
+                stopLoading('#login_button', 'Inloggen');
                 $("#login_button").removeAttr("disabled");
 
                 if(data.responseJSON && data.responseJSON.errors) {
@@ -119,7 +119,7 @@ const stopLoading = function(selector, value) {
 const doAuthLoading = function(selector) {
     document.querySelector(selector).innerHTML = `
     <div id="loading" class="spinner-border text-dark" style="width: 1.5rem; height: 1.5rem; border-width: 0.2em;" role="status">
-        <span class="sr-only">Loading...</span>
+        <span class="visually-hidden">Loading...</span>
     </div>
 `;
 }
