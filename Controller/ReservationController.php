@@ -55,7 +55,7 @@ class ReservationController
 
         $result = $this->Reservation->getDataforPDF($id);
 
-        if(!isset($result->errors)){
+        if (!isset($result->errors)) {
             var_dump($result->fetchall(PDO::FETCH_ASSOC));
         }
     }
@@ -65,32 +65,28 @@ class ReservationController
         $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
         $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
 
-        if ($role == 2 or $role == 4) {
+        $data = isset($_POST['data']) ? $_POST['data'] : null;
+        $reservation_id = isset($_POST['id']) ? $_POST['id'] : null;
+        $array = [];
 
-            $data = isset($_POST['data']) ? $_POST['data'] : null;
-            $reservation_id = isset($_POST['id']) ? $_POST['id'] : null;
-            $array = [];
-
-            for ($i = 0; $i < count($data); $i++) {
-                foreach ($data[$i] as $key => $value) {
-                    $array[$i]['rates_id'] = $value['rates_id'];
-                    $array[$i]['people'] = $value['people'];
-                }
+        for ($i = 0; $i < count($data); $i++) {
+            foreach ($data[$i] as $key => $value) {
+                $array[$i]['rates_id'] = $value['rates_id'];
+                $array[$i]['people'] = $value['people'];
             }
+        }
 
-            $encode = json_encode($array);
+        $encode = json_encode($array);
 
-            $status = 2;
 
-            $setPeople = $this->Reservation->setReservationPeople($encode, $reservation_id, $status);
+        $setPeople = $this->Reservation->setReservationPeople($encode, $reservation_id);
 
-            if (!isset($setPeople->errors)) {
-                echo Functions::toJSON(array(
-                    'url' => 'index.php?con=reserv&op=invoice&id=' . $reservation_id,
-                ));
+        if (!isset($setPeople->errors)) {
+            echo Functions::toJSON(array(
+                'url' => 'index.php?con=reserv&op=invoice&id=' . $reservation_id,
+            ));
 
-                exit;
-            }
+            exit;
         }
     }
 

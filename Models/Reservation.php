@@ -18,13 +18,13 @@ class Reservation extends Main
         }
     }
 
-    public function setReservationPeople($encode, $reservation_id, $status)
+    public function setReservationPeople($encode, $reservation_id)
     {
         try {
-            $sql = "UPDATE Reservation SET reservated_people = '{$encode}', status_id = $status WHERE reservation_id = $reservation_id";
+            $sql = "UPDATE Reservation SET reservated_people = '{$encode}' WHERE reservation_id = $reservation_id";
             $result = self::updateData($sql);
 
-            http_response_code(200);
+            http_response_code(201);
             return $result;
         } catch (Exception $e) {
             throw $e;
