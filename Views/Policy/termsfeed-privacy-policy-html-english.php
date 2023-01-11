@@ -5,7 +5,7 @@
         $title = "privacy_en";
         include 'Views/Layout/header.php';
         ?>
-    
+
     </head>
 <body>
 <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
@@ -76,8 +76,8 @@
             </ul>
 
             <h2>Use of Data</h2>
-                
-            <p>GamePlayParty uses the collected data for various purposes:</p>    
+
+            <p>GamePlayParty uses the collected data for various purposes:</p>
             <ul>
                 <li>To provide and maintain the Service</li>
                 <li>To notify you about changes to our Service</li>
@@ -115,7 +115,7 @@
             <p>We may employ third party companies and individuals to facilitate our Service ("Service Providers"), to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used.</p>
             <p>These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
 
-            
+
 
 
             <h2>Links to Other Sites</h2>
@@ -137,9 +137,8 @@
             <h2>Contact Us</h2>
             <p>If you have any questions about this Privacy Policy, please contact us:</p>
             <ul>
-                    <li>By email: info@gameplayparty.nl</li>
-                    
-                    </ul>
+                <li>By email: <a href="mailto:gameplayparty@gmail.com">info@gameplayparty.nl</a></li>
+            </ul>
         </div>
     </div>
     <?php include 'Views/Layout/footer.php'; ?>

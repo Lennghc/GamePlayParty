@@ -45,10 +45,10 @@
 
                     <a class="" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                     <span class="collapsed">
-                            Show more
-                    </span>    
+                            Lees meer
+                    </span>
                     <span class="expanded">
-                            Show Less
+                            Lees minder
                     </span>
                     </a>
 

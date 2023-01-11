@@ -5,7 +5,7 @@
         $title = "return_refund";
         include 'Views/Layout/header.php';
         ?>
-    
+
     </head>
 <body>
 <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
@@ -18,7 +18,7 @@
     <div class="container conatiner_landing_page">
 
         <div class="row mb-4">
-            
+
             <p>Thank you for shopping at GamePlayParty.</p>
 
             <p>Please read this policy carefully. This is the Return and Refund Policy of GamePlayParty. The Return and Refund Policy  for GamePlayParty has been created with the help of <a href="https://www.termsfeed.com/">TermsFeed</a>.</p>
@@ -35,7 +35,8 @@
 
             <ul>
             <li>
-                <p>By email: annuleer@gameplayparty.nl</p>
+
+                By email: <a href="mailto:annuleer@gameplayparty.nl">annuleer@gameplayparty.nl</a>
             </li>
             </ul>
 </div>

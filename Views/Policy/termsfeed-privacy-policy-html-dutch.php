@@ -5,7 +5,7 @@
         $title = "privacy_nl";
         include 'Views/Layout/header.php';
         ?>
-    
+
     </head>
 <body>
     <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
@@ -76,8 +76,8 @@
                 <li><strong>Veiligheidscookies.</strong> Wij gebruiken Veiligheidscookies voor veiligheidsdoeleinden.</li>
             </ul>
 
-            <h2>Gebruik van gegevens</h2> 
-            <p>GamePlayParty gebruikt de verzamelde gegevens voor uiteenlopende doeleinden:</p>    
+            <h2>Gebruik van gegevens</h2>
+            <p>GamePlayParty gebruikt de verzamelde gegevens voor uiteenlopende doeleinden:</p>
             <ul>
                 <li>Om onze Dienst te leveren en te onderhouden</li>
                 <li>Om u wijzigingen in onze Dienst te melden</li>
@@ -116,7 +116,7 @@
             <p>Wij kunnen externe bedrijven en personen aanstellen om onze Dienst ("Dienstverleners") te vereenvoudigen, om de Dienst te leveren in onze naam, om diensten uit te voeren in het kader van onze Dienst of om ons te helpen bij de analyse van hoe onze Dienst wordt gebruikt.</p>
             <p>Deze externe partijen hebben enkel toegang tot uw Persoonsgegevens om deze taken uit te voeren in onze naam en zij mogen deze niet openbaar maken aan anderen of ze gebruiken voor andere doeleinden.</p>
 
-            
+
 
 
             <h2>Links naar andere sites</h2>
@@ -138,9 +138,8 @@
             <h2>Contact opnemen</h2>
             <p>Als u vragen hebt over dit Privacybeleid kunt u contact opnemen met ons:</p>
             <ul>
-                    <li>Via email: info@gameplayparty.nl</li>
-                    
-                    </ul>
+                <li>Via email: <a href="mailto:gameplayparty@gmail.com">info@gameplayparty.nl</a></li>
+            </ul>
         </div>
     </div>
     <?php include 'Views/Layout/footer.php'; ?>
