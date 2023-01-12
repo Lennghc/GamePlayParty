@@ -1,6 +1,7 @@
 <?php
 require_once './Models/Cinema.php';
 require_once './Models/Lounge.php';
+require_once './Models/FileHandling.php';
 require_once './Models/Reservation.php';
 
 class CinemaController
@@ -9,6 +10,7 @@ class CinemaController
     {
         $this->Cinema = new Cinema();
         $this->Lounge = new Lounge();
+        $this->File = new FileHandling();
         $this->Display = new Display();
         $this->Reservation = new Reservation();
         $this->Auth = new Auth();
@@ -142,6 +144,7 @@ class CinemaController
             if (isset($_POST['submit'])) {
                 $cinema_name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
                 $cinema_desc = isset($_POST['cinema_desc']) ? $_POST['cinema_desc'] : null;
+                $cinema_img = isset($_POST['cinema_img']) ? $_POST['cinema_img'] : null;
 
                 $open_dates = isset($_POST['open_dates']) ? $_POST['open_dates'] : null;
                 $adres = isset($_POST['adres']) ? $_POST['adres'] : null;
@@ -168,10 +171,10 @@ class CinemaController
 
 
                 $encodeArray = json_encode($array);
+                $this->File->imageUpload($_FILES);
+                $this->Cinema->update($user_id, $cinema_name, $cinema_desc, $cinema_img, $encodeArray);
 
-                $this->Cinema->update($user_id, $cinema_name, $cinema_desc, $encodeArray);
-
-                header("Location: index.php?con=cinema&op=update");
+                //header("Location: index.php?con=cinema&op=update");
             }
 
             include 'Views/Pages/Admin/Cinema/update.php';
@@ -193,4 +196,5 @@ class CinemaController
         header('Location: index.php?con=cms&op=cinema');
         include 'Views/Pages/Admin/Cinema/index.php';
     }
+
 }

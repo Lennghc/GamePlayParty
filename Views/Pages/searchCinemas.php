@@ -8,6 +8,13 @@
     ?>
 </head>
 
+<style>
+    a {
+        text-decoration-line: none;
+        color: #000000;
+    }
+</style>
+
 <body>
     <img src="Assets/Img/gpp.svg" id="logo_image" alt="">
     <div class="container row">
@@ -16,7 +23,7 @@
 
     <?php include 'Views/Layout/navbar.php'; ?>
 
-    <div class="container">
+    <div class="container conatiner_landing_page">
 
         <div class="row mb-4">
 
