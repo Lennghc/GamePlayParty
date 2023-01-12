@@ -36,9 +36,8 @@ body.dark {
 }
 
 .title-under-logo {
-    padding-top: 5em;
+    padding-top: 5.7rem;
     float: left;
-    padding: 1em;
     text-align: left;
     transform: rotate(-15deg);
     font: bold 3em/9em 'sans-serif' !important;
@@ -106,14 +105,15 @@ body.dark {
     color: #08c447 !important;
 }
 
-.img-fluid {
-    height: 20rem;
+
+#img-gameconsole {
+    height: 20rem!important;
 }
 
 .box-right-home {
     position: absolute;
     top: 10em;
-    left: 60rem;
+    left: 72rem;
 }
 
 [aria-expanded="false"]>.expanded,
