@@ -255,11 +255,27 @@ class Display
 					$cinema_img = $value['cinema_img'];
 
 					if ($item < $result->rowCount()) {
-						
-						$html .= "<li class='list-group-item'><a href='index.php?con=cinema&op=details&id={$value['cinema_id']}'>{$value['cinema_name']}";
+
+						$html .= "<section class='img-list'>";
+						$html .= 	"<ol class='img-list-parent'>";
+						$html .= 		"<li class='img-list-item'>";
+						$html .= 		"<a href='index.php?con=cinema&op=details&id={$value['cinema_id']}>";
+						$html .= 		"<div class='img-list-gutter'>";
+						$html .= 			"<div class='img-list-image'>";
 						if (!empty($cinema_img)) {
-							$html .= "<img src='Assets/Img/uploads/{$value['cinema_img']}' width='250' heigt='250'></a></li>";
-						}				
+							$html .= "<img src='Assets/Img/uploads/{$value['cinema_img']}' width='350' height='150'>";
+						} else {
+							$html .= "<img class='img-list-src' src='https://via.placeholder.com/350x150'>";
+						}	
+						$html .= 			"</div>";
+						$html .= 			"<div class='img-list-text'>";
+						$html .= 			"{$value['cinema_name']}";
+						$html .= 			"</div>";
+						$html .= 		"</div>";
+						$html .= 		"</a></li>";
+						$html .= 	"</ol>";
+						$html .= "</section>";
+						
 						$item++;
 						$html .= ($item % 5 == 0) ? '</ul></div><div class="col-lg-3"><ul class="list-group">' : "";
 					}
