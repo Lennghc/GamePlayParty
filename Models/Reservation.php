@@ -8,7 +8,7 @@ class Reservation extends Main
     public function getDataforPDF($reservation_id)
     {
         try {
-            $sql = "SELECT cinema_name, cinema_reachability, reservated_date, reservation_date, reservated_people, reservated_timeslot, status_id, status_text, lounge_id ,cinema_id FROM reservation JOIN lounge USING(lounge_id) JOIN cinema USING(cinema_id) JOIN status USING(status_id) WHERE reservation_id = $reservation_id";
+            $sql = "SELECT cinema_name, cinema_reachability, reservated_date, reservation_date, reservated_people, reservated_timeslot, status_id, status_text, lounge_id ,cinema_id,reservation_id,user_data FROM reservation JOIN lounge USING(lounge_id) JOIN cinema USING(cinema_id) JOIN status USING(status_id) WHERE reservation_id = $reservation_id";
             $result = self::readData($sql);
 
             http_response_code(200);

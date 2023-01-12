@@ -53,7 +53,11 @@ class ReservationController
         $result = $this->Reservation->getDataforPDF($id);
 
         if (!isset($result->errors)) {
-            var_dump($result->fetchall(PDO::FETCH_ASSOC));
+            $data = $result->fetchall(PDO::FETCH_ASSOC);
+            echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+            include('Views/Pages/invoice.php');
         }
     }
 
