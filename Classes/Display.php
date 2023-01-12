@@ -8,12 +8,55 @@ class Display
 		$this->Lounge = new Lounge();
 	}
 
+	public function createCinemaList($result)
+	{
+
+		$html = "";
+
+		if ($result->rowCount() != 0) {
+			$html .= "<section id='list'>
+            <div class='container col-md-12'>
+                <div class='row mt-4'>
+                    <div class='col-md-4 mt-5'>";
+			$item = 0;
+
+			while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+
+				if ($item < $result->rowCount()) {
+					$html .= "<div class='list-item'>
+										<div class='list-img'>";
+
+					if (!empty($row['cinema_img'])) {
+						$html .= "<img src='Assets/Img/uploads/{$row['cinema_img']}'>";
+					} else {
+						$html .= "<img src='https://via.placeholder.com/350x150'>";
+					}
+
+					$html .= "</div>
+            <div class='list-info'>
+              <h6>{$row['cinema_name']}</h6>
+            </div>
+            <div class='list-ticket'>";
+					$html .= "<a class='list-button' href='index.php?con=cinema&op=details&id={$row['cinema_id']}'>";
+					$html .= "<i id='fa' class='fa fa-arrow-left'></i></a>
+            </div>
+          </div>";
+					$item++;
+					$html .= ($item % 5 == 0) ? '</div><div class="col-md-4 mt-5">' : "";
+				}
+			}
+
+			$html .= "</div></div></div></div></section>";
+		}
+		return $html;
+	}
+
 
 	public function createRatesForm($result)
 	{
 		$html = "";
 		if ($result->rowCount() != 0) {
-			$html .= "<div class='container'><form onsubmit=\"event.preventDefault();\" id='rates-form' method='POST'>";
+			$html .= "<div class='container'><form onsubmit=\"list.prlistDefault();\" id='rates-form' method='POST'>";
 			$html .= "<h4>Tarieven per persoon</h4>";
 			while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
 				foreach ($row as $value) {
@@ -58,7 +101,7 @@ class Display
 		$html = "";
 
 		$html .= "<div class='container'>
-          <form onsubmit=\"event.preventDefault();\" id='rates-form'  method='POST'>
+          <form onsubmit=\"list.prlistDefault();\" id='rates-form'  method='POST'>
           <div class='d-flex justify-content-between'>
           <h4>Gegevens gast</h4>
             <h7>Tijds blok <span id='time'>{$time}</span></h7>
@@ -242,51 +285,7 @@ class Display
 		}
 	}
 
-	public function createCinemaList($result)
-	{
-		$html = "";
-		if ($result->rowCount() != 0) {
-			while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
-				$html .= '<div class="col-lg-3"><ul class="list-group">';
-				$item = 0;
-				foreach ($row as $value) {
-					$cinema_name = $value['cinema_name'];
-					$cinema_id = $value['cinema_id'];
-					$cinema_img = $value['cinema_img'];
 
-					if ($item < $result->rowCount()) {
-
-						$html .= "<section class='img-list'>";
-						$html .= 	"<ol class='img-list-parent'>";
-						$html .= 		"<li class='img-list-item'>";
-						$html .= 		"<a href='index.php?con=cinema&op=details&id={$value['cinema_id']}>";
-						$html .= 		"<div class='img-list-gutter'>";
-						$html .= 			"<div class='img-list-image'>";
-						if (!empty($cinema_img)) {
-							$html .= "<img src='Assets/Img/uploads/{$value['cinema_img']}' width='350' height='150'>";
-						} else {
-							$html .= "<img class='img-list-src' src='https://via.placeholder.com/350x150'>";
-						}	
-						$html .= 			"</div>";
-						$html .= 			"<div class='img-list-text'>";
-						$html .= 			"{$value['cinema_name']}";
-						$html .= 			"</div>";
-						$html .= 		"</div>";
-						$html .= 		"</a></li>";
-						$html .= 	"</ol>";
-						$html .= "</section>";
-						
-						$item++;
-						$html .= ($item % 5 == 0) ? '</ul></div><div class="col-lg-3"><ul class="list-group">' : "";
-					}
-				}
-				$html .= '</div>';
-			}
-		} else {
-			$html .= '<h2>Geen data</h2>';
-		}
-		return $html;
-	}
 
 	public function convertToSidebar($result)
 	{

@@ -8,7 +8,7 @@ class Cinema extends Main
     public function all()
     {
         try {
-            $sql = "SELECT cinema_id,cinema_name, cinema_img FROM Cinema WHERE is_active = 1";
+            $sql = "SELECT cinema_id,cinema_name, cinema_img FROM Cinema WHERE is_active = 1 ORDER BY cinema_name ASC";
             $results = self::readsData($sql);
             return $results;
         } catch (Exception $e) {

@@ -25,15 +25,10 @@
 
     <div class="container conatiner_landing_page">
 
-        <div class="row mb-4">
-
-            <?= !empty($list) ? $list : null ?>
-
-        </div>
+        <?= !empty($list) ? $list : null  ?>
 
     </div>
-
-    <?php include 'Views/Layout/footer.php'; ?>
+    <?php include 'Views/Layout/footer.php';  ?>
 
 </body>
 

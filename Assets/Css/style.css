@@ -107,7 +107,7 @@ body.dark {
 
 
 #img-gameconsole {
-    height: 20rem!important;
+    height: 20rem !important;
 }
 
 .box-right-home {
@@ -116,75 +116,101 @@ body.dark {
     left: 72rem;
 }
 
-<<<<<<< Updated upstream
 [aria-expanded="false"]>.expanded,
 [aria-expanded="true"]>.collapsed {
     display: none;
-=======
-[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
-  display: none;
 }
 
-.img-list {
-margin:0 auto;
+
+
+
+
+#list .list-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    max-height: 100%;
+    max-height: 90px;
+    transition: all .3s;
+
+    display: flex;
 }
 
-.img-list ol,
-.img-list ul {
-list-style:none;
+#list .list-item:hover {
+    transform: scale(1.02);
 }
 
-.img-list-gutter {
-padding:0;
+#list .list-img {
+    position: relative;
+    width: 20%;
 }
 
-.img-list-item {
-border-bottom:1px solid #c2c2c2;
-padding-bottom:2em;
-margin-bottom:2em;
+#list .list-img img {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    transform: scale(1.2);
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1.0) 30%, transparent 90%);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1.0) 30%, transparent 90%);
 }
 
-.img-list-text {
-padding: 1em 0;
+
+
+#list .list-info {
+    width: 50%;
+    padding: 10px;
 }
 
-@media (min-width:600px) {
-
-.image-list-gutter {
-    display:table;
+#list .list-info h6 {
+    text-transform: capitalize;
+    color: #000;
 }
 
-.img-list-image,
-.img-list-text {
-    display:table-cell;
-    vertical-align:top;
+#list .list-ticket {
+    margin-left: auto;
+    margin-right: 20px;
+    align-self: center;
 }
 
-.img-list-text {
-    padding: 0 0 0 38px;
+#list .list-ticket .list-button {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    background: #343a40;
+    box-shadow: 0 0 3px gray;
+    transition: all .3s;
 }
 
-.img-list-image {
-    min-width:280px;
+#fa {
+    font-size: 20px;
 }
 
-.img-list-src {
-    width:100%;
-    max-width:356px;
+#list .list-ticket .list-button:hover,
+#list .list-ticket .list-button:focus {
+    transform: scale(1.2) skew(-10deg);
+    box-shadow: 2px 5px 10px #343a404e;
+    border-radius: 15%;
 }
 
-}
+@media (max-width: 991.98px) {
 
-@media (min-width:764px) {
+    #list .list-img {
+        width: 23%;
+    }
 
-.img-list-text {
-    padding: 0 0 0 48px;
-}
+    #list .list-date {
+        transform: scale(0.7);
+        top: -3px;
+        left: 1px
+    }
 
-.img-list-image {
-    min-width:356px;
-    max-width:356px;
-}
-
->>>>>>> Stashed changes
+    #list .list-info .badge {
+        font-size: 50%;
+        line-height: unset;
+    }
 }
