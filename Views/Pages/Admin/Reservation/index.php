@@ -14,7 +14,7 @@
     <?php include './Views/Pages/Admin/Layout/sidebar.php' ?>
 
     <div class="col py-3">
-        <h2>Reserveringen</h2>
+        <h2>Reserveringen overzicht</h2>
         <?= !empty($table) ? $table : null ?>
 
     </div>

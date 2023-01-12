@@ -39,7 +39,7 @@ class Auth extends Main
     public function all($user_id)
     {
         try {
-            $sql = "SELECT user_id AS ID,user_email AS Email,role_name AS Role FROM Users JOIN Roles USING(role_id) WHERE user_id != $user_id";
+            $sql = "SELECT user_id AS ID,user_email AS Email FROM Users WHERE user_id != $user_id";
             $result = self::readsData($sql);
             return $result;
         } catch (Exception $e) {

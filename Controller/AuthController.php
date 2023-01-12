@@ -143,20 +143,15 @@ class AuthController
 
     public function update($id)
     {
-        // $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
 
-        // if ($role == 4) {
-        //     $result = $this->Auth->collectUserData($id);
-        //     $updateForm = $this->Display->createUserForm($result, true, "index.php?con=users&op=update&id={$id}");
-        // } elseif ($role == 3) {
-        //     $result = $this->Auth->collectUserData($id);
-        //     $updateForm = $this->Display->createUserForm($result, false, "index.php?con=users&op=update&id={$id}");
-
-        // } else {
-        //     Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
-        //     header('Location: index.php');
-        //     exit();
-        // }
+        if ($role == 4) {
+            $result = $this->Auth->collectUserData($id);
+        } else {
+            Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
+            header('Location: index.php');
+            exit();
+        }
 
         // if (isset($_POST['submit'])) {
         //     $fName = isset($_POST['fName']) ? $_POST['fName'] : null;
@@ -176,7 +171,7 @@ class AuthController
         //     exit();
         // }
 
-        // include 'Views/Pages/Admin/Users/update.php';
+        include 'Views/Pages/Admin/Users/update.php';
     }
 
     public function logout()

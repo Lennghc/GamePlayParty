@@ -15,7 +15,7 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a href="<?= PATH_DIR ?>/" class="nav-link align-middle px-0">
-                            <i class="fa fa-house"></i> <span class="ms-1 d-none d-sm-inline text-white">Home</span>
+                            <i class="fa fa-circle-chevron-left"></i> <span class="ms-1 d-none d-sm-inline text-white">Terug</span>
                         </a>
                     </li>
                     <li>
@@ -25,7 +25,7 @@
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li><a href="index.php?con=cms&op=lounge" class="nav-link px-0 align-middle"><i class="fa fa-video"></i> <span class="ms-1 d-none d-sm-inline text-white">Zalen</span></a></li>' : null ?>
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li><a href="index.php?con=cms&op=rate" class="nav-link px-0 align-middle"><i class="fa fa-money-bill-wave"></i> <span class="ms-1 d-none d-sm-inline text-white">Tarieven</span></a></li>' : null ?>
 
-                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=users" class="nav-link px-0 align-middle"><i class="fa fa-users"></i> <span class="ms-1 d-none d-sm-inline text-white">Gebruikers</span></a></li>' : null ?>
+                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=users" class="nav-link px-0 align-middle"><i class="fa fa-users"></i> <span class="ms-1 d-none d-sm-inline text-white">Bioscoop Eigenaren</span></a></li>' : null ?>
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=cinema" class="nav-link px-0 align-middle"><i class="fa fa-video"></i> <span class="ms-1 d-none d-sm-inline text-white">Bioscopen</span></a></li>' : null ?>
 
 
@@ -38,13 +38,8 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                         <!-- <li><a class="dropdown-item" href="#">New project...</a></li> -->
-                        <li><a class="dropdown-item" href="index.php?con=users&op=update">Profiel settings</a></li>
-                        <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li><a class="dropdown-item" href="index.php?con=cinema&op=update">Bioscoop pagina</a></li>' : null ?>
+                        <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li><a class="dropdown-item" href="index.php?con=cinema&op=update">Bioscoop pagina</a></li><li><hr class="dropdown-divider"></li>' : null ?>
 
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
                         <li><a class="dropdown-item" href="index.php?con=auth&op=logout">Uitloggen</a></li>
                     </ul>
                 </div>
