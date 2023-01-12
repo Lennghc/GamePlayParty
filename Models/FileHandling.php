@@ -4,7 +4,7 @@ class FileHandling{
 public function ImageUpload(){
 
     $randomhash = md5(date('YmdFhms'));
-    $target_dir = "Assets/Img/uploads";
+    $target_dir = "Assets/Img/uploads/";
     $imageFileType = strtolower(pathinfo($_FILES['cinema_img']['name'],PATHINFO_EXTENSION));
     $image = $randomhash.".".$imageFileType;
     $target_file = $target_dir . basename($image);
