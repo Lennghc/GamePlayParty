@@ -86,8 +86,7 @@ class CinemaController
     public function details($cinema_id)
     {
         $result = $this->Lounge->timeSlots($cinema_id);
-        $reservated = $this->Reservation->getReservatedTimeSlots();
-        $button = $this->Display->createTimeslotButtons([$result, $reservated]);
+        $button = $this->Display->createTimeslotButtons($result);
         $result = $this->Cinema->read($cinema_id);
         $informationText = $this->Display->convertToText($result, true);
 
@@ -138,7 +137,6 @@ class CinemaController
                 $reach = json_decode($dataCinema[0]['cinema_reachability'], true);
             }
 
-            // var_dump($this->Cinema->read($user_id));
 
 
             if (isset($_POST['submit'])) {

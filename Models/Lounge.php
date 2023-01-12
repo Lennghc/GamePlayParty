@@ -37,21 +37,6 @@ class Lounge extends Main
         }
     }
 
-    public function removeTime($lounge_id, $timeslots)
-    {
-        try {
-            if ($timeslots != NULL) {
-                $encode = json_encode($timeslots);
-            } else {
-                $encode = NULL;
-            }
-            $sql = "UPDATE `Lounge` set `lounge_timeslots` = '$encode' WHERE lounge_id = $lounge_id";
-            $results = self::updateData($sql);
-            return $results;
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
 
     public function getCinemaIDByLoungeID($lounge_id)
     {

@@ -20,7 +20,7 @@
             <div>
                 <h6 class="footer_title">Pagina's</h6>
                 <ul class="footer_list">
-                        <?= isset($_SESSION['user']) ? '<li class="footer_list-item"><a href="index.php?con=auth&op=logout" class="footer_list-link">Uitloggen</a>' : '<a href="index.php?con=auth&op=registreer" class="footer_list-link">Registreren</a></li>'?>
+                        <?= isset($_SESSION['user']) ? '<li class="footer_list-item"><a href="index.php?con=auth&op=logout" class="footer_list-link">Uitloggen</a>' : ''?>
                         <?= isset($_SESSION['user']) ? '' : '<li class="footer_list-item"><a href="index.php?con=auth&op=login" class="footer_list-link">Inloggen</a></li>'?>
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li class="footer_list-item"><a href="index.php?con=cms" class="footer_list-link">Beheer paneel</a></li>' : null ?>
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 3 ? '<li class="footer_list-item"><a href="index.php?con=cms" class="footer_list-link">Beheer paneel</a></li>' : null ?>

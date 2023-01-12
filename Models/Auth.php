@@ -59,7 +59,7 @@ class Auth extends Main
                 $errors[] = "username or email is already linked to a account.";
             } else {
                 $password = Functions::encrypt($password);
-                $sql = "INSERT INTO `Users` (`user_username`, `user_email`, `user_password`, `role_id`) VALUES ('{$username}','{$email}', '{$password}', 1)";
+                $sql = "INSERT INTO `Users` (`user_username`, `user_email`, `user_password`, `role_id`) VALUES ('{$username}','{$email}', '{$password}', 3)";
                 $result = self::createData($sql);
 
                 http_response_code(201);
