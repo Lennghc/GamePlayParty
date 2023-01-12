@@ -8,7 +8,7 @@ class Cinema extends Main
     public function all()
     {
         try {
-            $sql = "SELECT cinema_id,cinema_name FROM Cinema WHERE is_active = 1";
+            $sql = "SELECT cinema_id,cinema_name, cinema_img FROM Cinema WHERE is_active = 1";
             $results = self::readsData($sql);
             return $results;
         } catch (Exception $e) {
@@ -61,10 +61,10 @@ class Cinema extends Main
             throw $e;
         }
     }
-    public function update($user_id, $cinema_name, $cinema_desc, $reachability)
+    public function update($user_id, $cinema_name, $cinema_desc, $cinema_img, $reachability)
     {
         try {
-            $sql = "UPDATE Cinema SET `cinema_name` = '{$cinema_name}', `cinema_desc` = '{$cinema_desc}', `cinema_reachability` = '$reachability' WHERE user_id = $user_id";
+            $sql = "UPDATE Cinema SET `cinema_name` = '{$cinema_name}', `cinema_desc` = '{$cinema_desc}', `cinema_img` = '{$cinema_img}', `cinema_reachability` = '$reachability' WHERE user_id = $user_id";
             $result = self::updateData($sql);
             return $result;
         } catch (Exception $e) {

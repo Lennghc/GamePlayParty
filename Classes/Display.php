@@ -252,9 +252,14 @@ class Display
 				foreach ($row as $value) {
 					$cinema_name = $value['cinema_name'];
 					$cinema_id = $value['cinema_id'];
+					$cinema_img = $value['cinema_img'];
 
 					if ($item < $result->rowCount()) {
-						$html .= "<li class='list-group-item'><a href='index.php?con=cinema&op=details&id={$value['cinema_id']}'>{$value['cinema_name']}</a></li>";
+						
+						$html .= "<li class='list-group-item'><a href='index.php?con=cinema&op=details&id={$value['cinema_id']}'>{$value['cinema_name']}";
+						if (!empty($cinema_img)) {
+							$html .= "<img src='Assets/Img/uploads/{$value['cinema_img']}' width='250' heigt='250'></a></li>";
+						}				
 						$item++;
 						$html .= ($item % 5 == 0) ? '</ul></div><div class="col-lg-3"><ul class="list-group">' : "";
 					}
