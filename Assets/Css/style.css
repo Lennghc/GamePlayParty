@@ -4,6 +4,10 @@
 
 }
 
+body {
+    overflow-x: hidden;
+}
+
 * {
     font-family: sans-serif;
 }
@@ -37,7 +41,7 @@ body.dark {
     padding: 1em;
     text-align: left;
     transform: rotate(-15deg);
-    font: bold 3em/9em 'sans-serif'!important;
+    font: bold 3em/9em 'sans-serif' !important;
     color: var(--text-color-text)
 }
 
@@ -51,19 +55,20 @@ body.dark {
 }
 
 .bg-green {
-    background-color: var(--nav-color)!important;
+    background-color: var(--nav-color) !important;
 }
 
 
 #button-group {
-    display: none!important;
+    display: none !important;
 }
 
 @media (max-width: 790px) {
 
     #button-group {
-        display: inline-flex!important;
+        display: inline-flex !important;
     }
+
     #logo_image {
         width: 150%;
     }
@@ -83,12 +88,13 @@ body.dark {
     .home-image {
         margin: 0;
     }
-    .conatiner_landing_page{
+
+    .conatiner_landing_page {
         margin-top: unset;
     }
 
-    .reservDetails-inputfield{
-        width: 40%!important;
+    .reservDetails-inputfield {
+        width: 40% !important;
     }
 
     #img-gameconsole {
@@ -110,6 +116,7 @@ body.dark {
     left: 60rem;
 }
 
-[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
-  display: none;
+[aria-expanded="false"]>.expanded,
+[aria-expanded="true"]>.collapsed {
+    display: none;
 }
