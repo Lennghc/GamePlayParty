@@ -102,7 +102,7 @@ $('#rates_button').on('click', function () {
         key: key
     }
 
-    if (fName != "" && mName != "" && lName != "" && street != "" && houseNumber != "" && zipCode != "" && city != "" && tel != "" && email != "") {
+    if (fName != "" && lName != "" && street != "" && houseNumber != "" && zipCode != "" && city != "" && tel != "" && email != "") {
         var userArray = [];
         userArray = {
             fName: fName,

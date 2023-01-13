@@ -3,6 +3,32 @@ require_once 'Main.php';
 
 class Rates extends Main
 {
+
+    public function calculate($id, $people)
+    {
+        try {
+            $sql = "SELECT $people * rates_price, rates_desc, rates_price FROM Rates WHERE rates_id = $id";
+            $result = self::readData($sql);
+
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+
+    public function allRatesOfOneCinema($cinema_id)
+    {
+        try {
+            $sql = "SELECT rates_desc,rates_price FROM Rates WHERE cinema_id = $cinema_id";
+            $result = self::readData($sql);
+
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function ownRates($user_id)
     {
         try {

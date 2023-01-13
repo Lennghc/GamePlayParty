@@ -53,9 +53,23 @@ class ReservationController
         $result = $this->Reservation->getDataforPDF($id);
 
         if (!isset($result->errors)) {
+            // caculate rates in php 
             $data = $result->fetchall(PDO::FETCH_ASSOC);
+            $rates = json_decode($data[0]['reservated_people'], true);
+            $ratesNewArray = [];
+            foreach ($rates as $value) {
+                $intID = (int)$value['rates_id'][0];
+                $intPEOPLE = (int)$value['people'][0];
+                $result = $this->Rates->calculate($intID, $intPEOPLE);
+                $row = $result->fetchall(PDO::FETCH_ASSOC);
+                array_push($ratesNewArray,$row);
+            }
+
+           $rate = $this->Display->pdf($ratesNewArray,$data);
+           $allRates = $this->Rates->allRatesOfOneCinema($data[0]['cinema_id'])->fetchall(PDO::FETCH_ASSOC);
+
             echo '<pre>';
-            print_r($data);
+            // var_dump($data);
             echo '</pre>';
             include('Views/Pages/invoice.php');
         }

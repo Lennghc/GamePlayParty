@@ -3,10 +3,62 @@
 class Display
 {
 
-	public function __construct()
+
+	public function pdf($rates,$data)
 	{
-		$this->Lounge = new Lounge();
+		$html = "";
+		// $html .= '<div class="col-4 odd"><strong>Dienst</strong></div>
+		$html .= '<div class="col-7 odd"><strong>Tarief</strong></div>
+		  <div class="col-5 odd"><strong>Bedrag</strong></div>';
+		// $html .= '<div class="col-4 bob"><strong>Kids GamePlayParty</strong><br>Vrijdag 14 oktober, 2018</div>';
+		$subtotal = 0;
+		foreach ($rates as $key => $value) {
+
+			$keys = array_keys($value[0]);
+			$arra = explode('*', $keys[0]);
+			if ($arra[0] != 0) {
+				$price = number_format($value[0]['rates_price'], 2, ',');
+				$html .= "<div class='col-7 bob'><strong>{$value[0]['rates_desc']}:</strong> {$arra[0]} @ €{$price}</div>";
+				$subtotalforeach = number_format($value[0][$keys[0]], 2, ',');
+				$html .= "<div class='col-5 bob'>€ {$subtotalforeach}<br></div>";
+				$subtotal = $subtotal + $value[0][$keys[0]];
+			}
+		}
+		$subtotaal = number_format($subtotal, 2, ',');
+		//   $html .='<div class="col-4 bob"><strong>Laser ULTRA</strong><br>Vrijdag 14 oktober, 2018</div>
+		//   <div class="col-3 bob"><strong>Toeslag:</strong> 8 @ €2,50<br><br></div>
+		//   <div class="col-5 bob">€ 20,00<br><br></div>';
+
+		$html .= "<div class='col-7 ral'><strong>Subtotaal:</strong></div>
+      <div class='col-5'>€ {$subtotaal}</div>";
+
+		$btw = $subtotal * 1.21;
+
+		$korting = $btw - $subtotal;
+		$korting = number_format($korting, 2, ',');
+
+		$html .= "<div class='col-7 ral'><strong>BTW 21%:</strong></div>
+      <div class='col-5'>€ {$korting}</div>";
+
+		$priceWithBTW = number_format($btw, 2, ',');
+		$quart_3_4_OfTotal = $btw * 0.75;
+		$quart = $btw - $quart_3_4_OfTotal;
+		$quart = number_format($quart, 2, ',');
+		$quartOfTotal = number_format($quart_3_4_OfTotal, 2, ',');
+		$html .= "<div class='col-7 ral'><strong>Totaal:</strong></div>
+      <div class='col-5'>€ {$priceWithBTW}</div>";
+
+	  $date = new DateTime($data[0]['reservated_date']);
+		$html .= "<div class='col-7 ral bob'><strong>Reeds voldaan:</strong></div>
+      <div class='col-5 bob'>€ {$quart}</div>
+      <div class='col-7 ral'><strong>Nog te voldoen (75%):</strong></div>
+      <div class='col-5 hil'><strong>€ {$quartOfTotal}</strong></div>
+      <div class='col-12'><strong>Betalingen: </strong>{$date->format('d-m-Y')} <strong>€ {$quart} </strong>(MasterCard 1243)</div>";
+
+
+		return [$html,$quartOfTotal];
 	}
+
 
 	public function createCinemaList($result)
 	{
@@ -56,7 +108,7 @@ class Display
 	{
 		$html = "";
 		if ($result->rowCount() != 0) {
-			$html .= "<div class='container'><form onsubmit=\"list.prlistDefault();\" id='rates-form' method='POST'>";
+			$html .= "<div class='container'><form onsubmit=\"event.preventDefault();\" id='rates-form' method='POST'>";
 			$html .= "<h4>Tarieven per persoon</h4>";
 			while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
 				foreach ($row as $value) {
@@ -101,7 +153,7 @@ class Display
 		$html = "";
 
 		$html .= "<div class='container'>
-          <form onsubmit=\"list.prlistDefault();\" id='rates-form'  method='POST'>
+          <form onsubmit=\"event.preventDefault();\" id='rates-form'  method='POST'>
           <div class='d-flex justify-content-between'>
           <h4>Gegevens gast</h4>
             <h7>Tijds blok <span id='time'>{$time}</span></h7>

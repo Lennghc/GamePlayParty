@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,164 +10,261 @@
   <meta name="keywords" content="keywords,here">
   <link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
   <link rel="stylesheet" href="stylesheet.css" type="text/css">
-  <style>@charset "UTF-8";
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-  .keep-together {
-    page-break-inside: avoid;
-  }
+  <style>
+    @charset "UTF-8";
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-  .break-before {
-    page-break-before: always;
-  }
+    .keep-together {
+      page-break-inside: avoid;
+    }
 
-  .break-after {
-    page-break-after: always;
-  }  
-  body {
-    font-family: 'Open Sans', sans-serif;
-  }
-  * {
-    box-sizing: border-box;
-  }
-  .row::after {
-    content: "";
-    clear: both;
-    display: table;
+    .break-before {
+      page-break-before: always;
+    }
 
-  }
-[class*="col-"] {
-  float: left;
-  padding: 1em;
-}
-  html {
-    font-family: "Open Sans", sans-serif;
-    color: #2c3e50;
-  }
-  .header {
-    color: #ffffff;
-    padding: 2em;
-  }
-  .menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  .menu li {
-    padding: 8px;
-    margin-bottom: 7px;
-    background-color: #33b5e5;
-    color: #ffffff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  }
-  .menu li:hover {
-    background-color: #0099cc;
-  }
-  .aside {
-    background-color: #33b5e5;
-    padding: 15px;
-    color: #ffffff;
-    text-align: center;
-    font-size: 14px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  }
-  .footer {
-    background-color: #0099cc;
-    color: #ffffff;
-    text-align: center;
-    font-size: 12px;
-    padding: 15px;
-  }
-  /* For mobile phones: */
-  [class*="col-"] {
-    width: 100%;
-  }
-  @media only screen and (min-width: 600px) {
-    /* For tablets: */
-    .col-s-1 {width: 8.33%;}
-    .col-s-2 {width: 16.66%;}
-    .col-s-3 {width: 25%;}
-    .col-s-4 {width: 33.33%;}
-    .col-s-5 {width: 41.66%;}
-    .col-s-6 {width: 50%;}
-    .col-s-7 {width: 58.33%;}
-    .col-s-8 {width: 66.66%;}
-    .col-s-9 {width: 75%;}
-    .col-s-10 {width: 83.33%;}
-    .col-s-11 {width: 91.66%;}
-    .col-s-12 {width: 100%;}
-  }
-  @media only screen and (min-width: 768px) {
-    /* For desktop: */
-    .col-1 {width: 8.33%;}
-    .col-2 {width: 16.66%;}
-    .col-3 {width: 25%;}
-    .col-4 {width: 33.33%;}
-    .col-5 {width: 41.66%;}
-    .col-6 {width: 50%;}
-    .col-7 {width: 58.33%;}
-    .col-8 {width: 66.66%;}
-    .col-9 {width: 75%;}
-    .col-10 {width: 83.33%;}
-    .col-11 {width: 91.66%;}
-    .col-12 {width: 100%;}
-  }
-  .container{
-    background: center 0px / 960px no-repeat url(Assets/Img/gpp.svg) #F5F5F5;
-    width:960px;
-    margin: 0 auto;
-  }
-  table{
-    width: inherit;
-  }
-  .ral{
-    text-align: right;
-  }
-  .hil{
-    background-color: #C4E538;
-  }
-  .odd{
-    background-color: #A3CB38;
-  }
-.menu > li {
-  padding: 1em;
-  margin-bottom: 1em;
-   background-color: #FFF; 
-  color: #ffffff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  display: inline;
-  font: condensed 0.8em/46px 'Open Sans';
-}
-  .bob{
+    .break-after {
+      page-break-after: always;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+
+    }
+
+    [class*="col-"] {
+      float: left;
+      padding: 1em;
+    }
+
+    html {
+      font-family: "Open Sans", sans-serif;
+      color: #2c3e50;
+    }
+
+    .header {
+      color: #ffffff;
+      padding: 2em;
+    }
+
+    .menu ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu li {
+      padding: 8px;
+      margin-bottom: 7px;
+      background-color: #33b5e5;
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    .menu li:hover {
+      background-color: #0099cc;
+    }
+
+    .aside {
+      background-color: #33b5e5;
+      padding: 15px;
+      color: #ffffff;
+      text-align: center;
+      font-size: 14px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    .footer {
+      background-color: #0099cc;
+      color: #ffffff;
+      text-align: center;
+      font-size: 12px;
+      padding: 15px;
+    }
+
+    /* For mobile phones: */
+    [class*="col-"] {
+      width: 100%;
+    }
+
+    @media only screen and (min-width: 600px) {
+
+      /* For tablets: */
+      .col-s-1 {
+        width: 8.33%;
+      }
+
+      .col-s-2 {
+        width: 16.66%;
+      }
+
+      .col-s-3 {
+        width: 25%;
+      }
+
+      .col-s-4 {
+        width: 33.33%;
+      }
+
+      .col-s-5 {
+        width: 41.66%;
+      }
+
+      .col-s-6 {
+        width: 50%;
+      }
+
+      .col-s-7 {
+        width: 58.33%;
+      }
+
+      .col-s-8 {
+        width: 66.66%;
+      }
+
+      .col-s-9 {
+        width: 75%;
+      }
+
+      .col-s-10 {
+        width: 83.33%;
+      }
+
+      .col-s-11 {
+        width: 91.66%;
+      }
+
+      .col-s-12 {
+        width: 100%;
+      }
+    }
+
+    @media only screen and (min-width: 768px) {
+
+      /* For desktop: */
+      .col-1 {
+        width: 8.33%;
+      }
+
+      .col-2 {
+        width: 16.66%;
+      }
+
+      .col-3 {
+        width: 25%;
+      }
+
+      .col-4 {
+        width: 33.33%;
+      }
+
+      .col-5 {
+        width: 41.66%;
+      }
+
+      .col-6 {
+        width: 50%;
+      }
+
+      .col-7 {
+        width: 58.33%;
+      }
+
+      .col-8 {
+        width: 66.66%;
+      }
+
+      .col-9 {
+        width: 75%;
+      }
+
+      .col-10 {
+        width: 83.33%;
+      }
+
+      .col-11 {
+        width: 91.66%;
+      }
+
+      .col-12 {
+        width: 100%;
+      }
+    }
+
+    .container {
+      background: center 0px / 960px no-repeat url(Assets/Img/gpp.svg) #F5F5F5;
+      width: 960px;
+      margin: 0 auto;
+    }
+
+    table {
+      width: inherit;
+    }
+
+    .ral {
+      text-align: right;
+    }
+
+    .hil {
+      background-color: #C4E538;
+    }
+
+    .odd {
+      background-color: #A3CB38;
+    }
+
+    .menu>li {
+      padding: 1em;
+      margin-bottom: 1em;
+      background-color: #FFF;
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      display: inline;
+      font: condensed 0.8em/46px 'Open Sans';
+    }
+
+    .bob {
       border-bottom: 2px solid #FFC312;
-  }
-  .rot {
-  transform: rotate(-15deg);
-  font: bold 3em/5em 'Open Sans';
-  margin-bottom: -3em;
-  }
-</style>
+    }
+
+    .rot {
+      transform: rotate(-15deg);
+      font: bold 3em/5em 'Open Sans';
+      margin-bottom: -3em;
+    }
+  </style>
 </head>
-<?php 
-$timeslot = json_decode($data[0]['reservated_timeslot'],true); 
-$reachability = json_decode($data[0]['cinema_reachability'],true); 
-$rates = json_decode($data[0]['reservated_people'],true);
-$user = json_decode($data[0]['user_data'],true);
+<?php
+$timeslot = json_decode($data[0]['reservated_timeslot'], true);
+$reachability = json_decode($data[0]['cinema_reachability'], true);
+$rates = json_decode($data[0]['reservated_people'], true);
+$user = json_decode($data[0]['user_data'], true);
 
 ?>
+
 <body>
   <div class="container">
     <div class="header"></div>
     <article class="row">
       <div class="col-7 ral rot">Reservering</div>
       <div class="col-5 ral">
-        <h4><?=$data[0]['cinema_name']?></h4>
-        <?= $reachability[2]['message']?>
+        <h4><?= $data[0]['cinema_name'] ?></h4>
+        <?= $reachability[2]['message'] ?>
       </div>
       <div class="col-7">
-        <h4><?=$user['fName'] . ' ' . $user['mName']. ' ' . $user['lName']?></h4>
-        <?=$user['adres']['street'] . ' ' . $user['adres']['houseNumber']?><br>
-        <?=$user['adres']['zipcode'] . ' ' . $user['adres']['city']?><br>
-        Tel.:<?=$user['tel']?>  
+        <h4><?= $user['fName'] . ' ' . $user['mName'] . ' ' . $user['lName'] ?></h4>
+        <?= $user['adres']['street'] . ' ' . $user['adres']['houseNumber'] ?><br>
+        <?= $user['adres']['zipcode'] . ' ' . $user['adres']['city'] ?><br>
+        Tel.:<?= $user['tel'] ?>
       </div>
       <div class="col-5">
         <div class="row">
@@ -178,15 +276,22 @@ $user = json_decode($data[0]['user_data'],true);
             <strong>Totaal EURO:</strong><br><br>
           </div>
           <div class="col-6 bob">
-            <strong>GPP-<?=$data[0]['reservation_id']?></strong><br>
-            <?php $date = new DateTime($data[0]['reservation_date']); echo $date->format('d F, Y') ?><br>
-            <?php $date = new DateTime($data[0]['reservated_date']); echo $date->format('d F, Y') ?><br>
-            <?php echo $timeslot[1]['slot_start_time'] . ' - ' . $timeslot[1]['slot_end_time']; ?><br>
-            €0,00<br><br>
+            <strong>GPP-<?= $data[0]['reservation_id'] ?></strong><br>
+            <?php $date = new DateTime($data[0]['reservation_date']);
+            echo $date->format('d F, Y') ?><br>
+            <?php $date = new DateTime($data[0]['reservated_date']);
+            echo $date->format('d F, Y') ?><br>
+            <?php
+
+            foreach ($timeslot as $key => $value) {
+              echo $value['slot_start_time'] . ' - ' . $value['slot_end_time'];
+            }
+            ?><br>
+            € <?=$rate[1]?><br><br>
           </div>
         </div>
       </div>
-      <div class="col-4 odd"><strong>Dienst</strong></div>
+      <!-- <div class="col-4 odd"><strong>Dienst</strong></div>
       <div class="col-3 odd"><strong>Tarief</strong></div>
       <div class="col-5 odd"><strong>Bedrag</strong></div>
       <div class="col-4 bob"><strong>Kids GamePlayParty</strong><br>Vrijdag 14 oktober, 2018</div>
@@ -205,19 +310,18 @@ $user = json_decode($data[0]['user_data'],true);
       <div class="col-5 bob">€ 54,45</div>
       <div class="col-7 ral"><strong>Nog te voldoen (75%):</strong></div>
       <div class="col-5 hil"><strong>€163,35</strong></div>
-      <div class="col-12"><strong>Betalingen: </strong>14-10-2018 <strong>€ 54,45 </strong>(MasterCard 1243)</div>
-      <div class="col-12 bob"><h2>Informatie over Kinepolis Jaarbeurs Utrecht</h2></div>
+      <div class="col-12"><strong>Betalingen: </strong>14-10-2018 <strong>€ 54,45 </strong>(MasterCard 1243)</div> -->
+      <?= $rate[0] ?>
+      <div class="col-12 bob">
+        <h2>Informatie over <?= $data[0]['cinema_name'] ?></h2>
+      </div>
       <div class="col-6 bob">
         <p>Met Kinepolis Jaarbeurs (14 zalen, 3200 stoelen) heeft Utrecht eindelijk een moderne megabioscoop in de binnenstad: de grootste bioscoop van Utrecht, en een van de grootste bioscopen van Nederland. Kinepolis Jaarbeurs biedt elke filmbezoeker ‘the ultimate cinema experience’: ruime en comfortabele stoelen, royale beenruimte, en beeld en geluid van het allerhoogste niveau.</p>
       </div>
 
       <div class="col-6 bob">
-        <p><strong>Openingstijden:</strong><br>
-        Donderdag: 9:15 uur - 12:00 uur<br>
-        Vrijdag: 13:15 uur - 15:15 uur<br></p>
-        <br>
-        <br>
-        <br>
+        <p><strong>Openingstijden:</strong></p>
+        <?= $reachability[1]['message'] ?>
         <br>
 
       </div>
@@ -225,13 +329,15 @@ $user = json_decode($data[0]['user_data'],true);
         <p><strong>Reguliere tarieven:</strong></p>
       </div>
       <div class="col-8">
-        € 10,80 | Normaal<br>
-        € 6,50 | Kinderen t/m 11 jaar<br>
-        € 8,50 | Jeugd 12 t/m 17 jaar<br>
-        € 9,00 | 65+<br>
-        € 8,70 | Studenten, CJP & BankGiro Loterij VIP-KAART
+        <?php
+        foreach ($allRates as $key => $value) {
+          $price = number_format($value['rates_price'], 2, ',');
+
+          echo ' € ' . $price . " | " . $value['rates_desc'] . '<br>';
+        }
+        ?>
       </div>
-      <div class="col-4">
+      <!-- <div class="col-4">
         <p><strong>Toeslagen:</strong></p>
       </div>
       <div class="col-8">
@@ -242,7 +348,7 @@ $user = json_decode($data[0]['user_data'],true);
         € 2,50 | Laser ULTRA<br>
         € 2,50 | COSY
 
-      </div>
+      </div> -->
       <div class="col-4">
         <p><strong>Voorwaarden:</strong></p>
       </div>
@@ -251,38 +357,37 @@ $user = json_decode($data[0]['user_data'],true);
           <li>Bovenstaande prijzen zijn per persoon, zijn niet geldig bij evenementen, speciale voorstellingen of besloten voorstellingen en altijd exclusief toeslagen.</li>
         </ul>
       </div>
-      <div class="col-4">
-        <p><strong>Bereikbaarheid auto:</strong></p>
-      </div>
-      <div class="col-8">
-        <p>Met de auto bereikt u Kinepolis Jaarbeurs door op de Ring Utrecht de blauwe ANWB-borden met de aanduiding 'Jaarbeurs' te volgen. Rondom de Jaarbeurs is volop parkeergelegenheid. Parkeren op het Jaarbeursterrein is per 1 mei gratis voor alle automobilisten die een kaartje voor de film hebben gekocht.</p>
-      </div>
-      <div class="col-4">
-        <p><strong>Bereikbaarheid OV:</strong></p>
-      </div>
-      <div class="col-8">
-        <p>Kinepolis Jaarbeurs ligt naast de Jaarbeurshallen tegenover het Centraal Station van Utrecht en is dus uitstekend te bereiken met trein, bus en tram. Volg vanaf het Centraal Station de borden ‘Jaarbeursplein’ en loop richting de Jaarbeurshallen. Binnen enkele minuten vindt u de bioscoop aan uw linkerhand.</p>
-      </div>
-      <div class="col-4">
-        <p><strong>Bereikbaarheid Fiets:</strong></p>
-      </div>
-      <div class="col-8">
-        <p>U kunt uw fiets vlak naast de bioscoop kwijt in de gratis fietsenstalling, gelegen tussen restaurant Miyagi and Jones en parkeerplaats P3.</p>
-      </div>
-      <div class="col-4">
-        <p><strong>Rolstoeltoegankelijkheid:</strong></p>
-      </div>
-      <div class="col-8">
-        <p>Kinepolis Jaarbeurs heeft rolstoelplaatsen in elke zaal. Lift en mindervalidentoilet zijn ook aanwezig.</p>
-      </div>        
 
-      <div class="col-4">
+      <?php
+      foreach ($reachability as $key => $value) {
+        if ($key != 1 && $key != 2) {
+          if ($value['message'] != "") {
+            if ($value['title'] == 'Openbaar vervoer') {
+              echo "<div class='col-4'><p><strong>Bereikbaarheid OV:</strong></p></div>";
+              echo "<div class='col-8'>{$value['message']}</div>";
+            } elseif ($value['title'] == 'Rolstoeltoegankelijkheid') {
+              echo "<div class='col-4'><p><strong>Rolstoeltoegankelijkheid:</strong></p></div>";
+              echo "<div class='col-8'>{$value['message']}</div>";
+            } else {
+              echo "<div class='col-4'><p><strong>Bereikbaarheid {$value['title']}:</strong></p></div>";
+              echo "<div class='col-8'>{$value['message']}</div>";
+            }
+          }
+        }
+      }
+      ?>
+
+      <!-- <div class="col-4">
         <p><strong>Voorwaarden:</strong></p>
       </div>
       <div class="col-8">
         <p>U kunt uw fiets vlak naast de bioscoop kwijt in de gratis fietsenstalling, gelegen tussen restaurant Miyagi and Jones en parkeerplaats P3.</p>
       </div>
-      <div class="col-12">
+     -->
+
+
+
+      <!-- <div class="col-12">
         <table>
           <thead>
             <tr class="bob">
@@ -295,21 +400,44 @@ $user = json_decode($data[0]['user_data'],true);
             </tr>
           </thead>
           <tbody>
-            <tr class="odd"><td>1</td><td>102</td><td>2</td><td>11.20m x 4.68m</td><td><span class="screen-facilities icon icon-screen-facilities-toegankelijk-voor-andersvaliden" title="Toegankelijk voor andersvaliden">Toegankelijk voor andersvaliden</span></td><td><div class="screen-technology icon icon-screen-technology-laser" title="Laser"><span>Laser</span></div><div class="screen-technology icon icon-screen-technology-dolby-71" title="Dolby 7.1"><span>Dolby 7.1</span></div></td></tr>
-            <tr class="even"><td>2</td><td>102</td><td>2</td><td>11.20m x 4.68m</td><td><span class="screen-facilities icon icon-screen-facilities-toegankelijk-voor-andersvaliden" title="Toegankelijk voor andersvaliden">Toegankelijk voor andersvaliden</span></td><td><div class="screen-technology icon icon-screen-technology-laser" title="Laser"><span>Laser</span></div><div class="screen-technology icon icon-screen-technology-dolby-71" title="Dolby 7.1"><span>Dolby 7.1</span></div></td></tr>
-          </table>
-        </div>
-        <div class="col-12">
-          <ul class="menu">
-            <li><a href="/gebruiksvoorwaarden">Gebruiksvoorwaarden</a></li>
-            <li><a href="/privacy-beleid">Privacy beleid</a></li>
-            <li><a href="/cookie-beleid">Cookie beleid</a></li>
-            <li><a href="/algemene-verkoopvoorwaarden">Algemene Verkoopvoorwaarden</a></li>
-            <li><a href="/privacy-beleid-b2b">Privacy beleid B2B</a></li>
-            <li><a href="/sitemap">Sitemap</a></li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </body>
-  </html>
+            <tr class="odd">
+              <td>1</td>
+              <td>102</td>
+              <td>2</td>
+              <td>11.20m x 4.68m</td>
+              <td><span class="screen-facilities icon icon-screen-facilities-toegankelijk-voor-andersvaliden" title="Toegankelijk voor andersvaliden">Toegankelijk voor andersvaliden</span></td>
+              <td>
+                <div class="screen-technology icon icon-screen-technology-laser" title="Laser"><span>Laser</span></div>
+                <div class="screen-technology icon icon-screen-technology-dolby-71" title="Dolby 7.1"><span>Dolby 7.1</span></div>
+              </td>
+            </tr>
+            <tr class="even">
+              <td>2</td>
+              <td>102</td>
+              <td>2</td>
+              <td>11.20m x 4.68m</td>
+              <td><span class="screen-facilities icon icon-screen-facilities-toegankelijk-voor-andersvaliden" title="Toegankelijk voor andersvaliden">Toegankelijk voor andersvaliden</span></td>
+              <td>
+                <div class="screen-technology icon icon-screen-technology-laser" title="Laser"><span>Laser</span></div>
+                <div class="screen-technology icon icon-screen-technology-dolby-71" title="Dolby 7.1"><span>Dolby 7.1</span></div>
+              </td>
+            </tr>
+        </table>
+      </div> -->
+
+
+      <div class="col-12">
+        <ul class="menu">
+          <li><a href="/gebruiksvoorwaarden">Gebruiksvoorwaarden</a></li>
+          <li><a href="/privacy-beleid">Privacy beleid</a></li>
+          <li><a href="/cookie-beleid">Cookie beleid</a></li>
+          <li><a href="/algemene-verkoopvoorwaarden">Algemene Verkoopvoorwaarden</a></li>
+          <li><a href="/privacy-beleid-b2b">Privacy beleid B2B</a></li>
+          <li><a href="/sitemap">Sitemap</a></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</body>
+
+</html>
