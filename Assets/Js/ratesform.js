@@ -103,6 +103,30 @@ $('#rates_button').on('click', function () {
     }
 
     if (fName != "" && lName != "" && street != "" && houseNumber != "" && zipCode != "" && city != "" && tel != "" && email != "") {
+
+
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var zipcodeformat = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i;
+        var houseformat = /^[1-9]\d*(?: ?(?:[a-z]|[/-] ?\d+[a-z]?))?$/;
+
+        if (!email.match(mailformat)) {
+            toast('Ongeldig email adres', 'error', 'toast-top-right');
+            return;
+        }
+
+        if(!zipCode.match(zipcodeformat)){
+            toast('Ongeldige postcode', 'error', 'toast-top-right');
+            return;
+        }
+
+        if(!houseNumber.match(houseformat)){
+            toast('Ongeldig huisnummer', 'error', 'toast-top-right');
+            return;
+        }
+
+
+
+
         var userArray = [];
         userArray = {
             fName: fName,
@@ -192,9 +216,6 @@ $('#rates_button').on('click', function () {
 
     }
 });
-
-
-
 
 
 const stopLoading = function (selector, value) {

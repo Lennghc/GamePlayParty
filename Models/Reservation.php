@@ -21,11 +21,23 @@ class Reservation extends Main
     public function setReservation($encodeField, $encodeUserData, $encodeTimeslot, $lounge_id, $open_date)
     {
         try {
-            $sql = "INSERT INTO `Reservation` (`reservated_date`, `reservated_timeslot`, `lounge_id`, `user_data`, `reservated_people`, `status_id`) VALUES ('{$open_date}', '$encodeTimeslot', '{$lounge_id}', '$encodeUserData' , '$encodeField' , '6')";
-            $result = self::createData($sql);
+            $sql = "SELECT reservation_id FROM Reservation WHERE reservated_date = '$open_date' AND reservated_timeslot = '$encodeTimeslot'";
+            $result = self::readData($sql);
 
-            http_response_code(201);
-            return $result;
+            if ($result->rowCount() != 0) {
+                $errors[] = "Geen dubblen reserveringen.";
+            } else {
+                $sql = "INSERT INTO `Reservation` (`reservated_date`, `reservated_timeslot`, `lounge_id`, `user_data`, `reservated_people`, `status_id`) VALUES ('{$open_date}', '$encodeTimeslot', '{$lounge_id}', '$encodeUserData' , '$encodeField' , '6')";
+                $result = self::createData($sql);
+                http_response_code(201);
+                return $result;
+            }
+
+            http_response_code(401);
+
+            return (object) [
+                'errors' => $errors
+            ];
         } catch (Exception $e) {
             throw $e;
         }

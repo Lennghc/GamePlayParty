@@ -122,6 +122,10 @@ class ReservationController
             $this->Reservation->setTimeSlotInactive($timeslotData['lounge_id'], $encodeTimeslot, $timeslotData['key']);
             exit;
         }
+
+        echo Functions::toJSON(array(
+            'errors' => !empty($result->errors) ? $result->errors : null
+        ));
     }
 
 
