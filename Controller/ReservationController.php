@@ -62,16 +62,13 @@ class ReservationController
                 $intPEOPLE = (int)$value['people'][0];
                 $result = $this->Rates->calculate($intID, $intPEOPLE);
                 $row = $result->fetchall(PDO::FETCH_ASSOC);
-                array_push($ratesNewArray,$row);
+                array_push($ratesNewArray, $row);
             }
 
-           $rate = $this->Display->pdf($ratesNewArray,$data);
-           $allRates = $this->Rates->allRatesOfOneCinema($data[0]['cinema_id'])->fetchall(PDO::FETCH_ASSOC);
-           $table = $this->Display->createTableLoungePDF($this->Reservation->getDataforloungePDF($data[0]['cinema_id']));
+            $rate = $this->Display->pdf($ratesNewArray, $data);
+            $allRates = $this->Rates->allRatesOfOneCinema($data[0]['cinema_id'])->fetchall(PDO::FETCH_ASSOC);
+            $table = $this->Display->createTableLoungePDF($this->Reservation->getDataforloungePDF($data[0]['cinema_id']));
 
-            echo '<pre>';
-            // var_dump($data);
-            echo '</pre>';
             include('Views/Pages/invoice.php');
         }
     }
@@ -104,9 +101,6 @@ class ReservationController
 
         $encodeTimeslot = json_encode($time);
 
-        // echo '<pre>';
-        // print_r($encodeTimeslot);
-        // echo '</pre>';
         // ending timeslot setting to active
 
         $encodeUserData = json_encode($userData);
@@ -145,12 +139,12 @@ class ReservationController
                 exit();
             } else {
                 $result = $this->Reservation->ownCinemasReservations($user_id);
-                $table = $this->Display->createTable($result, false, false, true, false);
+                $table = $this->Display->createTable($result, false, false, false, false, false, true);
             }
         } elseif ($role == 4) {
             // Jack jones eigenaar
             $result = $this->Reservation->allReservationCinemas();
-            $table = $this->Display->createTable($result);
+            $table = $this->Display->createTable($result, false, false, false, false, false, true);
         } else {
             Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
             header('Location: index.php');
@@ -175,8 +169,6 @@ class ReservationController
             $rates = $this->Display->createRatesForm($this->Rates->getCinemaRates($lounge_id));
 
             include 'Views/Pages/reservDetails.php';
-
-            // $result = $this->Reservation->setTimeSlot($arra, $date, $lounge_id, $user_id);
 
             exit();
         } else {

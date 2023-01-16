@@ -257,7 +257,7 @@ class Display
 		return $html;
 	}
 
-	public function createTable($result, $edit = false, $delete = false, $read = false, $create = false, $status = false)
+	public function createTable($result, $edit = false, $delete = false, $read = false, $create = false, $status = false, $pdf = false)
 	{
 		$tableheader = false;
 		$html = "";
@@ -276,6 +276,8 @@ class Display
 						$html .= "<th>Actions</th>";
 					} elseif ($status == true) {
 						$html .= "<th>Actief/Inactief</th>";
+					} elseif ($pdf == true) {
+						$html .= "<th>Factuur</th>";
 					}
 					$html .= "</tr>";
 					$tableheader = true;
@@ -284,7 +286,7 @@ class Display
 				foreach ($row as $value) {
 					$html .= "<td>" . (empty($value) ? '<i class="text-black fa fa-ban" aria-hidden="true"></i>' : $value) . "</td>";
 				}
-				if ($edit == true || $delete == true || $read == true || $status == true) {
+				if ($edit == true || $delete == true || $read == true || $status == true || $pdf == true) {
 					$html .= "<td style='display: flex; justify-content: ;'>";
 					if ($edit == true) {
 						$html .= "<a type='button' href='index.php?con={$_GET['op']}&op=update&id={$row['ID']}' class='btn btn-info'><i class='fa fa-edit'></i></a>";
@@ -294,6 +296,9 @@ class Display
 					}
 					if ($read == true) {
 						$html .= "<a type='button' class='btn btn-success'><i class='fa fa-eye'></i></a>";
+					}
+					if ($pdf == true) {
+						$html .= "<a type='button' href='index.php?con=reserv&op=invoice&id={$row['ID']}' class='btn btn-warning'><i class='fa fa-file-pdf'></i></a>";
 					}
 					if ($status == true) {
 						if ($row['is_active'] == 1) {
@@ -374,7 +379,6 @@ class Display
 		if ($result->rowCount() != 0) {
 			$row = $result->fetchall(PDO::FETCH_ASSOC);
 			foreach ($row as $value) {
-				return var_dump(gettype($value['cinema_reachability']));
 				$reachability = json_decode($value['cinema_reachability'], true);
 				foreach ($reachability as $item) {
 					if (!empty($item['message'])) {

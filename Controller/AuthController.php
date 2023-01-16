@@ -153,23 +153,6 @@ class AuthController
             exit();
         }
 
-        // if (isset($_POST['submit'])) {
-        //     $fName = isset($_POST['fName']) ? $_POST['fName'] : null;
-        //     $mName = isset($_POST['mName']) ? $_POST['mName'] : null;
-        //     $lName = isset($_POST['lName']) ? $_POST['lName'] : null;
-        //     $street = isset($_POST['street']) ? $_POST['street'] : null;
-        //     $house_nmr = isset($_POST['houseNumber']) ? $_POST['houseNumber'] : null;
-        //     $zipcode = isset($_POST['zipcode']) ? $_POST['zipcode'] : null;
-        //     $city = isset($_POST['city']) ? $_POST['city'] : null;
-        //     $tel = isset($_POST['tel']) ? $_POST['tel'] : null;
-
-        //     $role_id = isset($_POST['role']) ? $_POST['role'] : $_SESSION['user']->role_id;
-
-        //     $this->Auth->update($id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel, $role_id);
-        //     Functions::toast("ID: {$id} met success bijgewerkt!", 'success', 'toast-top-right');
-        //     header('Location: index.php?con=cms');
-        //     exit();
-        // }
 
         include 'Views/Pages/Admin/Users/update.php';
     }

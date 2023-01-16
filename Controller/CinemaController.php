@@ -172,12 +172,9 @@ class CinemaController
 
                 $encodeArray = json_encode($array);
                 $cinema_img = $this->File->imageUpload($_FILES);
-                echo "<pre>";
-                print_r($cinema_img);
-                echo "</pre>";
+
                 $this->Cinema->update($user_id, $cinema_name, $cinema_desc, $cinema_img, $encodeArray);
 
-                //header("Location: index.php?con=cinema&op=update");
             }
 
             include 'Views/Pages/Admin/Cinema/update.php';
