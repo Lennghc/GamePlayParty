@@ -18,6 +18,19 @@ class Reservation extends Main
         }
     }
 
+    public function getDataforloungePDF($cinema_id)
+    {
+        try {
+            $sql = "SELECT `lounge_id`,`lounge_nmr`,`lounge_chair_places`,`lounge_wheelchair_places`,`lounge_screensize` FROM `Lounge` WHERE cinema_id = $cinema_id;";
+            $results = self::readData($sql);
+
+            return $results;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+
     public function setReservation($encodeField, $encodeUserData, $encodeTimeslot, $lounge_id, $open_date)
     {
         try {

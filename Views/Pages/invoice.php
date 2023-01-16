@@ -385,6 +385,7 @@ $user = json_decode($data[0]['user_data'], true);
       </div>
      -->
 
+     <?= !empty($table) ? $table : null ?>
 
 
       <!-- <div class="col-12">

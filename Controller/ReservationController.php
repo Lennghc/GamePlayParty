@@ -67,6 +67,7 @@ class ReservationController
 
            $rate = $this->Display->pdf($ratesNewArray,$data);
            $allRates = $this->Rates->allRatesOfOneCinema($data[0]['cinema_id'])->fetchall(PDO::FETCH_ASSOC);
+           $table = $this->Display->createTableLoungePDF($this->Reservation->getDataforloungePDF($data[0]['cinema_id']));
 
             echo '<pre>';
             // var_dump($data);

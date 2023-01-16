@@ -3,8 +3,37 @@
 class Display
 {
 
+	public function createTableLoungePDF($result)
+	{
+		$html = "";
+		$html .= "<div class='col-12'>";
+		$html .= "<table>";
+		$html .= "<thead>";
+		$html .= "<tr class='bob'>";
+		$html .= "<th>Zaal</th>";
+		$html .= "<th>Aantal stoelen</th>";
+		$html .= "<th>Rolstoelplaatsen</th>";
+		$html .= "<th>Schermgrootte</th>";
+		$html .= "</tr>";
+		$html .= " </thead>";
 
-	public function pdf($rates,$data)
+
+		foreach ($result as $key => $value) {
+			$html .= "<tbody>";
+			$html .= "<tr class='odd'>";
+			$html .= "<td>{$value['lounge_nmr']}</td>";
+			$html .= "<td>{$value['lounge_chair_places']}</td>";
+			$html .= "<td>{$value['lounge_wheelchair_places']}</td>";
+			$html .= "<td>{$value['lounge_screensize']}</td>";
+			$html .= "</tr>";
+		}
+		$html .= "</table>";
+		$html .= "</div>";
+		return $html;
+	}
+
+
+	public function pdf($rates, $data)
 	{
 		$html = "";
 		// $html .= '<div class="col-4 odd"><strong>Dienst</strong></div>
@@ -48,7 +77,7 @@ class Display
 		$html .= "<div class='col-7 ral'><strong>Totaal:</strong></div>
       <div class='col-5'>€ {$priceWithBTW}</div>";
 
-	  $date = new DateTime($data[0]['reservated_date']);
+		$date = new DateTime($data[0]['reservated_date']);
 		$html .= "<div class='col-7 ral bob'><strong>Reeds voldaan:</strong></div>
       <div class='col-5 bob'>€ {$quart}</div>
       <div class='col-7 ral'><strong>Nog te voldoen (75%):</strong></div>
@@ -56,7 +85,7 @@ class Display
       <div class='col-12'><strong>Betalingen: </strong>{$date->format('d-m-Y')} <strong>€ {$quart} </strong>(MasterCard 1243)</div>";
 
 
-		return [$html,$quartOfTotal];
+		return [$html, $quartOfTotal];
 	}
 
 
@@ -299,41 +328,41 @@ class Display
 	public function createTimeslotButtons($result)
 	{
 		$html = "";
+		$time = [];
+
 		if ($result->rowCount() != 0) {
-			while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
+			$row = $result->fetchall(PDO::FETCH_ASSOC);
 
+			foreach ($row as $newkey => $rowValue) {
+				$time = json_decode($rowValue['lounge_timeslots'], true);
+				$date = $rowValue['lounge_open_date'];
+				$lounge_id = $rowValue['lounge_id'];
+				setlocale(LC_ALL, 'nl_NL');
 
-				foreach ($row as $rowValue) {
-					$time = [];
-					$time = json_decode($rowValue['lounge_timeslots'], true);
-					$date = $rowValue['lounge_open_date'];
-					$lounge_id = $rowValue['lounge_id'];
-					setlocale(LC_ALL, 'nl_NL');
+				$html .= $time[$newkey]['active'] == 0 ? '<div class="col-md-12 mt-3"><h5>' . strftime('%A %d, %B', strtotime($date)) . '</h5></div>' : null;
 
-					$html .= '<div class="col-md-12 mt-3"><h5>' . strftime('%A %d, %B', strtotime($date)) . '</h5></div>';
-					$html .= "<div class='col-md-8 d-flex flex-wrap mb-3'>";
+				$html .= "<div class='col-md-8 d-flex flex-wrap mb-3'>";
 
-					foreach ($time as $key => $valueTime) {
-						if ($valueTime['active'] == 0) {
-							$html .= "<form id='form' action='index.php?con=reserv&op=handleReservation' method='POST'>";
-							$time = $valueTime['slot_start_time'] . '-' . $valueTime['slot_end_time'];
-							$html .= "<input type='hidden' name='key' value='{$key}' >";
-							$html .= "<input type='hidden' name='lounge_id' value='{$lounge_id}'>";
-							$html .= "<input type='hidden' value='{$time}' name='timeslot'>";
-							$html .= "<input type='hidden' value='{$date}' name='date'>";
-							$html .= "<div class='col-md-12'>";
-							$html .= "<button type='submit' name='submit' class='btn btn-secondary m-1' >{$time}</button>";
-							$html .= "</div>";
-							$html .= "</form>";
-						}
+				foreach ($time as $key => $valueTime) {
+					if ($valueTime['active'] == 0) {
+						$html .= "<form id='form' action='index.php?con=reserv&op=handleReservation' method='POST'>";
+						$time = $valueTime['slot_start_time'] . '-' . $valueTime['slot_end_time'];
+						$html .= "<input type='hidden' name='key' value='{$key}' >";
+						$html .= "<input type='hidden' name='lounge_id' value='{$lounge_id}'>";
+						$html .= "<input type='hidden' value='{$time}' name='timeslot'>";
+						$html .= "<input type='hidden' value='{$date}' name='date'>";
+						$html .= "<div class='col-md-12'>";
+						$html .= "<button type='submit' name='submit' class='btn btn-secondary m-1' >{$time}</button>";
+						$html .= "</div>";
+						$html .= "</form>";
 					}
-
-					$html .= "</div>";
-
-
-					return $html;
 				}
+
+
+				$html .= "</div>";
 			}
+
+			return $html;
 		}
 	}
 
