@@ -26,12 +26,26 @@ class Lounge extends Main
         }
     }
 
-    public function timeSlots($cinema_id)
+    public function timeSlots($week_start, $week_end, $cinema_id)
     {
         try {
-            $sql = "SELECT lounge_open_date, lounge_timeslots, lounge_id FROM Lounge WHERE `lounge_open_date` >= NOW() + INTERVAL 2 DAY AND `lounge_timeslots` IS NOT NULL AND `cinema_id` = $cinema_id";
+            $sql = "SELECT lounge_open_date, lounge_timeslots, lounge_id FROM Lounge WHERE lounge_open_date BETWEEN '$week_start' AND '$week_end' AND cinema_id = $cinema_id";
             $results = self::readsData($sql);
-            return $results;
+            $result = $results->fetchall(PDO::FETCH_ASSOC);
+
+            if (!$result) {
+                $errors[] = "Geen reservering gevonden.";
+            } else {
+                http_response_code(201);
+
+                return $result;
+            }
+
+            http_response_code(401);
+
+            return (object) [
+                'errors' => $errors
+            ];
         } catch (Exception $e) {
             throw $e;
         }
@@ -48,4 +62,5 @@ class Lounge extends Main
             throw $e;
         }
     }
+
 }
