@@ -29,7 +29,7 @@
     <script>
         tinymce.init({
             selector: 'textarea#Page',
-            plugins: 'anchor autolink charmap emoticons image link lists media searchreplace visualblocks checklist mediaembed casechange formatpainter linkchecker permanentpen powerpaste advcode editimage footnotes inlinecss',
+            plugins: 'anchor autolink charmap emoticons image link lists media searchreplace visualblocks',
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media | a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
         });
 
