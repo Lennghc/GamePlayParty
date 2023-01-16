@@ -257,14 +257,15 @@ $user = json_decode($data[0]['user_data'], true);
     <article class="row">
       <div class="col-7 ral rot">Reservering</div>
       <div class="col-5 ral">
-        <h4><?= $data[0]['cinema_name'] ?></h4>
-        <?= $reachability[2]['message'] ?>
+
+        <h4><?= !empty($data[0]['cinema_name']) ? $data[0]['cinema_name'] : null ?></h4>
+        <?= !empty($reachability[2]['message']) ? $reachability[2]['message'] : null ?>
       </div>
       <div class="col-7">
-        <h4><?= $user['fName'] . ' ' . $user['mName'] . ' ' . $user['lName'] ?></h4>
-        <?= $user['adres']['street'] . ' ' . $user['adres']['houseNumber'] ?><br>
-        <?= $user['adres']['zipcode'] . ' ' . $user['adres']['city'] ?><br>
-        Tel.:<?= $user['tel'] ?>
+        <h4><?= $user['fName'] . ' ' . $user['mName'] . ' ' . ucfirst($user['lName']) ?></h4>
+        <?= ucfirst($user['adres']['street']) . ' ' . $user['adres']['houseNumber'] ?><br>
+        <?= $user['adres']['zipcode'] . ' ' . ucfirst($user['adres']['city']) ?><br>
+        Tel.:<?= !empty($user['tel']) ? $user['tel'] : null ?>
       </div>
       <div class="col-5">
         <div class="row">
@@ -276,7 +277,7 @@ $user = json_decode($data[0]['user_data'], true);
             <strong>Totaal EURO:</strong><br><br>
           </div>
           <div class="col-6 bob">
-            <strong>GPP-<?= $data[0]['reservation_id'] ?></strong><br>
+            <strong>GPP-<?= !empty($data[0]['reservation_id']) ? $data[0]['reservation_id'] : null ?></strong><br>
             <?php $date = new DateTime($data[0]['reservation_date']);
             echo $date->format('d F, Y') ?><br>
             <?php $date = new DateTime($data[0]['reservated_date']);
@@ -287,31 +288,12 @@ $user = json_decode($data[0]['user_data'], true);
               echo $value['slot_start_time'] . ' - ' . $value['slot_end_time'];
             }
             ?><br>
-            € <?=$rate[1]?><br><br>
+            € <?= !empty($rate[1]) ? $rate[1] : null ?><br><br>
           </div>
         </div>
       </div>
-      <!-- <div class="col-4 odd"><strong>Dienst</strong></div>
-      <div class="col-3 odd"><strong>Tarief</strong></div>
-      <div class="col-5 odd"><strong>Bedrag</strong></div>
-      <div class="col-4 bob"><strong>Kids GamePlayParty</strong><br>Vrijdag 14 oktober, 2018</div>
-      <div class="col-3 bob"><strong>Kinderen t/m 11 jaar:</strong> 8 @ €20,00</div>
-      <div class="col-5 bob">€160,00<br><br></div>
-      <div class="col-4 bob"><strong>Laser ULTRA</strong><br>Vrijdag 14 oktober, 2018</div>
-      <div class="col-3 bob"><strong>Toeslag:</strong> 8 @ €2,50<br><br></div>
-      <div class="col-5 bob">€ 20,00<br><br></div>
-      <div class="col-7 ral"><strong>Subtotaal:</strong></div>
-      <div class="col-5">€180,00</div>
-      <div class="col-7 ral"><strong>BTW 21%:</strong></div>
-      <div class="col-5">€ 37,80</div>
-      <div class="col-7 ral"><strong>Totaal:</strong></div>
-      <div class="col-5">€217,80</div>
-      <div class="col-7 ral bob"><strong>Reeds voldaan:</strong></div>
-      <div class="col-5 bob">€ 54,45</div>
-      <div class="col-7 ral"><strong>Nog te voldoen (75%):</strong></div>
-      <div class="col-5 hil"><strong>€163,35</strong></div>
-      <div class="col-12"><strong>Betalingen: </strong>14-10-2018 <strong>€ 54,45 </strong>(MasterCard 1243)</div> -->
-      <?= $rate[0] ?>
+
+      <?= !empty($rate[0]) ? $rate[0] : null ?>
       <div class="col-12 bob">
         <h2>Informatie over <?= $data[0]['cinema_name'] ?></h2>
       </div>
@@ -322,6 +304,7 @@ $user = json_decode($data[0]['user_data'], true);
       <div class="col-6 bob">
         <p><strong>Openingstijden:</strong></p>
         <?= $reachability[1]['message'] ?>
+        <?= !empty($reachability[1]['message']) ? $reachability[1]['message'] : null ?>
         <br>
 
       </div>
@@ -337,18 +320,7 @@ $user = json_decode($data[0]['user_data'], true);
         }
         ?>
       </div>
-      <!-- <div class="col-4">
-        <p><strong>Toeslagen:</strong></p>
-      </div>
-      <div class="col-8">
-        € 0,50 | toeslag bij film van 135 minuten en langer<br>
-        € 1,50 | 3D-toeslag excl. bril<br>
-        € 2,60 | 3D-toeslag incl. bril<br>
-        € 1,50 | Dolby Atmos<br>
-        € 2,50 | Laser ULTRA<br>
-        € 2,50 | COSY
 
-      </div> -->
       <div class="col-4">
         <p><strong>Voorwaarden:</strong></p>
       </div>
@@ -377,54 +349,8 @@ $user = json_decode($data[0]['user_data'], true);
       }
       ?>
 
-      <!-- <div class="col-4">
-        <p><strong>Voorwaarden:</strong></p>
-      </div>
-      <div class="col-8">
-        <p>U kunt uw fiets vlak naast de bioscoop kwijt in de gratis fietsenstalling, gelegen tussen restaurant Miyagi and Jones en parkeerplaats P3.</p>
-      </div>
-     -->
 
-     <?= !empty($table) ? $table : null ?>
-
-
-      <!-- <div class="col-12">
-        <table>
-          <thead>
-            <tr class="bob">
-              <th>Zaal</th>
-              <th>Aantal stoelen</th>
-              <th>Rolstoelplaatsen</th>
-              <th>Schermgrootte</th>
-              <th>Faciliteiten</th>
-              <th>Versies</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="odd">
-              <td>1</td>
-              <td>102</td>
-              <td>2</td>
-              <td>11.20m x 4.68m</td>
-              <td><span class="screen-facilities icon icon-screen-facilities-toegankelijk-voor-andersvaliden" title="Toegankelijk voor andersvaliden">Toegankelijk voor andersvaliden</span></td>
-              <td>
-                <div class="screen-technology icon icon-screen-technology-laser" title="Laser"><span>Laser</span></div>
-                <div class="screen-technology icon icon-screen-technology-dolby-71" title="Dolby 7.1"><span>Dolby 7.1</span></div>
-              </td>
-            </tr>
-            <tr class="even">
-              <td>2</td>
-              <td>102</td>
-              <td>2</td>
-              <td>11.20m x 4.68m</td>
-              <td><span class="screen-facilities icon icon-screen-facilities-toegankelijk-voor-andersvaliden" title="Toegankelijk voor andersvaliden">Toegankelijk voor andersvaliden</span></td>
-              <td>
-                <div class="screen-technology icon icon-screen-technology-laser" title="Laser"><span>Laser</span></div>
-                <div class="screen-technology icon icon-screen-technology-dolby-71" title="Dolby 7.1"><span>Dolby 7.1</span></div>
-              </td>
-            </tr>
-        </table>
-      </div> -->
+      <?= !empty($table) ? $table : null ?>
 
 
       <div class="col-12">
