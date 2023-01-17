@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class='icon' href='index.php?con=home&op=about_us'><i class="fa fa-address-card"></i>
+                    <a class='icon' href='index.php?con=content&op=about_us'><i class="fa fa-address-card"></i>
                         <span>About Us</span>
                     </a>
                 </li>

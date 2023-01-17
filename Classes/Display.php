@@ -3,6 +3,117 @@
 class Display
 {
 
+	public function readPageContent($result, $pageHome = false)
+	{
+		$html = "";
+
+		if ($result->rowCount() != 0) {
+			while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
+				foreach ($row as $value) {	
+					
+					$html .= "<div class='container row'>
+					<div class='col-md-7 title-under-logo'><span style='font-family:sans-serif!important;'>{$value['content_title']}</span></div>
+				</div>";
+					
+					if ($pageHome == true) {
+
+						$html .= "<div class='container conatiner_landing_page'>
+
+						<div class='row'>
+							{$value['content_main']}
+				
+				
+							<div class='col-md-12'>
+								{$value['content_extra']}
+				
+								<a class='' data-bs-toggle='collapse' href='#collapseExample' role='button' aria-expanded='false' aria-controls='collapseExample'>
+									<span class='collapsed'>
+										Lees meer
+									</span>
+									<span class='expanded''>
+										Lees minder
+									</span>
+								</a>
+				
+							</div>
+				
+						</div>
+				
+					</div>";
+					} else {
+						$html .="<div class='container conatiner_landing_page'>
+
+						<div class='row'>				
+							<div class='col-md-12'>
+								<p>{$value['content_main']}
+								</p>
+							</div>
+							
+							<div class='col-md-12'>				
+								<p>{$value['content_extra']}
+								</p>
+								<a href='mailto:gameplayparty@gmail.com'><div class='button'>Mail ons!</div></a>
+							</div>
+						</div>
+					</div>";
+					}
+				}
+			}
+		}
+		return $html;
+	}
+
+	public function pageUpdateForm($result, $title, $url)
+	{
+		$html = "";
+		if ($result->rowCount() != 0) {
+
+			while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
+				foreach ($row as $value) {
+					$html .= "<div class='container'>
+            <form action='{$url}' method='POST'>
+                <div class='d-flex justify-content-between'>
+                    <h2>{$title} pagina</h2>
+                    <button class='btn bg-dark bg-opacity-50 text-white' type='submit' name='submit'>Opslaan</button>
+                </div>
+                <div class='row'>
+                    <div class='col-md-3'>
+                        <div class='form-floating mb-3'>
+                            <input type='text' name='content_title' id='Content_Title' class='form-control' placeholder='Pagina Title' value='{$value['content_title']}'>
+                            <label for='Content_Title'>Pagina Title</label>
+                        </div>
+                    </div>
+                    <div class='col-md-3'>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-6 form-group'>
+                        <h5>Hoofd content</h5>
+                        <div class='form-floating mb-3'>
+                        <label for='Content_Main'>Wie zijn wij?</label>
+                        <textarea type='textarea' id='Content_Main' name='content_main' rows='20' cols='50'>{$value['content_main']}</textarea>
+                        </div>
+                    </div>
+
+                    <div class='col-md-6'>
+                        <h5>Extra Content</h5>
+                        <div class='form-floating mb-3'>
+                            <label for='Extra_content'>Contact</label>
+                            <textarea class='form-control' name='content_extra' id='Extra_content' rows='20' cols='50'>{$value['content_extra']}</textarea>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </form>
+
+        </div>";
+				}
+			}
+		}
+
+		return $html;
+	}
+
 	public function createTableLoungePDF($result)
 	{
 		$html = "";
@@ -360,12 +471,16 @@ class Display
 						$html .= "<button type='submit' name='submit' class='btn btn-secondary m-1' >{$time}</button>";
 						$html .= "</div>";
 						$html .= "</form>";
+					} else {
+
+						$error = "Geen reservering gevonden";
 					}
 				}
 
-
 				$html .= "</div>";
 			}
+			// $html = !empty($error) ? $error : null;
+
 
 			return $html;
 		}

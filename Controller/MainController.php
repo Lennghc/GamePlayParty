@@ -1,5 +1,4 @@
 <?php
-require_once 'HomeController.php';
 require_once 'CinemaController.php';
 require_once 'CmsController.php';
 require_once 'ReservationController.php';
@@ -15,7 +14,7 @@ class MainController
 {
     public function __construct()
     {
-        $this->HomeController = new HomeController();
+        $this->ContentController = new ContentController();
         $this->CinemaController = new CinemaController();
         $this->CmsController = new CmsController();
         $this->ReservationController = new ReservationController();
@@ -32,11 +31,11 @@ class MainController
     {
         try {
 
-            $controller = isset($_GET['con']) ? $_GET['con'] : 'home';
+            $controller = isset($_GET['con']) ? $_GET['con'] : 'content';
 
             switch ($controller) {
-                case 'home':
-                    $this->HomeController->handleRequest();
+                case 'content':
+                    $this->ContentController->handleRequest();
                     break;
                 case 'cinema':
                     $this->CinemaController->handleRequest();
@@ -55,9 +54,6 @@ class MainController
                     break;
                 case 'rate':
                     $this->RatesController->handleRequest();
-                    break;
-                case 'content':
-                    $this->ContentController->handleRequest();
                     break;
                 default:
                     http_response_code(404);

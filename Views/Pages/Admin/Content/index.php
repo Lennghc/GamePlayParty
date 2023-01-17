@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <?php
-    $title = 'Content';
+    $title = 'Bioscopen';
     include './Views/Layout/header.php';
     ?>
     <style>
@@ -22,9 +22,8 @@
     <?php include './Views/Pages/Admin/Layout/sidebar.php' ?>
 
     <div class="col py-3">
-        <!-- <h2>About us</h2> -->
-       <?php include './Views/Pages/Admin/Content/updateContent.php' ?>
-
+        <h2>Pagina bewerken</h2>
+        <?= !empty($display) ? $display : null ?>
     </div>
     </div>
     </div>
