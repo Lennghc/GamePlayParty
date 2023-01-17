@@ -9,6 +9,7 @@ class CmsController
         $this->CinemaController = new CinemaController();
         $this->LoungeController = new LoungeController();
         $this->RatesController = new RatesController();
+        $this->HomeController = new HomeController();
     }
     public function __destruct()
     {
@@ -35,6 +36,9 @@ class CmsController
                     break;
                 case 'rate':
                     $this->RatesController->index();
+                    break;
+                case 'home':
+                    $this->HomeController->update();
                     break;
                 default:
                     http_response_code(404);
