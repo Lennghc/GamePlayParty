@@ -14,7 +14,7 @@
     <?php include './Views/Pages/Admin/Layout/sidebar.php' ?>
     <div class="col py-3">
         <div class="container">
-            <form action="index.php?con=home&op=update" method="POST">
+            <form action="index.php?con=content&op=home" method="POST">
                 <div class="d-flex justify-content-between">
                     <h2>Bewerken Homepagina</h2>
                     <button class="btn bg-dark bg-opacity-50 text-white" type="submit" name="submit">Opslaan</button>

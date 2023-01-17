@@ -27,7 +27,9 @@
 
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=users" class="nav-link px-0 align-middle"><i class="fa fa-users"></i> <span class="ms-1 d-none d-sm-inline text-white">Bioscoop Eigenaren</span></a></li>' : null ?>
                     <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=cinema" class="nav-link px-0 align-middle"><i class="fa fa-video"></i> <span class="ms-1 d-none d-sm-inline text-white">Bioscopen</span></a></li>' : null ?>
-                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=cms&op=home" class="nav-link px-0 align-middle"><i class="fa-solid fa-pen-to-square"></i> <span class="ms-1 d-none d-sm-inline text-white">Bewerk Homepagina</span></a></li>' : null ?>
+                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=content&op=home" class="nav-link px-0 align-middle"><i class="fa fa-edit"></i> <span class="ms-1 d-none d-sm-inline text-white">Bewerk Homepagina</span></a></li>' : null ?>
+                    <?= isset($_SESSION['user']) && $_SESSION['user']->role_id == 4 ? '<li><a href="index.php?con=content&op=aboutus" class="nav-link px-0 align-middle"><i class="fa fa-edit"></i> <span class="ms-1 d-none d-sm-inline text-white">About us</span></a></li>' : null ?>
+
 
 
                 </ul>

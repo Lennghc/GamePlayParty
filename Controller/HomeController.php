@@ -8,6 +8,7 @@ class HomeController
     {
         $this->Auth = new Auth();
         $this->Home = new Home();
+        $this->Content = new Content();
     }
     public function __destruct()
     {
@@ -40,9 +41,6 @@ class HomeController
                 case 'terms_conditions':
                     $this->terms_conditions();
                     break;
-                case 'update':
-                    $this->update_content();
-                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -54,13 +52,14 @@ class HomeController
 
     public function index()
     {
-        $result = $this->Home->collectDataHome()->fetchall(PDO::FETCH_ASSOC);
+        $result = $this->Content->collectDataHome()->fetchall(PDO::FETCH_ASSOC);
         include 'Views/Pages/home.php';
 
     }
 
     public function about_us()
     {
+        $result = $this->Content->collectDataAboutus()->fetchall(PDO::FETCH_ASSOC);
         include 'Views/Pages/about_us.php';
     }
 
@@ -88,26 +87,5 @@ class HomeController
     public function terms_conditions()
     {
         include 'Views/Policy/termsfeed-terms-conditions-html-english.php';
-    }
-
-    public function update_content()
-    {
-        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
-        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
-        $result = $this->Home->collectDataHome()->fetchall(PDO::FETCH_ASSOC);
-
-        if ($role == 4) {
-            if (isset($_POST['submit'])) {
-                $home_title = isset($_POST['home_title']) ? $_POST['home_title'] : null;
-                $home_start_content = isset($_POST['start_content']) ? $_POST['start_content'] : null;
-                $home_main_content = isset($_POST['main_content']) ? $_POST['main_content'] : null;
-
-                $result = $this->Home->update($home_title, $home_start_content, $home_main_content);
-                $result = $this->Home->collectDataHome()->fetchall(PDO::FETCH_ASSOC);
-                header("Location: index.php");
-            }
-
-            include 'Views/Pages/Admin/Home/update.php';
-        }
     }
 }

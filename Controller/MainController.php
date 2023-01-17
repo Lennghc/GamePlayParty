@@ -6,6 +6,7 @@ require_once 'ReservationController.php';
 require_once 'LoungeController.php';
 require_once 'AuthController.php';
 require_once 'RatesController.php';
+require_once 'ContentController.php';
 require_once './Classes/Display.php';
 require_once './Classes/Functions.php';
 require_once './Classes/Validation.php';
@@ -21,6 +22,7 @@ class MainController
         $this->LoungeController = new LoungeController();
         $this->AuthController = new AuthController();
         $this->RatesController = new RatesController();
+        $this->ContentController = new ContentController();
         $this->Display = new Display();
     }
     public function __destruct()
@@ -56,6 +58,9 @@ class MainController
                     break;
                 case 'rate':
                     $this->RatesController->handleRequest();
+                    break;
+                case 'content':
+                    $this->ContentController->handleRequest();
                     break;
                 default:
                     http_response_code(404);
