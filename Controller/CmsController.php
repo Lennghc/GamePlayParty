@@ -9,7 +9,7 @@ class CmsController
         $this->CinemaController = new CinemaController();
         $this->LoungeController = new LoungeController();
         $this->RatesController = new RatesController();
-        $this->HomeController = new HomeController();
+        $this->ContentController = new ContentController();
         $this->ContentController = new ContentController();
     }
     public function __destruct()

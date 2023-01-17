@@ -53,9 +53,6 @@ class MainController
                 case 'auth':
                     $this->AuthController->handleRequest();
                     break;
-                case 'users';
-                    $this->AuthController->handleRequest();
-                    break;
                 case 'rate':
                     $this->RatesController->handleRequest();
                     break;

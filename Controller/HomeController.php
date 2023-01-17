@@ -1,13 +1,11 @@
 <?php
 require_once './Models/Auth.php';
-require_once './Models/Home.php';
 
 class HomeController
 {
     public function __construct()
     {
         $this->Auth = new Auth();
-        $this->Home = new Home();
         $this->Content = new Content();
     }
     public function __destruct()
