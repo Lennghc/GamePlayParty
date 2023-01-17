@@ -32,6 +32,15 @@
                 <div class="row" id="tijden" role="group">
 
                     <?= !empty($button) ? $button : null ?>
+                    <form method="post" id="datepicker">
+                        <div class="col-md-4">
+                            <input type="hidden" id="cinema" value="<?= !empty($_GET['id']) ? $_GET['id'] : null ?>">
+                            <input type="date" id="date" min="<?= date('Y-m-d') ?>" class="form-control" onchange="dateOfThatWeek(event)">
+                        </div>
+
+                    </form>
+                    <div id="buttons" class="p-3"></div>
+
                     <div id="adres"></div>
 
                 </div>
@@ -53,12 +62,67 @@
 
     </div>
 
+    <script>
+        function dateOfThatWeek(e) {
+
+            var date = e.target.value;
+            var id = $('#cinema').val();
+
+            $.ajax({
+                url: "index.php?con=cinema&op=searchTimeSlots",
+                type: "POST",
+                data: {
+                    date: date,
+                    cinema: id,
+                },
+                beforeSend: function(xhr) {
+                    doAuthLoading('#buttons');
+                },
+                cache: false,
+                success: function(data, textStatus, xhr) {
+                    stopLoading('#buttons', 'success');
+
+                    if (xhr.status == 201) {
+                        // if status is (201 created), set de input fields to empty and give one message back of success
+
+                        document.getElementById('buttons').innerHTML = data.html;
+
+                    }
+
+                },
+                error: function(data) {
+                    stopLoading('#date', 'Try again later!');
+                    $("#date").remove("disabled");
+
+                    if (data.responseJSON && data.responseJSON.errors) {
+                        let errors = data.responseJSON.errors.map(error => {
+                            return `${error} <br>`;
+                        });
+
+                        document.getElementById('buttons').innerHTML = errors;
+                        
+                    }
+                }
+            });
+
+        }
 
 
+        const stopLoading = function(selector, value) {
+            if ($("#loading")) {
+                $("#loading").remove();
+                $(selector).html(value);
+            }
+        }
 
-
-
-
+        const doAuthLoading = function(selector) {
+            document.querySelector(selector).innerHTML = `
+    <div id="loading" class="spinner-border text-dark" style="width: 1.5rem; height: 1.5rem; border-width: 0.2em;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+`;
+        }
+    </script>
     <?php include 'Views/Layout/footer.php'; ?>
 
 

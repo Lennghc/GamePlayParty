@@ -53,6 +53,9 @@ class CinemaController
                 case 'readAll':
                     $this->readAll();
                     break;
+                case 'searchTimeSlots':
+                    $this->searchTimeslots();
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -60,6 +63,39 @@ class CinemaController
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function searchTimeslots()
+    {
+        $date = isset($_POST['date']) ? $_POST['date'] : null;
+        $cinema_id = isset($_POST['cinema']) ? $_POST['cinema'] : null;
+
+        $date = new DateTime($date);
+        $week = $date->format("W");
+        $year = $date->format("Y");
+
+        $date->setISODate($year, $week);
+        $week_start = $date->format('Y-m-d');
+        $date->modify('+6 days');
+        $week_end = $date->format('Y-m-d');
+
+        $result = $this->Lounge->timeSlots($week_start, $week_end, $cinema_id);
+
+        if (!isset($result->errors)) {
+
+            $button = $this->Display->createTimeslotButtons($result);
+
+            echo Functions::toJSON(array(
+                'html' => $button
+            ));
+
+            exit;
+        }
+
+
+        echo Functions::toJSON(array(
+            'errors' => !empty($result->errors) ? $result->errors : null
+        ));
     }
 
     public function index()
@@ -87,8 +123,6 @@ class CinemaController
 
     public function details($cinema_id)
     {
-        $result = $this->Lounge->timeSlots($cinema_id);
-        $button = $this->Display->createTimeslotButtons($result);
         $result = $this->Cinema->read($cinema_id);
         $informationText = $this->Display->convertToText($result, true);
 
@@ -174,7 +208,6 @@ class CinemaController
                 $cinema_img = $this->File->imageUpload($_FILES);
 
                 $this->Cinema->update($user_id, $cinema_name, $cinema_desc, $cinema_img, $encodeArray);
-
             }
 
             include 'Views/Pages/Admin/Cinema/update.php';
@@ -196,5 +229,4 @@ class CinemaController
         header('Location: index.php?con=cms&op=cinema');
         include 'Views/Pages/Admin/Cinema/index.php';
     }
-
 }

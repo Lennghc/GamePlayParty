@@ -335,10 +335,10 @@ class Display
 		$html = "";
 		$time = [];
 
-		if ($result->rowCount() != 0) {
-			$row = $result->fetchall(PDO::FETCH_ASSOC);
+		if (count($result) != 0) {
+			// $row = $result->fetchall(PDO::FETCH_ASSOC);
 
-			foreach ($row as $newkey => $rowValue) {
+			foreach ($result as $newkey => $rowValue) {
 				$time = json_decode($rowValue['lounge_timeslots'], true);
 				$date = $rowValue['lounge_open_date'];
 				$lounge_id = $rowValue['lounge_id'];
