@@ -38,7 +38,7 @@ class CmsController
                     $this->RatesController->index();
                     break;
                 case 'home':
-                    $this->HomeController->update();
+                    $this->HomeController->update_content();
                     break;
                 default:
                     http_response_code(404);

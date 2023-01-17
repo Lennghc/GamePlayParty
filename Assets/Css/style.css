@@ -73,14 +73,13 @@ body.dark {
     }
 
     .title-under-logo {
-        padding-top: 3.5em;
-        padding-top: 5em;
+        padding-top: 1rem !important;
         float: none;
         padding: 0;
         text-align: left;
         transform: rotate(-15deg);
         font: bold 1.3em/14.5em 'sans-serif' !important;
-        margin-bottom: -2.5em;
+        margin-bottom: -6.5em;
 
     }
 
@@ -98,6 +97,11 @@ body.dark {
 
     #img-gameconsole {
         display: none;
+    }
+
+    p>img {
+        max-width: 100% !important;
+        height: auto !important;
     }
 }
 
