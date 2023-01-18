@@ -45,13 +45,11 @@ class Display
 
 						<div class='row'>				
 							<div class='col-md-12'>
-								<p>{$value['content_main']}
-								</p>
+								<p>{$value['content_main']}</p>
 							</div>
 							
 							<div class='col-md-12'>				
-								<p>{$value['content_extra']}
-								</p>
+								<p>{$value['content_extra']}</p>
 								<a href='mailto:gameplayparty@gmail.com'><div class='button'>Mail ons!</div></a>
 							</div>
 						</div>
@@ -91,7 +89,7 @@ class Display
                         <h5>Hoofd content</h5>
                         <div class='form-floating mb-3'>
                         <label for='Content_Main'>Wie zijn wij?</label>
-                        <textarea type='textarea' id='Content_Main' name='content_main' rows='20' cols='50'>{$value['content_main']}</textarea>
+                        <textarea type='textarea' id='PageEditor' name='content_main'>{$value['content_main']}</textarea>
                         </div>
                     </div>
 
@@ -99,7 +97,7 @@ class Display
                         <h5>Extra Content</h5>
                         <div class='form-floating mb-3'>
                             <label for='Extra_content'>Contact</label>
-                            <textarea class='form-control' name='content_extra' id='Extra_content' rows='20' cols='50'>{$value['content_extra']}</textarea>
+                            <textarea class='form-control' name='content_extra' id='PageEditor'>{$value['content_extra']}</textarea>
                         </div>
                     </div>
                 </div>
