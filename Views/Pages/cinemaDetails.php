@@ -34,7 +34,6 @@
                     <?= !empty($button) ? $button : null ?>
                     <form method="post" id="datepicker">
                         <div class="col-md-4">
-                            <input type="hidden" id="cinema" value="<?= !empty($_GET['id']) ? $_GET['id'] : null ?>">
                             <input type="date" id="date" min="<?= date('Y-m-d') ?>" class="form-control" onchange="dateOfThatWeek(event)">
                         </div>
 
@@ -66,7 +65,10 @@
         function dateOfThatWeek(e) {
 
             var date = e.target.value;
-            var id = $('#cinema').val();
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get('id')
 
             $.ajax({
                 url: "index.php?con=cinema&op=searchTimeSlots",

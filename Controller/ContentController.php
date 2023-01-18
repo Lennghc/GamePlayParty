@@ -64,9 +64,16 @@ class ContentController
 
     public function updateAbout()
     {
-        $result = $this->Content->collectContentPage(2);
-        $display = $this->Display->pageUpdateForm($result, 'About Us', 'index.php?con=content&op=updateAboutHandler');
-        include 'Views/Pages/Admin/Content/index.php';
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+
+        if ($role == 4) {
+            $result = $this->Content->collectContentPage(2);
+            $display = $this->Display->pageUpdateForm($result, 'About Us', 'index.php?con=content&op=updateAboutHandler');
+            include 'Views/Pages/Admin/Content/index.php';
+        } else {
+            Functions::toast('Onbevoegd hiervoor.', 'error', 'toast-top-right');
+            header("Location: index.php");
+        }
     }
 
     public function updateAboutHandler()
@@ -83,9 +90,16 @@ class ContentController
 
     public function updateHome()
     {
-        $result = $this->Content->collectContentPage(1);
-        $display = $this->Display->pageUpdateForm($result, 'Home', 'index.php?con=content&op=updateHomeHandler');
-        include 'Views/Pages/Admin/Content/index.php';
+        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
+
+        if ($role == 4) {
+            $result = $this->Content->collectContentPage(1);
+            $display = $this->Display->pageUpdateForm($result, 'Home', 'index.php?con=content&op=updateHomeHandler');
+            include 'Views/Pages/Admin/Content/index.php';
+        } else {
+            Functions::toast('Onbevoegd hiervoor.', 'error', 'toast-top-right');
+            header("Location: index.php");
+        }
     }
 
     public function updateHomeHandler()
@@ -104,7 +118,7 @@ class ContentController
     public function index()
     {
         $result = $this->Content->collectContentPage(1);
-        $page = $this->Display->readPageContent($result,true);
+        $page = $this->Display->readPageContent($result, true);
         include 'Views/Pages/home.php';
     }
 
@@ -134,7 +148,6 @@ class ContentController
     {
         include 'Views/Policy/termsfeed-return-refund-policy-html-english.php';
     }
-
 
     public function terms_conditions()
     {
