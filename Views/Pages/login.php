@@ -28,7 +28,6 @@
 
             <button class="w-100 btn btn-lg btn-success" type="submit" id="login_button">Inloggen</button>
             <button class="btn btn-secondary button" onclick="history.back()">Ga terug</button>
-            <a class="btn btn-secondary button" href="?con=home&op=registreer">Registreer</a>
 
             <p class="mt-5 mb-3 text-muted">&copy; WebWorld</p>
         </form>

@@ -1,11 +1,11 @@
 <?php
-require_once 'HomeController.php';
 require_once 'CinemaController.php';
 require_once 'CmsController.php';
 require_once 'ReservationController.php';
 require_once 'LoungeController.php';
 require_once 'AuthController.php';
 require_once 'RatesController.php';
+require_once 'ContentController.php';
 require_once './Classes/Display.php';
 require_once './Classes/Functions.php';
 require_once './Classes/Validation.php';
@@ -14,13 +14,14 @@ class MainController
 {
     public function __construct()
     {
-        $this->HomeController = new HomeController();
+        $this->ContentController = new ContentController();
         $this->CinemaController = new CinemaController();
         $this->CmsController = new CmsController();
         $this->ReservationController = new ReservationController();
         $this->LoungeController = new LoungeController();
         $this->AuthController = new AuthController();
         $this->RatesController = new RatesController();
+        $this->ContentController = new ContentController();
         $this->Display = new Display();
     }
     public function __destruct()
@@ -30,11 +31,11 @@ class MainController
     {
         try {
 
-            $controller = isset($_GET['con']) ? $_GET['con'] : 'home';
+            $controller = isset($_GET['con']) ? $_GET['con'] : 'content';
 
             switch ($controller) {
-                case 'home':
-                    $this->HomeController->handleRequest();
+                case 'content':
+                    $this->ContentController->handleRequest();
                     break;
                 case 'cinema':
                     $this->CinemaController->handleRequest();
@@ -49,9 +50,6 @@ class MainController
                     $this->ReservationController->handleRequest();
                     break;
                 case 'auth':
-                    $this->AuthController->handleRequest();
-                    break;
-                case 'users';
                     $this->AuthController->handleRequest();
                     break;
                 case 'rate':

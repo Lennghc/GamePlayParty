@@ -32,7 +32,7 @@
                     <div class="col-md-3">
                         <div class="form-floating mb-6">
                             <input type="file" name="cinema_img" id="cinema_Img" class="form-control" value="<?= !empty($dataCinema[0]['cinema_img']) ? $dataCinema[0]['cinema_img'] : null ?>">
-                            <label for="cinema_img">Bioscoop Thumbnail</label>
+                            <label for="cinema_Name">Bioscoop Thumbnail</label>
                         </div>
                     </div>
                 </div>
@@ -109,5 +109,4 @@
     </div>
 
 </body>
-
 </html>

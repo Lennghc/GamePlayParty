@@ -18,6 +18,8 @@ class Functions
             if (strtotime($startTime) <= strtotime($endTime)) {
                 $time[$i]['slot_start_time'] = $start;
                 $time[$i]['slot_end_time'] = $end;
+                $time[$i]['active'] = 0;
+
             }
         }
         return $time;

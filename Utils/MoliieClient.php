@@ -25,7 +25,7 @@ $mollie = new MollieClient('test_8umVA4dk2r3jUDNU5fQwGPBJrrJQJK');
 $payment = $mollie->createPayment();
 //
 $payment->setAmount(500);
-$payment->setRedirectUrl('https://webworld.lennghc.nl/?#');
+$payment->setRedirectUrl('https://gameplayparty.imlenn.dev/?#');
 $payment->setDescription('Reservering nummer #69 - GamePlayParty');
 //
 

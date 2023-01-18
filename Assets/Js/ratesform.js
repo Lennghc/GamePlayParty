@@ -25,7 +25,10 @@ function ratesCalculate(id, calc) {
                 parrentRow.querySelector('#subtotal').innerHTML = Euro.format(newPrice);
             }
 
+
+
             return value;
+
         }
         add(id);
     }
@@ -74,13 +77,78 @@ function ratesCalculate(id, calc) {
 
 
 $('#rates_button').on('click', function () {
+    // user details
+    var fName = $('#fName').val();
+    var mName = $('#mName').val();
+    var lName = $('#lName').val();
+    var street = $('#Street').val();
+    var houseNumber = $('#houseNumber').val();
+    var zipCode = $('#zipCode').val();
+    var city = $('#City').val();
+    var tel = $('#Tel').val();
+    var email = $('#Email').val();
+
+    var date = $('#date').val();
+    var lounge = $('#zaal').val();
+    var time = $('#time').text();
+    var key = $('#key').val();
+
+    var timeArray = [];
+
+    timeArray = {
+        lounge_id: lounge,
+        lounge_open_date: date,
+        timeslot: time,
+        key: key
+    }
+
+    if (fName != "" && lName != "" && street != "" && houseNumber != "" && zipCode != "" && city != "" && tel != "" && email != "") {
 
 
-    var inputArray = [];
-    var sendData = [];
-    var Data = [];
-    var inputs = document.querySelectorAll('.input-number');
-    inputs.forEach(input => {
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var zipcodeformat = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i;
+        var houseformat = /^[1-9]\d*(?: ?(?:[a-z]|[/-] ?\d+[a-z]?))?$/;
+
+        if (!email.match(mailformat)) {
+            toast('Ongeldig email adres', 'error', 'toast-top-right');
+            return;
+        }
+
+        if(!zipCode.match(zipcodeformat)){
+            toast('Ongeldige postcode', 'error', 'toast-top-right');
+            return;
+        }
+
+        if(!houseNumber.match(houseformat)){
+            toast('Ongeldig huisnummer', 'error', 'toast-top-right');
+            return;
+        }
+
+
+
+
+        var userArray = [];
+        userArray = {
+            fName: fName,
+            mName: mName,
+            lName: lName,
+            adres: {
+                street: street,
+                houseNumber: houseNumber,
+                zipcode: zipCode,
+                city: city
+            },
+
+            tel: tel,
+            email: email
+        };
+
+
+        var inputArray = [];
+        var sendData = [];
+        var Data = [];
+        var inputs = document.querySelectorAll('.input-number');
+        inputs.forEach(input => {
             $(input).attr("readonly", true);
             inputArray = {
                 rates_id: [input.getAttribute("data-type")],
@@ -88,7 +156,7 @@ $('#rates_button').on('click', function () {
             };
 
             Data.push(sendData.concat(inputArray));
-    });
+        });
 
         var minPlusButtons = document.querySelectorAll('.minplus')
         minPlusButtons.forEach(element => {
@@ -101,11 +169,12 @@ $('#rates_button').on('click', function () {
 
 
         $.ajax({
-            url: "index.php?con=reserv&op=pdf",
+            url: "index.php?con=reserv&op=create",
             type: "POST",
             data: {
-                data: Data,
-                id: $('#reservation').val()
+                inputFields: Data,
+                userData: userArray,
+                timeslotData: timeArray
             },
             beforeSend: function (xhr) {
                 doAuthLoading('#rates_button');
@@ -116,12 +185,12 @@ $('#rates_button').on('click', function () {
 
                 if (xhr.status == 201) {
                     // if status is (201 created), set de input fields to empty and give one message back of success
-                    // $('#rates-form')[0].reset();
+                    $('#rates-form')[0].reset();
                     toast('U heeft met success een pre-order gemaatkt!', 'success', 'toast-top-right');
 
-                    // $("#rates_button").remove();
-                    // $('#download').append("<a id='url' class='btn bg-success bg-opacity-25'>Download</a>")
-                    // $("#url").attr('href', data.url);
+                    $("#rates_button").remove();
+                    $('#download').append("<a id='url' class='btn bg-success bg-opacity-25'>Klik voor mijn Reservering</a>")
+                    $("#url").attr('href', data.url);
                     // setTimeout(() => {
                     //     window.location.replace('index.php?con=auth&op=login');
                     // }, 2000);
@@ -142,10 +211,11 @@ $('#rates_button').on('click', function () {
                 }
             }
         });
+    } else {
+        toast("Please fill all the fields!", 'error', 'toast-top-right');
+
+    }
 });
-
-
-
 
 
 const stopLoading = function (selector, value) {

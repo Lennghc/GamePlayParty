@@ -39,7 +39,7 @@ class Auth extends Main
     public function all($user_id)
     {
         try {
-            $sql = "SELECT user_id AS ID,user_email AS Email,role_name AS Role FROM Users JOIN Roles USING(role_id) WHERE user_id != $user_id";
+            $sql = "SELECT user_id AS ID,user_email AS Email FROM Users WHERE user_id != $user_id";
             $result = self::readsData($sql);
             return $result;
         } catch (Exception $e) {
@@ -59,7 +59,7 @@ class Auth extends Main
                 $errors[] = "username or email is already linked to a account.";
             } else {
                 $password = Functions::encrypt($password);
-                $sql = "INSERT INTO `Users` (`user_username`, `user_email`, `user_password`, `role_id`) VALUES ('{$username}','{$email}', '{$password}', 1)";
+                $sql = "INSERT INTO `Users` (`user_username`, `user_email`, `user_password`, `role_id`) VALUES ('{$username}','{$email}', '{$password}', 3)";
                 $result = self::createData($sql);
 
                 http_response_code(201);

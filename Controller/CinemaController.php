@@ -1,6 +1,7 @@
 <?php
 require_once './Models/Cinema.php';
 require_once './Models/Lounge.php';
+require_once './Models/FileHandling.php';
 require_once './Models/Reservation.php';
 
 class CinemaController
@@ -9,6 +10,7 @@ class CinemaController
     {
         $this->Cinema = new Cinema();
         $this->Lounge = new Lounge();
+        $this->File = new FileHandling();
         $this->Display = new Display();
         $this->Reservation = new Reservation();
         $this->Auth = new Auth();
@@ -51,6 +53,9 @@ class CinemaController
                 case 'readAll':
                     $this->readAll();
                     break;
+                case 'searchTimeSlots':
+                    $this->searchTimeslots();
+                    break;
                 default:
                     http_response_code(404);
                     break;
@@ -58,6 +63,39 @@ class CinemaController
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function searchTimeslots()
+    {
+        $date = isset($_POST['date']) ? $_POST['date'] : null;
+        $cinema_id = isset($_POST['cinema']) ? $_POST['cinema'] : null;
+
+        $date = new DateTime($date);
+        $week = $date->format("W");
+        $year = $date->format("Y");
+
+        $date->setISODate($year, $week);
+        $week_start = $date->format('Y-m-d');
+        $date->modify('+6 days');
+        $week_end = $date->format('Y-m-d');
+
+        $result = $this->Lounge->timeSlots($week_start, $week_end, $cinema_id);
+
+        if (!isset($result->errors)) {
+
+            $button = $this->Display->createTimeslotButtons($result);
+
+            echo Functions::toJSON(array(
+                'html' => $button
+            ));
+
+            exit;
+        }
+
+
+        echo Functions::toJSON(array(
+            'errors' => !empty($result->errors) ? $result->errors : null
+        ));
     }
 
     public function index()
@@ -85,9 +123,6 @@ class CinemaController
 
     public function details($cinema_id)
     {
-        $result = $this->Lounge->timeSlots($cinema_id);
-        $reservated = $this->Reservation->getReservatedTimeSlots();
-        $button = $this->Display->createTimeslotButtons([$result, $reservated]);
         $result = $this->Cinema->read($cinema_id);
         $informationText = $this->Display->convertToText($result, true);
 
@@ -138,12 +173,12 @@ class CinemaController
                 $reach = json_decode($dataCinema[0]['cinema_reachability'], true);
             }
 
-            // var_dump($this->Cinema->read($user_id));
 
 
             if (isset($_POST['submit'])) {
                 $cinema_name = isset($_POST['cinema_name']) ? $_POST['cinema_name'] : null;
                 $cinema_desc = isset($_POST['cinema_desc']) ? $_POST['cinema_desc'] : null;
+                $cinema_img = isset($_POST['cinema_img']) ? $_POST['cinema_img'] : null;
 
                 $open_dates = isset($_POST['open_dates']) ? $_POST['open_dates'] : null;
                 $adres = isset($_POST['adres']) ? $_POST['adres'] : null;
@@ -170,10 +205,9 @@ class CinemaController
 
 
                 $encodeArray = json_encode($array);
+                $cinema_img = $this->File->imageUpload($_FILES);
 
-                $this->Cinema->update($user_id, $cinema_name, $cinema_desc, $encodeArray);
-
-                header("Location: index.php?con=cinema&op=update");
+                $this->Cinema->update($user_id, $cinema_name, $cinema_desc, $cinema_img, $encodeArray);
             }
 
             include 'Views/Pages/Admin/Cinema/update.php';

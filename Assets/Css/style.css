@@ -4,6 +4,10 @@
 
 }
 
+body {
+    overflow-x: hidden;
+}
+
 * {
     font-family: sans-serif;
 }
@@ -32,12 +36,11 @@ body.dark {
 }
 
 .title-under-logo {
-    padding-top: 5em;
+    padding-top: 5.7rem;
     float: left;
-    padding: 1em;
     text-align: left;
     transform: rotate(-15deg);
-    font: bold 3em/9em 'sans-serif'!important;
+    font: bold 3em/9em 'sans-serif' !important;
     color: var(--text-color-text)
 }
 
@@ -51,48 +54,54 @@ body.dark {
 }
 
 .bg-green {
-    background-color: var(--nav-color)!important;
+    background-color: var(--nav-color) !important;
 }
 
 
 #button-group {
-    display: none!important;
+    display: none !important;
 }
 
 @media (max-width: 790px) {
 
     #button-group {
-        display: inline-flex!important;
+        display: inline-flex !important;
     }
+
     #logo_image {
         width: 150%;
     }
 
     .title-under-logo {
-        padding-top: 3.5em;
-        padding-top: 5em;
+        padding-top: 1rem !important;
         float: none;
         padding: 0;
         text-align: left;
         transform: rotate(-15deg);
         font: bold 1.3em/14.5em 'sans-serif' !important;
-        margin-bottom: -2.5em;
+        margin-bottom: -6.5em;
 
     }
 
     .home-image {
         margin: 0;
     }
-    .conatiner_landing_page{
-        margin-top: unset;
+
+    .conatiner_landing_page {
+        margin-top: 3em;
     }
 
-    .reservDetails-inputfield{
-        width: 40%!important;
+    .reservDetails-inputfield {
+        width: 40% !important;
     }
 
     #img-gameconsole {
         display: none;
+    }
+
+    p>img {
+        max-width: 100% !important;
+        height: auto !important;
     }
 }
 
@@ -100,16 +109,113 @@ body.dark {
     color: #08c447 !important;
 }
 
-.img-fluid {
-    height: 20rem;
+
+#img-gameconsole {
+    height: 20rem !important;
 }
 
 .box-right-home {
     position: absolute;
     top: 10em;
-    left: 60rem;
+    left: 72rem;
 }
 
-[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
-  display: none;
+[aria-expanded="false"]>.expanded,
+[aria-expanded="true"]>.collapsed {
+    display: none;
+}
+
+
+
+
+
+#list .list-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    max-height: 100%;
+    max-height: 90px;
+    transition: all .3s;
+
+    display: flex;
+}
+
+#list .list-item:hover {
+    transform: scale(1.02);
+}
+
+#list .list-img {
+    position: relative;
+    width: 20%;
+}
+
+#list .list-img img {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    transform: scale(1.2);
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1.0) 30%, transparent 90%);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1.0) 30%, transparent 90%);
+}
+
+
+
+#list .list-info {
+    width: 50%;
+    padding: 10px;
+    align-self: center;
+}
+
+#list .list-info h6 {
+    text-transform: capitalize;
+    color: #000;
+}
+
+#list .list-ticket {
+    margin-left: auto;
+    margin-right: 20px;
+    align-self: center;
+}
+
+#list .list-ticket .list-button {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    background: #343a40;
+    box-shadow: 0 0 3px gray;
+    transition: all .3s;
+}
+
+#fa {
+    font-size: 20px;
+}
+
+#list .list-ticket .list-button:hover,
+#list .list-ticket .list-button:focus {
+    transform: scale(1.2) skew(-10deg);
+    box-shadow: 2px 5px 10px #343a404e;
+    border-radius: 15%;
+}
+
+@media (max-width: 991.98px) {
+
+    #list .list-img {
+        width: 23%;
+    }
+
+    #list .list-date {
+        transform: scale(0.7);
+        top: -3px;
+        left: 1px
+    }
+
+    #list .list-info .badge {
+        font-size: 50%;
+        line-height: unset;
+    }
 }

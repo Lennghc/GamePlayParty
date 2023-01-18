@@ -32,11 +32,8 @@ class ReservationController
                 case 'handleReservation':
                     $this->handleReservation();
                     break;
-                case 'reservDetails':
-                    $this->reservDetails($id);
-                    break;
-                case 'pdf':
-                    $this->createUrl();
+                case 'create':
+                    $this->create();
                     break;
                 case 'invoice':
                     $this->invoice($id);
@@ -56,38 +53,74 @@ class ReservationController
         $result = $this->Reservation->getDataforPDF($id);
 
         if (!isset($result->errors)) {
-            var_dump($result->fetchall(PDO::FETCH_ASSOC));
+            // caculate rates in php 
+            $data = $result->fetchall(PDO::FETCH_ASSOC);
+            $rates = json_decode($data[0]['reservated_people'], true);
+            $ratesNewArray = [];
+            foreach ($rates as $value) {
+                $intID = (int)$value['rates_id'][0];
+                $intPEOPLE = (int)$value['people'][0];
+                $result = $this->Rates->calculate($intID, $intPEOPLE);
+                $row = $result->fetchall(PDO::FETCH_ASSOC);
+                array_push($ratesNewArray, $row);
+            }
+
+            $rate = $this->Display->pdf($ratesNewArray, $data);
+            $allRates = $this->Rates->allRatesOfOneCinema($data[0]['cinema_id'])->fetchall(PDO::FETCH_ASSOC);
+            $table = $this->Display->createTableLoungePDF($this->Reservation->getDataforloungePDF($data[0]['cinema_id']));
+
+            include('Views/Pages/invoice.php');
         }
     }
 
-    public function createUrl()
+    public function create()
     {
-        $role = isset($_SESSION['user']->role_id) ? $_SESSION['user']->role_id : null;
-        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : null;
-
-        $data = isset($_POST['data']) ? $_POST['data'] : null;
-        $reservation_id = isset($_POST['id']) ? $_POST['id'] : null;
+        $userData = isset($_POST['userData']) ? $_POST['userData'] : null;
+        $inputFields = isset($_POST['inputFields']) ? $_POST['inputFields'] : null;
+        $timeslotData = isset($_POST['timeslotData']) ? $_POST['timeslotData'] : null;
         $array = [];
 
-        for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $key => $value) {
+        for ($i = 0; $i < count($inputFields); $i++) {
+            foreach ($inputFields[$i] as $key => $value) {
                 $array[$i]['rates_id'] = $value['rates_id'];
                 $array[$i]['people'] = $value['people'];
             }
         }
 
-        $encode = json_encode($array);
 
 
-        $setPeople = $this->Reservation->setReservationPeople($encode, $reservation_id);
+        // timeslot setting to active
+        $timeslotArray = explode('-', $timeslotData['timeslot']);
 
-        if (!isset($setPeople->errors)) {
+        $start_time = $timeslotArray[0];
+        $end_time = $timeslotArray[1];
+
+        $time[$timeslotData['key']]['slot_start_time'] = $start_time;
+        $time[$timeslotData['key']]['slot_end_time'] = $end_time;
+        $time[$timeslotData['key']]['active'] = 1;
+
+        $encodeTimeslot = json_encode($time);
+
+        // ending timeslot setting to active
+
+        $encodeUserData = json_encode($userData);
+
+        $encodeField = json_encode($array);
+
+        $result = $this->Reservation->setReservation($encodeField, $encodeUserData, $encodeTimeslot, $timeslotData['lounge_id'], $timeslotData['lounge_open_date']);
+
+        if (!isset($result->errors)) {
             echo Functions::toJSON(array(
-                'url' => 'index.php?con=reserv&op=invoice&id=' . $reservation_id,
+                'url' => 'index.php?con=reserv&op=invoice&id=' . $result,
             ));
 
+            $this->Reservation->setTimeSlotInactive($timeslotData['lounge_id'], $encodeTimeslot, $timeslotData['key']);
             exit;
         }
+
+        echo Functions::toJSON(array(
+            'errors' => !empty($result->errors) ? $result->errors : null
+        ));
     }
 
 
@@ -106,12 +139,12 @@ class ReservationController
                 exit();
             } else {
                 $result = $this->Reservation->ownCinemasReservations($user_id);
-                $table = $this->Display->createTable($result, false, false, true, false);
+                $table = $this->Display->createTable($result, false, false, false, false, false, true);
             }
         } elseif ($role == 4) {
             // Jack jones eigenaar
             $result = $this->Reservation->allReservationCinemas();
-            $table = $this->Display->createTable($result);
+            $table = $this->Display->createTable($result, false, false, false, false, false, true);
         } else {
             Functions::toast('Onbevoegd hiervoor', 'error', 'toast-top-right');
             header('Location: index.php');
@@ -121,93 +154,25 @@ class ReservationController
         include 'Views/Pages/Admin/Reservation/index.php';
     }
 
-
-    public function reservDetails($id)
-    {
-        $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : 'NULL';
-        $result = $this->Reservation->hasReservation($user_id);
-
-        $array = $result->fetchall(PDO::FETCH_ASSOC);
-        foreach ($array as $value) {
-            if ($user_id == $value['user_id'] and $id == $value['reservation_id']) {
-                $formInputs = $this->Display->createUserForm($this->Auth->collectUserData($user_id), false, "index.php?con=reserv&op=reservDetails&id={$id}");
-                $cinemaID = $this->Lounge->getCinemaIDByLoungeID($value['lounge_id']);
-                $cinema_id = $cinemaID->fetchall(PDO::FETCH_ASSOC);
-                $rates = $this->Display->createRatesForm($this->Rates->getCinemaRates($cinema_id[0]['cinema_id']));
-                include 'Views/Pages/reservDetails.php';
-
-
-                if (isset($_POST['submit'])) {
-                    $fName = isset($_POST['fName']) ? $_POST['fName'] : null;
-                    $mName = isset($_POST['mName']) ? $_POST['mName'] : null;
-                    $lName = isset($_POST['lName']) ? $_POST['lName'] : null;
-                    $street = isset($_POST['street']) ? $_POST['street'] : null;
-                    $house_nmr = isset($_POST['houseNumber']) ? $_POST['houseNumber'] : null;
-                    $zipcode = isset($_POST['zipcode']) ? $_POST['zipcode'] : null;
-                    $city = isset($_POST['city']) ? $_POST['city'] : null;
-                    $tel = isset($_POST['tel']) ? $_POST['tel'] : null;
-
-
-                    $this->Reservation->updateUser($user_id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel);
-                    Functions::toast("{$_SESSION['user']->username} met success bijgewerkt!", 'success', 'toast-top-right');
-                    // header("Location: index.php?con=reserv&op=reservDetails&id={$id}");
-                    exit();
-                }
-            } else {
-                Functions::toast('Dit mag niet!', 'error', 'toast-top-right');
-                header('Location: index.php');
-                exit();
-            }
-        }
-    }
-
     public function handleReservation()
     {
         if (isset($_POST['submit'])) {
-            if (!isset($_SESSION['user']->id)) {
-                Functions::toast('Meld je eerst aan!', 'error', 'toast-top-right');
-                header('Location: index.php?con=auth&op=login');
-                exit();
-            }
-            $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : 'NULL';
-            $hasReservation = $this->Reservation->hasReservation($user_id);
-            $res = $hasReservation->fetchall(PDO::FETCH_ASSOC);
-            if ($hasReservation->rowCount() ==  0) {
-                $timeslot = isset($_POST['timeslot']) ? $_POST['timeslot'] : NULL;
-                $date = isset($_POST['date']) ? $_POST['date'] : NULL;
-                $lounge_id = isset($_POST['lounge_id']) ? $_POST['lounge_id'] : NULL;
-                $user_id = isset($_SESSION['user']->id) ? $_SESSION['user']->id : NULL;
-
-                $timeslotArray = explode('-', $timeslot);
-
-                $start_time = $timeslotArray[0];
-                $end_time = $timeslotArray[1];
-
-                $time[1]['slot_start_time'] = $start_time;
-                $time[1]['slot_end_time'] = $end_time;
-
-                $arra = json_encode($time);
-
-                $result = $this->Reservation->setTimeSlot($arra, $date, $lounge_id, $user_id);
-
-                header("Location: index.php?con=reserv&op=reservDetails&id={$result}");
-                exit();
-            } elseif ($hasReservation->rowCount() >= 1) {
-                foreach ($res as $value) {
-                    $reservation_id = $value['reservation_id'];
-                }
-                Functions::toast('Deze factuur staat nog open!', 'info', 'toast-top-right');
-                header("Location: index.php?con=reserv&op=reservDetails&id={$reservation_id}");
-                exit();
-            }
+            $place = isset($_POST['key']) ? $_POST['key'] : null;
 
 
-            // else {
-            //     // go to list of view with more reservations of that person
-            //     Functions::toast('Je hebt nog betalingen open staan!', 'info', 'toast-top-right');
-            //     header('Location: index.php');
-            //     exit();
-            // }
+            $timeslot = isset($_POST['timeslot']) ? $_POST['timeslot'] : NULL;
+            $date = isset($_POST['date']) ? $_POST['date'] : NULL;
+            $lounge_id = isset($_POST['lounge_id']) ? $_POST['lounge_id'] : NULL;
+
+
+            $formInputs = $this->Display->createUserForm($timeslot, $date, $place, $lounge_id);
+            $rates = $this->Display->createRatesForm($this->Rates->getCinemaRates($lounge_id));
+
+            include 'Views/Pages/reservDetails.php';
+
+            exit();
+        } else {
+            http_response_code(404);
         }
     }
 }

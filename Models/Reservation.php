@@ -8,7 +8,7 @@ class Reservation extends Main
     public function getDataforPDF($reservation_id)
     {
         try {
-            $sql = "SELECT cinema_name, cinema_reachability, reservated_date, reservation_date, reservated_people, reservated_timeslot, status_id, status_text, lounge_id ,cinema_id FROM reservation JOIN lounge USING(lounge_id) JOIN cinema USING(cinema_id) JOIN status USING(status_id) WHERE reservation_id = $reservation_id";
+            $sql = "SELECT cinema_name, cinema_reachability, reservated_date, reservation_date, reservated_people, reservated_timeslot, status_id, status_text, lounge_id ,cinema_id,reservation_id,user_data FROM Reservation JOIN Lounge USING(lounge_id) JOIN Cinema USING(cinema_id) JOIN Status USING(status_id) WHERE reservation_id = $reservation_id";
             $result = self::readData($sql);
 
             http_response_code(200);
@@ -18,46 +18,64 @@ class Reservation extends Main
         }
     }
 
-    public function setReservationPeople($encode, $reservation_id)
+    public function getDataforloungePDF($cinema_id)
     {
         try {
-            $sql = "UPDATE Reservation SET reservated_people = '{$encode}' WHERE reservation_id = $reservation_id";
+            $sql = "SELECT `lounge_id`,`lounge_nmr`,`lounge_chair_places`,`lounge_wheelchair_places`,`lounge_screensize` FROM `Lounge` WHERE cinema_id = $cinema_id;";
+            $results = self::readData($sql);
+
+            return $results;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+
+    public function setReservation($encodeField, $encodeUserData, $encodeTimeslot, $lounge_id, $open_date)
+    {
+        try {
+            $sql = "SELECT reservation_id FROM Reservation WHERE reservated_date = '$open_date' AND reservated_timeslot = '$encodeTimeslot'";
+            $result = self::readData($sql);
+
+            if ($result->rowCount() != 0) {
+                $errors[] = "Geen dubblen reserveringen.";
+            } else {
+                $sql = "INSERT INTO `Reservation` (`reservated_date`, `reservated_timeslot`, `lounge_id`, `user_data`, `reservated_people`, `status_id`) VALUES ('{$open_date}', '$encodeTimeslot', '{$lounge_id}', '$encodeUserData' , '$encodeField' , '6')";
+                $result = self::createData($sql);
+                http_response_code(201);
+                return $result;
+            }
+
+            http_response_code(401);
+
+            return (object) [
+                'errors' => $errors
+            ];
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+
+    public function setTimeSlotInactive($lounge_id, $timeSlot, $key)
+    {
+        try {
+            $sql = "SELECT lounge_timeslots FROM Lounge WHERE lounge_id = $lounge_id";
+            $result = self::readData($sql);
+
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+
+            $oldTimeSlot = json_decode($row['lounge_timeslots'], true);
+            $newTimeSlot = json_decode($timeSlot, true);
+
+            unset($oldTimeSlot[$key]);
+
+            $combineArray = json_encode(array_merge($oldTimeSlot, $newTimeSlot));
+
+            $sql = "UPDATE Lounge SET lounge_timeslots = '$combineArray' WHERE lounge_id = $lounge_id";
             $result = self::updateData($sql);
 
             http_response_code(201);
-            return $result;
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
-
-    public function setTimeSlot($timeslot, $date, $lounge_id, $user_id)
-    {
-        try {
-            $sql = "INSERT INTO `Reservation` (`reservated_date`, `reservated_timeslot`, `lounge_id`, `user_id`, `status_id`) VALUES ('{$date}', '$timeslot', '{$lounge_id}', '{$user_id}' , '5')";
-            $result = self::createData($sql);
-            return $result;
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
-
-    public function getReservatedTimeSlots()
-    {
-        try {
-            $sql = "SELECT reservated_timeslot, reservated_date, lounge_id FROM Reservation";
-            $result = self::readData($sql);
-            return $result;
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
-
-    public function hasReservation($user_id)
-    {
-        try {
-            $sql = "SELECT user_fname, user_insertion, user_lname, user_streetname, user_city, user_zipcode, user_tel, user_house_nmr, user_username, user_email, reservation_id, user_id,lounge_id FROM Reservation JOIN Users USING(user_id) WHERE status_id = 4 OR status_id = 5 AND user_id = $user_id";
-            $result = self::readData($sql);
             return $result;
         } catch (Exception $e) {
             throw $e;
@@ -71,7 +89,7 @@ class Reservation extends Main
             $result = self::readData($sql);
             $fetch = $result->fetchall(PDO::FETCH_ASSOC);
 
-            $sql = "SELECT reservation_id AS ID, cinema_name AS BioscoopNaam, user_fname AS KlantNaam, status_text AS Status FROM Reservation JOIN Users USING(user_id) JOIN Lounge USING(lounge_id) JOIN Cinema USING(cinema_id) JOIN Status USING(status_id) WHERE cinema_id = {$fetch[0]['cinema_id']} AND status_id = 2";
+            $sql = "SELECT reservation_id AS ID, cinema_name AS BioscoopNaam, status_text AS Status FROM Reservation JOIN Lounge USING(lounge_id) JOIN Cinema USING(cinema_id) JOIN Status USING(status_id) WHERE cinema_id = {$fetch[0]['cinema_id']}";
             $result = self::readsData($sql);
             return $result;
         } catch (Exception $e) {
@@ -82,19 +100,8 @@ class Reservation extends Main
     public function allReservationCinemas()
     {
         try {
-            $sql = "SELECT reservation_id AS ID, cinema_name AS BioscoopNaam, user_fname AS KlantNaam, status_text AS Status FROM Reservation JOIN Users USING(user_id) JOIN Lounge USING(lounge_id) JOIN Cinema USING(cinema_id) JOIN Status USING(status_id) WHERE status_id = 2";
+            $sql = "SELECT reservation_id AS ID, cinema_name AS BioscoopNaam, status_text AS Status FROM Reservation JOIN Lounge USING(lounge_id) JOIN Cinema USING(cinema_id) JOIN Status USING(status_id)";
             $result = self::readsData($sql);
-            return $result;
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
-
-    public function updateUser($id, $fName, $mName, $lName, $street, $house_nmr, $zipcode, $city, $tel)
-    {
-        try {
-            $sql = "UPDATE Users SET user_fname = '{$fName}', user_insertion = '{$mName}', user_lname = '{$lName}', user_streetname = '{$street}', user_house_nmr = '{$house_nmr}', user_city = '{$city}', user_zipcode = '{$zipcode}', user_tel = '{$tel}' WHERE user_id = $id";
-            $result = self::updateData($sql);
             return $result;
         } catch (Exception $e) {
             throw $e;
