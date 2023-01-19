@@ -107,14 +107,14 @@ class ReservationController
 
         $encodeField = json_encode($array);
 
-        $result = $this->Reservation->setReservation($encodeField, $encodeUserData, $encodeTimeslot, $timeslotData['lounge_id'], $timeslotData['lounge_open_date']);
+        $result = $this->Reservation->setReservation($encodeField, $encodeUserData, $encodeTimeslot, $timeslotData['lounge_id'], $timeslotData['availabilty_date']);
 
         if (!isset($result->errors)) {
             echo Functions::toJSON(array(
                 'url' => 'index.php?con=reserv&op=invoice&id=' . $result,
             ));
 
-            $this->Reservation->setTimeSlotInactive($timeslotData['lounge_id'], $encodeTimeslot, $timeslotData['key']);
+            $this->Reservation->setTimeSlotInactive($timeslotData['availabilty_id'], $encodeTimeslot, $timeslotData['key']);
             exit;
         }
 
@@ -163,9 +163,10 @@ class ReservationController
             $timeslot = isset($_POST['timeslot']) ? $_POST['timeslot'] : NULL;
             $date = isset($_POST['date']) ? $_POST['date'] : NULL;
             $lounge_id = isset($_POST['lounge_id']) ? $_POST['lounge_id'] : NULL;
+            $availabilty_id = isset($_POST['availabilty_id']) ? $_POST['availabilty_id'] : NULL;
 
 
-            $formInputs = $this->Display->createUserForm($timeslot, $date, $place, $lounge_id);
+            $formInputs = $this->Display->createUserForm($timeslot, $date, $place, $availabilty_id,$lounge_id);
             $rates = $this->Display->createRatesForm($this->Rates->getCinemaRates($lounge_id));
 
             include 'Views/Pages/reservDetails.php';

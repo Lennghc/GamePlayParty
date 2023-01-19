@@ -57,22 +57,22 @@ class Reservation extends Main
     }
 
 
-    public function setTimeSlotInactive($lounge_id, $timeSlot, $key)
+    public function setTimeSlotInactive($availabilty_id, $timeSlot, $key)
     {
         try {
-            $sql = "SELECT lounge_timeslots FROM Lounge WHERE lounge_id = $lounge_id";
+            $sql = "SELECT availabilty_time FROM Lounge JOIN Availabilty USING(lounge_id) WHERE availabilty_id = $availabilty_id";
             $result = self::readData($sql);
 
             $row = $result->fetch(PDO::FETCH_ASSOC);
 
-            $oldTimeSlot = json_decode($row['lounge_timeslots'], true);
+            $oldTimeSlot = json_decode($row['availabilty_time'], true);
             $newTimeSlot = json_decode($timeSlot, true);
 
             unset($oldTimeSlot[$key]);
 
             $combineArray = json_encode(array_merge($oldTimeSlot, $newTimeSlot));
 
-            $sql = "UPDATE Lounge SET lounge_timeslots = '$combineArray' WHERE lounge_id = $lounge_id";
+            $sql = "UPDATE Availabilty SET availabilty_time = '$combineArray' WHERE availabilty_id = $availabilty_id";
             $result = self::updateData($sql);
 
             http_response_code(201);

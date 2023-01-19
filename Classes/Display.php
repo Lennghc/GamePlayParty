@@ -3,18 +3,80 @@
 class Display
 {
 
+	public function selectLoungesOptions($result)
+	{
+		$html = "";
+		if ($result->rowCount() != 0) {
+
+			$html .= "<div class='container'>
+			<form action='index.php?con={$_GET['con']}&op=create' method='POST'>
+			<h1>Beschikbaarheid instellen</h1>
+			<div class='row'>
+			<div class='col-md-6'>";
+
+			while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
+				$html .= "<div class='form-floating mb-3'>
+								<select class='form-control' name='lounge' id='inputLounge'>";
+				foreach ($row as $item) {
+					$html .= "<option value=" . $item['lounge_id'] . ">" . $item['lounge_nmr'] . "</option>";
+				}
+				$html .= "</select>
+				<label for='inputLounge'>Zaal Nummer</label>
+					</div>";
+			}
+
+
+			$html .= "</div>
+			</div>
+
+			<div class='row'>
+			<div class='col-md-3'>
+			<div class='form-floating mb-3'>
+			<input type='time' name='slot_start_time' class='form-control' id='slot_Start_Time' placeholder='Start Tijd'/>
+			<label for='slot_Start_Time'>Start Tijd</label>
+			</div>
+			</div>
+
+			<div class='col-md-3'>
+			<div class='form-floating mb-3'>
+			<input type='time' name='slot_end_time' class='form-control' id='slot_Eind_Time' placeholder='Eind Tijd'/>
+			<label for='slot_End_Time'>Eind Tijd</label>
+			</div>
+			</div>
+
+			<div class='col-md-3'>
+			<div class='form-floating mb-3'>
+			<input type='date' name='reservated_date' class='form-control' min='{date('Y-m-d')}' id='reservated_Date' placeholder='Datum'/>
+			<label for='reservated_Date'>Datum</label>
+			</div>
+			</div>
+
+			<div class='form-group'>
+			<button type='submit' name='submit' class='form-group btn btn-primary'>Beschikbaarheid instellen</button>
+			</div>
+
+			</div>
+
+			</div>";
+		} else {
+			$html .= "<h4 class='text-danger'>Geen zalen beschikbaar</h4>";
+		}
+
+		return $html;
+	}
+
 	public function readPageContent($result, $pageHome = false)
 	{
 		$html = "";
 
 		if ($result->rowCount() != 0) {
 			while ($row = $result->fetchall(PDO::FETCH_ASSOC)) {
-				foreach ($row as $value) {	
-					
+				foreach ($row as $value) {
+
 					$html .= "<div class='container row'>
 					<div class='col-md-7 title-under-logo'><span style='font-family:sans-serif!important;'>{$value['content_title']}</span></div>
 				</div>";
-					
+
 					if ($pageHome == true) {
 
 						$html .= "<div class='container conatiner_landing_page'>
@@ -41,7 +103,7 @@ class Display
 				
 					</div>";
 					} else {
-						$html .="<div class='container conatiner_landing_page'>
+						$html .= "<div class='container conatiner_landing_page'>
 
 						<div class='row'>				
 							<div class='col-md-12'>
@@ -286,7 +348,7 @@ class Display
 		}
 	}
 
-	public function createUserForm($time, $date, $key, $lounge_id)
+	public function createUserForm($time, $date, $key, $availabilty_id, $lounge_id)
 	{
 		$html = "";
 
@@ -298,6 +360,7 @@ class Display
           </div>
               <input type='hidden' id='date' value='{$date}' />
               <input type='hidden' id='zaal' value='{$lounge_id}' />
+			  <input type='hidden' id='availabilty' value='{$availabilty_id}'/ >
               <input type='hidden' id='key' value='{$key}' />
               <div class='row'>
                   <div class='col-md-4'>
@@ -379,6 +442,7 @@ class Display
 				if ($tableheader == false) {
 					$html .= "<tr>";
 					foreach ($row as $key => $value) {
+						$key = str_replace('_', ' ', $key);
 						$html .= "<th scope='col'>{$key}</th>";
 					}
 					if ($edit == true || $delete == true || $read == true) {
@@ -411,10 +475,10 @@ class Display
 					}
 					if ($status == true) {
 						if ($row['is_active'] == 1) {
-							$html .= "<a type='button' href='index.php?con={$_GET['op']}&op=deactivate&id={$row['id']}' class='btn btn-success'><i class='fa-solid fa-check'></i>Actief</a>";
+							$html .= "<a type='button' href='index.php?con={$_GET['op']}&op=deactivate&id={$row['ID']}' class='btn btn-success'><i class='fa-solid fa-check'></i>Actief</a>";
 						}
 						if ($row['is_active'] == 0) {
-							$html .= "<a type='button' href='index.php?con={$_GET['op']}&op=activate&id={$row['id']}' class='btn btn-danger'><i class='fa-solid fa-xmark'></i>&nbsp; Inactief</a>";
+							$html .= "<a type='button' href='index.php?con={$_GET['op']}&op=activate&id={$row['ID']}' class='btn btn-danger'><i class='fa-solid fa-xmark'></i>&nbsp; Inactief</a>";
 						}
 					}
 					$html .= "</td>";
@@ -448,12 +512,13 @@ class Display
 			// $row = $result->fetchall(PDO::FETCH_ASSOC);
 
 			foreach ($result as $newkey => $rowValue) {
-				$time = json_decode($rowValue['lounge_timeslots'], true);
-				$date = $rowValue['lounge_open_date'];
+				$time = json_decode($rowValue['availabilty_time'], true);
+				$date = $rowValue['availabilty_date'];
+				$availabilty_id = $rowValue['availabilty_id'];
 				$lounge_id = $rowValue['lounge_id'];
 				setlocale(LC_ALL, 'nl_NL');
 
-				$html .= $time[$newkey]['active'] == 0 ? '<div class="col-md-12 mt-3"><h5>' . strftime('%A %d, %B', strtotime($date)) . '</h5></div>' : null;
+				$html .= $time[1]['active'] == 0 ? '<div class="col-md-12 mt-3"><h5>' . strftime('%A %d, %B', strtotime($date)) . '</h5></div>' : null;
 
 				$html .= "<div class='col-md-8 d-flex flex-wrap mb-3'>";
 
@@ -465,6 +530,7 @@ class Display
 						$html .= "<input type='hidden' name='lounge_id' value='{$lounge_id}'>";
 						$html .= "<input type='hidden' value='{$time}' name='timeslot'>";
 						$html .= "<input type='hidden' value='{$date}' name='date'>";
+						$html .= "<input type='hidden' value='{$availabilty_id}' name='availabilty_id'>";
 						$html .= "<div class='col-md-12'>";
 						$html .= "<button type='submit' name='submit' class='btn btn-secondary m-1' >{$time}</button>";
 						$html .= "</div>";

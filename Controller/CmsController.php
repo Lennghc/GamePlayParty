@@ -11,6 +11,7 @@ class CmsController
         $this->RatesController = new RatesController();
         $this->ContentController = new ContentController();
         $this->ContentController = new ContentController();
+        $this->AvailabiltyController = new AvailabiltyController();
     }
     public function __destruct()
     {
@@ -40,6 +41,9 @@ class CmsController
                     break;
                 case 'content':
                     $this->ContentController->index();
+                    break;
+                case 'availabilty':
+                    $this->AvailabiltyController->index();
                     break;
                 default:
                     http_response_code(404);

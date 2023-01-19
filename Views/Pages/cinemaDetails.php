@@ -102,7 +102,7 @@
                         });
 
                         document.getElementById('buttons').innerHTML = errors;
-                        
+
                     }
                 }
             });

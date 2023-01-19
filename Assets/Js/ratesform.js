@@ -89,15 +89,17 @@ $('#rates_button').on('click', function () {
     var email = $('#Email').val();
 
     var date = $('#date').val();
-    var lounge = $('#zaal').val();
+    var lounge_id = $('#zaal').val();
+    var availabilty = $('#availabilty').val();
     var time = $('#time').text();
     var key = $('#key').val();
 
     var timeArray = [];
 
     timeArray = {
-        lounge_id: lounge,
-        lounge_open_date: date,
+        availabilty_id: availabilty,
+        availabilty_date: date,
+        lounge_id : lounge_id,
         timeslot: time,
         key: key
     }
